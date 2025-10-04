@@ -1,1 +1,933 @@
+/net/elena/murat/light/LightProperties.java:
+public LightProperties(Vector3 direction, Color color, double intensity);
+
+/net/elena/murat/light/FractalLight.java:
+public FractalLight(Point3 position, Color color, double intensity);
+
+/net/elena/murat/light/FractalLight.java:
+public FractalLight(Point3 position, Color color, double intensity, int octaves, double persistence, double frequency);
+
+/net/elena/murat/light/SpotLight.java:
+public SpotLight(Point3 position, Vector3 direction, Color color, double intensity, double innerConeAngle, double outerConeAngle);
+
+/net/elena/murat/light/SpotLight.java:
+public SpotLight(Point3 position, Vector3 direction, Color color, double intensity, double innerConeAngle, double outerConeAngle, double constantAttenuation, double linearAttenuation, double quadraticAttenuation);
+
+/net/elena/murat/light/ElenaDirectionalLight.java:
+public ElenaDirectionalLight(Vector3 direction, Color color, double intensity);
+
+/net/elena/murat/light/PulsatingPointLight.java:
+public PulsatingPointLight(Point3 initialPosition, Color baseColor, double baseIntensity, double pulsationSpeed, double movementSpeed, double movementAmplitude);
+
+/net/elena/murat/light/PulsatingPointLight.java:
+public PulsatingPointLight(Point3 initialPosition, Color baseColor, double baseIntensity, double pulsationSpeed, double movementSpeed, double movementAmplitude, double constantAttenuation, double linearAttenuation, double quadraticAttenuation);
+
+/net/elena/murat/light/ElenaMuratAmbientLight.java:
+public ElenaMuratAmbientLight(Color color, double intensity);
+
+/net/elena/murat/light/BlackHoleLight.java:
+public BlackHoleLight(Point3 singularity, double radius, Color color);
+
+/net/elena/murat/light/BlackHoleLight.java:
+public BlackHoleLight(Point3 singularity, double radius, Color color, double intensity);
+
+/net/elena/murat/light/MuratPointLight.java:
+public MuratPointLight(Point3 position, Color color, double intensity);
+
+/net/elena/murat/light/MuratPointLight.java:
+public MuratPointLight(Point3 position, Color color, double intensity, double constantAttenuation, double linearAttenuation, double quadraticAttenuation);
+
+/net/elena/murat/light/BioluminescentLight.java:
+public BioluminescentLight(List<Point3> positions, Color color, double pulseSpeed);
+
+/net/elena/murat/light/BioluminescentLight.java:
+public BioluminescentLight(List<Point3> positions, Color color, double pulseSpeed, double baseIntensity, double attenuationFactor);
+
+/net/elena/murat/math/IntersectionInterval.java:
+public IntersectionInterval(double tIn, double tOut, Intersection in, Intersection out);
+
+/net/elena/murat/math/Point3.java:
+public Point3(double x, double y, double z);
+
+/net/elena/murat/math/Vector2.java:
+public Vector2(double x, double y);
+
+/net/elena/murat/math/Vector2.java:
+public Vector2();
+
+/net/elena/murat/math/Vector2.java:
+public Vector2(Vector2 other);
+
+/net/elena/murat/math/Matrix4.java:
+public Matrix4();
+
+/net/elena/murat/math/Matrix4.java:
+public Matrix4(double m00, double m01, double m02, double m03, double m10, double m11, double m12, double m13, double m20, double m21, double m22, double m23, double m30, double m31, double m32, double m33);
+
+/net/elena/murat/math/Matrix4.java:
+public Matrix4(Matrix4 other);
+
+/net/elena/murat/math/Ray.java:
+public Ray(Point3 origin, Vector3 direction);
+
+/net/elena/murat/math/Ray.java:
+public Ray(Point3 origin, Vector3 direction, double energy);
+
+/net/elena/murat/math/Vector3.java:
+public Vector3(double x, double y, double z);
+
+/net/elena/murat/math/Vector3.java:
+public Vector3(Point3 from, Point3 to);
+
+/net/elena/murat/math/FloatColor.java:
+public FloatColor(double r, double g, double b);
+
+/net/elena/murat/math/FloatColor.java:
+public FloatColor(double r, double g, double b, double a);
+
+/net/elena/murat/math/FloatColor.java:
+public FloatColor(Color color);
+
+/net/elena/murat/math/Matrix3.java:
+public Matrix3();
+
+/net/elena/murat/math/Matrix3.java:
+public Matrix3(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22);
+
+/net/elena/murat/math/Matrix3.java:
+public Matrix3(Matrix3 other);
+
+/net/elena/murat/math/Intersection.java:
+public Intersection(Point3 point, Vector3 normal, double distance, EMShape shape);
+
+/net/elena/murat/material/GradientTextMaterial.java:
+public GradientTextMaterial(Color bgStart, Color bgEnd, Color textStart, Color textEnd, String text, Font font, StripeDirection direction, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform, int xOffset, int yOffset);
+
+/net/elena/murat/material/GradientTextMaterial.java:
+public GradientTextMaterial(String text);
+
+/net/elena/murat/material/GradientTextMaterial.java:
+public GradientTextMaterial(String text, int xOffset, int yOffset);
+
+/net/elena/murat/material/CoffeeFjordMaterial.java:
+public CoffeeFjordMaterial();
+
+/net/elena/murat/material/CoffeeFjordMaterial.java:
+public CoffeeFjordMaterial(Color coffeeColor, Color fjordColor, double blendIntensity);
+
+/net/elena/murat/material/PolkaDotMaterial.java:
+public PolkaDotMaterial(Color baseColor, Color dotColor, double dotSize, double dotSpacing);
+
+/net/elena/murat/material/PolkaDotMaterial.java:
+public PolkaDotMaterial(Color baseColor, Color dotColor);
+
+/net/elena/murat/material/NorwegianRoseMaterial.java:
+public NorwegianRoseMaterial();
+
+/net/elena/murat/material/NorwegianRoseMaterial.java:
+public NorwegianRoseMaterial(Color woodColor, Color roseColor);
+
+/net/elena/murat/material/FjordCrystalMaterial.java:
+public FjordCrystalMaterial();
+
+/net/elena/murat/material/FjordCrystalMaterial.java:
+public FjordCrystalMaterial(Color waterColor, Color crystalColor, double clarity);
+
+/net/elena/murat/material/MultiMixMaterial.java:
+public MultiMixMaterial();
+
+/net/elena/murat/material/MultiMixMaterial.java:
+public MultiMixMaterial(Material[] materials, double[] ratios);
+
+/net/elena/murat/material/WordMaterial.java:
+public WordMaterial(String text);
+
+/net/elena/murat/material/WordMaterial.java:
+public WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font);
+
+/net/elena/murat/material/WordMaterial.java:
+public WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, Color gradientColor);
+
+/net/elena/murat/material/WordMaterial.java:
+public WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, BufferedImage wordImage);
+
+/net/elena/murat/material/WordMaterial.java:
+public WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, int width, int height);
+
+/net/elena/murat/material/WordMaterial.java:
+public WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, boolean useGradient, Color gradientColor, BufferedImage wordImage, int width, int height);
+
+/net/elena/murat/material/RadialGradientMaterial.java:
+public RadialGradientMaterial(Color centerColor, Color edgeColor);
+
+/net/elena/murat/material/LavaFlowMaterial.java:
+public LavaFlowMaterial(Color hotColor, Color coolColor, double flowSpeed, Matrix4 invTransform);
+
+/net/elena/murat/material/WaterRippleMaterial.java:
+public WaterRippleMaterial(Color waterColor, double waveSpeed, Matrix4 invTransform);
+
+/net/elena/murat/material/WaterRippleMaterial.java:
+public WaterRippleMaterial(Color waterColor, double waveSpeed, double reflectivity, Matrix4 invTransform);
+
+/net/elena/murat/material/GhostTextMaterial.java:
+public GhostTextMaterial(String word, Color textColor, Color gradientColor, String gradientType, String fontFamily, int fontStyle, int fontSize, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset);
+
+/net/elena/murat/material/GhostTextMaterial.java:
+public GhostTextMaterial(String word, Color textColor, Color gradientColor, String gradientType, String fontFamily, int fontStyle, int fontSize, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset, double transparency, double reflectivity, double ior);
+
+/net/elena/murat/material/GhostTextMaterial.java:
+public GhostTextMaterial(String word, Color textColor, String fontFamily, int fontStyle, int fontSize);
+
+/net/elena/murat/material/CalligraphyRuneMaterial.java:
+public CalligraphyRuneMaterial();
+
+/net/elena/murat/material/CalligraphyRuneMaterial.java:
+public CalligraphyRuneMaterial(Color parchmentColor, Color inkColor, Color goldLeafColor, double writingIntensity);
+
+/net/elena/murat/material/ObsidianMaterial.java:
+public ObsidianMaterial();
+
+/net/elena/murat/material/ObsidianMaterial.java:
+public ObsidianMaterial(double edgeSharpness, double reflectivity);
+
+/net/elena/murat/material/PhongElenaMaterial.java:
+public PhongElenaMaterial(Color diffuseColor, double reflectivity, double shininess);
+
+/net/elena/murat/material/PhongElenaMaterial.java:
+public PhongElenaMaterial(Color diffuseColor, double reflectivity, double shininess, double ambientCoefficient);
+
+/net/elena/murat/material/GradientChessMaterial.java:
+public GradientChessMaterial(Color baseColor1, Color baseColor2, double squareSize, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/GradientChessMaterial.java:
+public GradientChessMaterial(Color baseColor1, Color baseColor2, double squareSize, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/PlatinumMaterial.java:
+public PlatinumMaterial(Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/PlatinumMaterial.java:
+public PlatinumMaterial(Matrix4 objectInverseTransform, double specularBalance);
+
+/net/elena/murat/material/pbr/CopperPBRMaterial.java:
+public CopperPBRMaterial();
+
+/net/elena/murat/material/pbr/CopperPBRMaterial.java:
+public CopperPBRMaterial(double roughness, double oxidation);
+
+/net/elena/murat/material/pbr/CopperPBRMaterial.java:
+public CopperPBRMaterial(Color baseColor, double roughness, double oxidation);
+
+/net/elena/murat/material/pbr/MarblePBRMaterial.java:
+public MarblePBRMaterial();
+
+/net/elena/murat/material/pbr/MarblePBRMaterial.java:
+public MarblePBRMaterial(Color baseColor, Color veinColor, double veinScale, double veinContrast, double roughness, double reflectivity, double veinIntensity);
+
+/net/elena/murat/material/pbr/WoodPBRMaterial.java:
+public WoodPBRMaterial();
+
+/net/elena/murat/material/pbr/WoodPBRMaterial.java:
+public WoodPBRMaterial(Color color1, Color color2, double tileSize, double roughness, double specularScale);
+
+/net/elena/murat/material/pbr/HolographicPBRMaterial.java:
+public HolographicPBRMaterial();
+
+/net/elena/murat/material/pbr/HolographicPBRMaterial.java:
+public HolographicPBRMaterial(Color baseColor, double rainbowSpeed, double scanLineDensity, double glitchIntensity, double timeOffset, double distortionFactor, double dataDensity);
+
+/net/elena/murat/material/pbr/WaterPBRMaterial.java:
+public WaterPBRMaterial();
+
+/net/elena/murat/material/pbr/WaterPBRMaterial.java:
+public WaterPBRMaterial(Color waterColor, double roughness, double waveIntensity, double murkiness, double foamThreshold);
+
+/net/elena/murat/material/pbr/SilverPBRMaterial.java:
+public SilverPBRMaterial(double roughness);
+
+/net/elena/murat/material/pbr/SilverPBRMaterial.java:
+public SilverPBRMaterial(Color albedo, double roughness, double metalness);
+
+/net/elena/murat/material/pbr/PlasticPBRMaterial.java:
+public PlasticPBRMaterial(Color albedo, double roughness, double reflectivity, double ior, double transparency);
+
+/net/elena/murat/material/pbr/PlasticPBRMaterial.java:
+public PlasticPBRMaterial(Color albedo);
+
+/net/elena/murat/material/pbr/ChromePBRMaterial.java:
+public ChromePBRMaterial();
+
+/net/elena/murat/material/pbr/ChromePBRMaterial.java:
+public ChromePBRMaterial(Color baseReflectance, double roughness, double anisotropy, double clearCoat, Color edgeTint);
+
+/net/elena/murat/material/pbr/GlassicTilePBRMaterial.java:
+public GlassicTilePBRMaterial();
+
+/net/elena/murat/material/pbr/GlassicTilePBRMaterial.java:
+public GlassicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness);
+
+/net/elena/murat/material/pbr/GoldPBRMaterial.java:
+public GoldPBRMaterial(double roughness);
+
+/net/elena/murat/material/pbr/GoldPBRMaterial.java:
+public GoldPBRMaterial(Color albedo, double roughness, double metalness);
+
+/net/elena/murat/material/pbr/CeramicTilePBRMaterial.java:
+public CeramicTilePBRMaterial();
+
+/net/elena/murat/material/pbr/CeramicTilePBRMaterial.java:
+public CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness);
+
+/net/elena/murat/material/pbr/CeramicTilePBRMaterial.java:
+public CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness, double tileSpecular, double groutSpecular);
+
+/net/elena/murat/material/pbr/CeramicTilePBRMaterial.java:
+public CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness, double tileSpecular, double groutSpecular, double fresnelIntensity, double normalMicroFacet, double reflectionSharpness, double energyConservation);
+
+/net/elena/murat/material/CircleTextureMaterial.java:
+public CircleTextureMaterial(Color solidColor, Color patternColor, double patternSize, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/CircleTextureMaterial.java:
+public CircleTextureMaterial(Color solidColor, Color patternColor, double patternSize, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/EmeraldMaterial.java:
+public EmeraldMaterial();
+
+/net/elena/murat/material/EmeraldMaterial.java:
+public EmeraldMaterial(Color baseColor, double density, double reflectivity);
+
+/net/elena/murat/material/DynamicGlassMaterial.java:
+public DynamicGlassMaterial();
+
+/net/elena/murat/material/DynamicGlassMaterial.java:
+public DynamicGlassMaterial(Color tintColor, double reflectivity, double transparency, double roughness, double density, double chromaticAberrationStrength);
+
+/net/elena/murat/material/LambertMaterial.java:
+public LambertMaterial(Color color);
+
+/net/elena/murat/material/LambertMaterial.java:
+public LambertMaterial(Color color, double ambientCoeff, double diffuseCoeff);
+
+/net/elena/murat/material/GradientImageTextMaterial.java:
+public GradientImageTextMaterial(Color bgStart, Color bgEnd, Color textStart, Color textEnd, BufferedImage bgImage, float bgAlpha, float textAlpha, String text, Font font, StripeDirection direction, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform, int xOffset, int yOffset, int imgOffsetX, int imgOffsetY, boolean isWrap);
+
+/net/elena/murat/material/GradientImageTextMaterial.java:
+public GradientImageTextMaterial(BufferedImage bmg, String text);
+
+/net/elena/murat/material/GradientImageTextMaterial.java:
+public GradientImageTextMaterial(BufferedImage bimgo, String text, int xOffset, int yOffset);
+
+/net/elena/murat/material/HolographicDiffractionMaterial.java:
+public HolographicDiffractionMaterial(Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/HolographicDiffractionMaterial.java:
+public HolographicDiffractionMaterial(Matrix4 objectInverseTransform, double reflectivity);
+
+/net/elena/murat/material/WaterfallMaterial.java:
+public WaterfallMaterial();
+
+/net/elena/murat/material/WaterfallMaterial.java:
+public WaterfallMaterial(Color baseColor, double flowSpeed);
+
+/net/elena/murat/material/QuantumFieldMaterial.java:
+public QuantumFieldMaterial(Color primary, Color secondary, double energy, Matrix4 invTransform);
+
+/net/elena/murat/material/StainedGlassMaterial.java:
+public StainedGlassMaterial(Color tint, double roughness, Matrix4 invTransform);
+
+/net/elena/murat/material/HybridTextMaterial.java:
+public HybridTextMaterial(String word, Color textColor, Color gradientColor, String gradientType, Color bgColor, String fontFamily, int fontStyle, int fontSize, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset, Color diffuseColor, double ior, double transparency, double reflectivity, Color filterColorInside, Color filterColorOutside, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient);
+
+/net/elena/murat/material/HybridTextMaterial.java:
+public HybridTextMaterial(String word, Color textColor, String fontFamily, int fontStyle, int fontSize);
+
+/net/elena/murat/material/HexagonalHoneycombMaterial.java:
+public HexagonalHoneycombMaterial(Color primary, Color secondary, double cellSize, double borderWidth);
+
+/net/elena/murat/material/HexagonalHoneycombMaterial.java:
+public HexagonalHoneycombMaterial(Color primary, Color secondary, Color borderColor, double cellSize, double borderWidth, double ambientStrength, double specularStrength, double shininess);
+
+/net/elena/murat/material/MosaicMaterial.java:
+public MosaicMaterial(Color baseColor, Color tileColor, double tileSize, double groutWidth, double randomness);
+
+/net/elena/murat/material/MosaicMaterial.java:
+public MosaicMaterial(Color baseColor, Color tileColor);
+
+/net/elena/murat/material/BlackHoleMaterial.java:
+public BlackHoleMaterial(Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/BlackHoleMaterial.java:
+public BlackHoleMaterial(Point3 singularity, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/FractalBarkMaterial.java:
+public FractalBarkMaterial(Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/FractalBarkMaterial.java:
+public FractalBarkMaterial(Matrix4 objectInverseTransform, double roughness);
+
+/net/elena/murat/material/SultanKingMaterial.java:
+public SultanKingMaterial();
+
+/net/elena/murat/material/SultanKingMaterial.java:
+public SultanKingMaterial(Color goldColor, Color rubyColor, Color sapphireColor, double royaltyIntensity);
+
+/net/elena/murat/material/TextureMaterial.java:
+public TextureMaterial(BufferedImage texture);
+
+/net/elena/murat/material/LinearGradientMaterial.java:
+public LinearGradientMaterial(Color topColor, Color bottomColor);
+
+/net/elena/murat/material/DiffuseMaterial.java:
+public DiffuseMaterial(Color color, double diffuseCoefficient, double reflectivity, double ior, double transparency);
+
+/net/elena/murat/material/DiffuseMaterial.java:
+public DiffuseMaterial(Color color);
+
+/net/elena/murat/material/TransparentColorMaterial.java:
+public TransparentColorMaterial(double transparency, double reflectivity, double ior);
+
+/net/elena/murat/material/TransparentColorMaterial.java:
+public TransparentColorMaterial(double transparency);
+
+/net/elena/murat/material/TurkishTileMaterial.java:
+public TurkishTileMaterial();
+
+/net/elena/murat/material/TurkishTileMaterial.java:
+public TurkishTileMaterial(Color baseColor, Color patternColor, double tileSize);
+
+/net/elena/murat/material/PhongMaterial.java:
+public PhongMaterial(Color diffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency);
+
+/net/elena/murat/material/PhongMaterial.java:
+public PhongMaterial(Color diffuseColor);
+
+/net/elena/murat/material/RosemalingMaterial.java:
+public RosemalingMaterial();
+
+/net/elena/murat/material/RosemalingMaterial.java:
+public RosemalingMaterial(Color backgroundColor, Color flowerColor, Color accentColor, double patternDensity);
+
+/net/elena/murat/material/TransparentEmojiMaterial.java:
+public TransparentEmojiMaterial(BufferedImage image, Color checkerColor1, Color checkerColor2, double checkerSize, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture, boolean isMessy);
+
+/net/elena/murat/material/TransparentEmojiMaterial.java:
+public TransparentEmojiMaterial(BufferedImage image, double checkerSize, double uScale, double vScale);
+
+/net/elena/murat/material/TransparentEmojiMaterial.java:
+public TransparentEmojiMaterial(BufferedImage image, double uScale, double vScale);
+
+/net/elena/murat/material/TransparentEmojiMaterial.java:
+public TransparentEmojiMaterial(BufferedImage image);
+
+/net/elena/murat/material/TransparentEmojiMaterial.java:
+public TransparentEmojiMaterial();
+
+/net/elena/murat/material/NordicWoodMaterial.java:
+public NordicWoodMaterial();
+
+/net/elena/murat/material/NordicWoodMaterial.java:
+public NordicWoodMaterial(Color woodColor, Color grainColor, double grainIntensity);
+
+/net/elena/murat/material/FractalFireMaterial.java:
+public FractalFireMaterial(int iterations, double chaos, double scale, double speed);
+
+/net/elena/murat/material/NordicWeaveMaterial.java:
+public NordicWeaveMaterial();
+
+/net/elena/murat/material/NordicWeaveMaterial.java:
+public NordicWeaveMaterial(Color primaryColor, Color secondaryColor, Color accentColor, double patternScale);
+
+/net/elena/murat/material/SolidCheckerboardMaterial.java:
+public SolidCheckerboardMaterial(Color color1, Color color2, double size, double ambient, double diffuse, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/AmberMaterial.java:
+public AmberMaterial();
+
+/net/elena/murat/material/MarbleMaterial.java:
+public MarbleMaterial(Color baseColor, Color veinColor, double scale, double veinDensity, double turbulence, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/MarbleMaterial.java:
+public MarbleMaterial(Color baseColor, Color veinColor, double scale, double veinDensity, double turbulence, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/PhongTextMaterial.java:
+public PhongTextMaterial(String word, Color textColor, Color gradientColor, String gradientType, Color bgColor, String fontFamily, int fontStyle, int fontSize, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset, Color diffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency);
+
+/net/elena/murat/material/PhongTextMaterial.java:
+public PhongTextMaterial(String word, Color textColor, String fontFamily, int fontStyle, int fontSize);
+
+/net/elena/murat/material/ImageTextureMaterial.java:
+public ImageTextureMaterial(BufferedImage image, double uScale, double vScale, double uOffset, double vOffset, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/ImageTextureMaterial.java:
+public ImageTextureMaterial(BufferedImage image, double uScale, double vScale, double uOffset, double vOffset, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/ImageTextureMaterial.java:
+public ImageTextureMaterial(BufferedImage image, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/ImageTextureMaterial.java:
+public ImageTextureMaterial(BufferedImage image, double scale, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/DewDropMaterial.java:
+public DewDropMaterial(Color baseColor, Color dropColor, double dropDensity, double dropSize, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/DewDropMaterial.java:
+public DewDropMaterial(Color baseColor, Color dropColor, double dropDensity, double dropSize, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/SolidColorMaterial.java:
+public SolidColorMaterial(Color color);
+
+/net/elena/murat/material/AnodizedTextMaterial.java:
+public AnodizedTextMaterial(String word, Color textColor, Color gradientColor, String gradientType, Color bgColor, String fontFamily, int fontStyle, int fontSize, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset, Color baseColor);
+
+/net/elena/murat/material/AnodizedTextMaterial.java:
+public AnodizedTextMaterial(String word, Color textColor, String fontFamily, int fontStyle, int fontSize);
+
+/net/elena/murat/material/SilverMaterial.java:
+public SilverMaterial();
+
+/net/elena/murat/material/PureWaterMaterial.java:
+public PureWaterMaterial();
+
+/net/elena/murat/material/PureWaterMaterial.java:
+public PureWaterMaterial(Color baseColor, double flowSpeed);
+
+/net/elena/murat/material/TextDielectricMaterial.java:
+public TextDielectricMaterial(String word, Color textColor, Color gradientColor, String gradientType, Color bgColor, String fontFamily, int fontStyle, int fontSize, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset, Color diffuseColor, double ior, double transparency, double reflectivity, Color filterColorInside, Color filterColorOutside);
+
+/net/elena/murat/material/TextDielectricMaterial.java:
+public TextDielectricMaterial(String word, Color textColor, String fontFamily, int fontStyle, int fontSize);
+
+/net/elena/murat/material/LightningMaterial.java:
+public LightningMaterial();
+
+/net/elena/murat/material/LightningMaterial.java:
+public LightningMaterial(Color baseColor, double intensity);
+
+/net/elena/murat/material/TriangleMaterial.java:
+public TriangleMaterial(Color color1, Color color2, double triangleSize, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/TriangleMaterial.java:
+public TriangleMaterial(Color color1, Color color2, double triangleSize, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/NorthernLightMaterial.java:
+public NorthernLightMaterial();
+
+/net/elena/murat/material/NorthernLightMaterial.java:
+public NorthernLightMaterial(Color primaryAurora, Color secondaryAurora, double intensity);
+
+/net/elena/murat/material/RectangleCheckerMaterial.java:
+public RectangleCheckerMaterial(Color color1, Color color2, double rectWidth, double rectHeight, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/RectangleCheckerMaterial.java:
+public RectangleCheckerMaterial(Color color1, Color color2, double rectWidth, double rectHeight, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/StripedMaterial.java:
+public StripedMaterial(Color color1, Color color2, double stripeSize, StripeDirection direction, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/StripedMaterial.java:
+public StripedMaterial(Color color1, Color color2, double stripeSize, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/StripedMaterial.java:
+public StripedMaterial(Color color1, Color color2, double stripeSize, StripeDirection direction, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/DamaskCeramicMaterial.java:
+public DamaskCeramicMaterial(Color primary, Color secondary, double shininess, Matrix4 invTransform);
+
+/net/elena/murat/material/DamaskCeramicMaterial.java:
+public DamaskCeramicMaterial(Color primary, Color secondary, double shininess, double ambient, double specular, Matrix4 invTransform);
+
+/net/elena/murat/material/SmartGlassMaterial.java:
+public SmartGlassMaterial();
+
+/net/elena/murat/material/SmartGlassMaterial.java:
+public SmartGlassMaterial(Color color, double clarity);
+
+/net/elena/murat/material/ContrastMaterial.java:
+public ContrastMaterial(Color baseColor, double contrast);
+
+/net/elena/murat/material/ContrastMaterial.java:
+public ContrastMaterial(Color baseColor, double contrast, boolean useLightColor);
+
+/net/elena/murat/material/NonScaledTransparentPNGMaterial.java:
+public NonScaledTransparentPNGMaterial(BufferedImage texture, double billboardWidth, double billboardHeight);
+
+/net/elena/murat/material/TelemarkPatternMaterial.java:
+public TelemarkPatternMaterial();
+
+/net/elena/murat/material/TelemarkPatternMaterial.java:
+public TelemarkPatternMaterial(Color baseColor, Color patternColor, Color accentColor, double patternScale);
+
+/net/elena/murat/material/DiamondMaterial.java:
+public DiamondMaterial(Color baseColor, double ior, double reflectivity, double transparency, double dispersionStrength, double fireEffect);
+
+/net/elena/murat/material/DiamondMaterial.java:
+public DiamondMaterial(Color baseColor, double ior);
+
+/net/elena/murat/material/DiamondMaterial.java:
+public DiamondMaterial(double ior);
+
+/net/elena/murat/material/DiamondMaterial.java:
+public DiamondMaterial();
+
+/net/elena/murat/material/TransparentPNGMaterial.java:
+public TransparentPNGMaterial(BufferedImage texture);
+
+/net/elena/murat/material/TransparentPNGMaterial.java:
+public TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture);
+
+/net/elena/murat/material/TransparentPNGMaterial.java:
+public TransparentPNGMaterial();
+
+/net/elena/murat/material/KilimRosemalingMaterial.java:
+public KilimRosemalingMaterial();
+
+/net/elena/murat/material/KilimRosemalingMaterial.java:
+public KilimRosemalingMaterial(Color kilimColor, Color rosemalingColor, Color accentColor, double patternIntensity);
+
+/net/elena/murat/material/WoodMaterial.java:
+public WoodMaterial(Color baseColor, Color grainColor, double grainFrequency, double ringVariation, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/WoodMaterial.java:
+public WoodMaterial(Color baseColor, Color grainColor, double grainFrequency, double ringVariation, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/HologramDataMaterial.java:
+public HologramDataMaterial(double dataDensity, int resolution);
+
+/net/elena/murat/material/HotCopperMaterial.java:
+public HotCopperMaterial();
+
+/net/elena/murat/material/HotCopperMaterial.java:
+public HotCopperMaterial(Color copperColor, Color patinaColor, double patinaAmount);
+
+/net/elena/murat/material/ReflectiveMaterial.java:
+public ReflectiveMaterial();
+
+/net/elena/murat/material/ReflectiveMaterial.java:
+public ReflectiveMaterial(Color baseColor, double reflectivity, double roughness);
+
+/net/elena/murat/material/TulipFjordMaterial.java:
+public TulipFjordMaterial();
+
+/net/elena/murat/material/TulipFjordMaterial.java:
+public TulipFjordMaterial(Color tulipColor, Color fjordColor, Color stemColor, double bloomIntensity);
+
+/net/elena/murat/material/DielectricMaterial.java:
+public DielectricMaterial();
+
+/net/elena/murat/material/DielectricMaterial.java:
+public DielectricMaterial(Color diffuseColor, double ior, double transparency, double reflectivity);
+
+/net/elena/murat/material/GlassMaterial.java:
+public GlassMaterial(Color baseColor, double ior, double reflectivity, double transparency);
+
+/net/elena/murat/material/GlassMaterial.java:
+public GlassMaterial(Color baseColor, double ior);
+
+/net/elena/murat/material/GlassMaterial.java:
+public GlassMaterial(double ior);
+
+/net/elena/murat/material/GlassMaterial.java:
+public GlassMaterial();
+
+/net/elena/murat/material/BrunostCheeseMaterial.java:
+public BrunostCheeseMaterial();
+
+/net/elena/murat/material/BrunostCheeseMaterial.java:
+public BrunostCheeseMaterial(Color cheeseColor, Color caramelColor, double caramelAmount);
+
+/net/elena/murat/material/SquaredMaterial.java:
+public SquaredMaterial(Color color1, Color color2, double scale, double ambient, double diffuse, double specular, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/SquaredMaterial.java:
+public SquaredMaterial(Color color1, Color color2, double scale, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/CopperMaterial.java:
+public CopperMaterial();
+
+/net/elena/murat/material/SphereWordTextureMaterial.java:
+public SphereWordTextureMaterial(String word, Color textColor, String fontFamily, int fontStyle, int fontSize);
+
+/net/elena/murat/material/SphereWordTextureMaterial.java:
+public SphereWordTextureMaterial(String word, Color textColor, Color gradientColor, String gradientType, Color bgColor, String fontFamily, int fontStyle, int fontSize, double reflectivity, double ior, double transparency, int uOffset, int vOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset);
+
+/net/elena/murat/material/RuneStoneMaterial.java:
+public RuneStoneMaterial();
+
+/net/elena/murat/material/RuneStoneMaterial.java:
+public RuneStoneMaterial(Color stoneColor, Color runeColor, double runeDensity);
+
+/net/elena/murat/material/CrystalClearMaterial.java:
+public CrystalClearMaterial(Color glassTint, double clarity, double ior, double dispersion, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/TexturedCheckerboardMaterial.java:
+public TexturedCheckerboardMaterial(Color color1, Color color2, double size, String text, Color textColor, Color gradientColor, String gradientType, Color bgColor, String fontFamily, int fontStyle, int fontSize, int textUOffset, int textVOffset, BufferedImage imageObject, int imageWidth, int imageHeight, int imageUOffset, int imageVOffset, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/RoughMaterial.java:
+public RoughMaterial(Color color, double roughness, double diffuseCoefficient, double reflectivity);
+
+/net/elena/murat/material/RoughMaterial.java:
+public RoughMaterial(Color color, double roughness);
+
+/net/elena/murat/material/BrightnessMaterial.java:
+public BrightnessMaterial(Color baseColor, double brightness);
+
+/net/elena/murat/material/BrightnessMaterial.java:
+public BrightnessMaterial(Color baseColor, double brightness, boolean useLightColor);
+
+/net/elena/murat/material/GoldMaterial.java:
+public GoldMaterial();
+
+/net/elena/murat/material/RandomMaterial.java:
+public RandomMaterial(Matrix4 invTransform);
+
+/net/elena/murat/material/OrbitalMaterial.java:
+public OrbitalMaterial(Color centerColor, Color orbitColor, double ringWidth, int ringCount);
+
+/net/elena/murat/material/OrbitalMaterial.java:
+public OrbitalMaterial(Color centerColor, Color orbitColor);
+
+/net/elena/murat/material/VikingRuneMaterial.java:
+public VikingRuneMaterial();
+
+/net/elena/murat/material/VikingRuneMaterial.java:
+public VikingRuneMaterial(Color stoneColor, Color runeColor, double runeDepth);
+
+/net/elena/murat/material/TransparentEmissivePNGMaterial.java:
+public TransparentEmissivePNGMaterial(BufferedImage texture, Color emissiveColor, double emissiveStrength);
+
+/net/elena/murat/material/TransparentEmissivePNGMaterial.java:
+public TransparentEmissivePNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture, Color emissiveColor, double emissiveStrength);
+
+/net/elena/murat/material/StarfieldMaterial.java:
+public StarfieldMaterial(Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/StarfieldMaterial.java:
+public StarfieldMaterial(Matrix4 objectInverseTransform, Color nebulaColor, double starSize, double starDensity, double twinkleSpeed);
+
+/net/elena/murat/material/RubyMaterial.java:
+public RubyMaterial();
+
+/net/elena/murat/material/RubyMaterial.java:
+public RubyMaterial(Color baseColor, double density, double reflectivity);
+
+/net/elena/murat/material/CarpetTextureMaterial.java:
+public CarpetTextureMaterial();
+
+/net/elena/murat/material/CarpetTextureMaterial.java:
+public CarpetTextureMaterial(Color baseColor, Color patternColor);
+
+/net/elena/murat/material/HamamSaunaMaterial.java:
+public HamamSaunaMaterial();
+
+/net/elena/murat/material/HamamSaunaMaterial.java:
+public HamamSaunaMaterial(Color marbleColor, Color woodColor, Color steamColor, double steamIntensity);
+
+/net/elena/murat/material/CrystalMaterial.java:
+public CrystalMaterial(Color baseColor, Color crystalColor, double rayDensity, double raySharpness);
+
+/net/elena/murat/material/CrystalMaterial.java:
+public CrystalMaterial(Color baseColor, Color crystalColor);
+
+/net/elena/murat/material/TexturedPhongMaterial.java:
+public TexturedPhongMaterial(Color baseDiffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency, BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/TexturedPhongMaterial.java:
+public TexturedPhongMaterial(Color baseDiffuseColor, BufferedImage texture, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/TexturedPhongMaterial.java:
+public TexturedPhongMaterial(Color baseDiffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency, BufferedImage texture, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/TexturedPhongMaterial.java:
+public TexturedPhongMaterial(Color diffuseColor, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/VikingMetalMaterial.java:
+public VikingMetalMaterial();
+
+/net/elena/murat/material/VikingMetalMaterial.java:
+public VikingMetalMaterial(Color baseColor, Color rustColor, double rustDensity);
+
+/net/elena/murat/material/ThresholdMaterial.java:
+public ThresholdMaterial(Color baseColor, double threshold);
+
+/net/elena/murat/material/ThresholdMaterial.java:
+public ThresholdMaterial(Color baseColor, double threshold, Color aboveColor, Color belowColor);
+
+/net/elena/murat/material/ThresholdMaterial.java:
+public ThresholdMaterial(Color baseColor, double threshold, Color aboveColor, Color belowColor, boolean useLightColor, boolean invertThreshold);
+
+/net/elena/murat/material/ImageTexture.java:
+public ImageTexture(BufferedImage image, double scale);
+
+/net/elena/murat/material/ImageTexture.java:
+public ImageTexture(BufferedImage image, double scaleU, double scaleV, double offsetU, double offsetV);
+
+/net/elena/murat/material/XRayMaterial.java:
+public XRayMaterial();
+
+/net/elena/murat/material/XRayMaterial.java:
+public XRayMaterial(Color baseColor, double transparency, double reflectivity);
+
+/net/elena/murat/material/CheckerboardMaterial.java:
+public CheckerboardMaterial(Color color1, Color color2, double size, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/CheckerboardMaterial.java:
+public CheckerboardMaterial(Color color1, Color color2, double size, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/DiagonalCheckerMaterial.java:
+public DiagonalCheckerMaterial(Color color1, Color color2, double scale, double ambient, double diffuse, double specular, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/DiagonalCheckerMaterial.java:
+public DiagonalCheckerMaterial(Color color1, Color color2, double scale, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/ProceduralCloudMaterial.java:
+public ProceduralCloudMaterial(Color baseColor, Color highlightColor);
+
+/net/elena/murat/material/BumpMaterial.java:
+public BumpMaterial(Material baseMaterial, ImageTexture normalMap, double strength, double uvScale, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/ElenaTextureMaterial.java:
+public ElenaTextureMaterial(String imagePath, Matrix4 objectInverseTransform)throws IOException;
+
+/net/elena/murat/material/ElenaTextureMaterial.java:
+public ElenaTextureMaterial(String imagePath, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)throws IOException;
+
+/net/elena/murat/material/AuroraCeramicMaterial.java:
+public AuroraCeramicMaterial();
+
+/net/elena/murat/material/AuroraCeramicMaterial.java:
+public AuroraCeramicMaterial(Color baseColor, Color auroraColor, double auroraIntensity);
+
+/net/elena/murat/material/ProceduralFlowerMaterial.java:
+public ProceduralFlowerMaterial(double petalCount, Color petalColor, Color centerColor);
+
+/net/elena/murat/material/ProceduralFlowerMaterial.java:
+public ProceduralFlowerMaterial(double petalCount, Color petalColor, Color centerColor, double ambientStrength);
+
+/net/elena/murat/material/AnodizedMetalMaterial.java:
+public AnodizedMetalMaterial();
+
+/net/elena/murat/material/AnodizedMetalMaterial.java:
+public AnodizedMetalMaterial(Color baseColor);
+
+/net/elena/murat/material/EmissiveMaterial.java:
+public EmissiveMaterial(Color emissiveColor, double emissiveStrength);
+
+/net/elena/murat/material/OpticalIllusionMaterial.java:
+public OpticalIllusionMaterial(Color color1, Color color2, double frequency, double smoothness, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/OpticalIllusionMaterial.java:
+public OpticalIllusionMaterial(Color color1, Color color2, double frequency, double smoothness, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/MetallicMaterial.java:
+public MetallicMaterial(Color metallicColor, Color specularColor, double reflectivity, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient);
+
+/net/elena/murat/material/NeutralMaterial.java:
+public NeutralMaterial(Color baseColor);
+
+/net/elena/murat/material/NeutralMaterial.java:
+public NeutralMaterial(Color baseColor, double reflectivity, double transparency, double indexOfRefraction);
+
+/net/elena/murat/material/PixelArtMaterial.java:
+public PixelArtMaterial(Color[] palette, double pixelSize, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform);
+
+/net/elena/murat/material/PixelArtMaterial.java:
+public PixelArtMaterial(Color[] palette, double pixelSize, Matrix4 objectInverseTransform);
+
+/net/elena/murat/shape/TorusKnot.java:
+public TorusKnot(double R, double r, int p, int q);
+
+/net/elena/murat/shape/Plane.java:
+public Plane(Point3 pointOnPlane, Vector3 normal);
+
+/net/elena/murat/shape/DifferenceCSG.java:
+public DifferenceCSG(EMShape left, EMShape right);
+
+/net/elena/murat/shape/UnionCSG.java:
+public UnionCSG(EMShape left, EMShape right);
+
+/net/elena/murat/shape/Cube.java:
+public Cube(double sideLength);
+
+/net/elena/murat/shape/Cube.java:
+public Cube(Point3 min, Point3 max);
+
+/net/elena/murat/shape/Hyperboloid.java:
+public Hyperboloid();
+
+/net/elena/murat/shape/Hyperboloid.java:
+public Hyperboloid(double a, double b, double c, double height);
+
+/net/elena/murat/shape/Box.java:
+public Box(double width, double height, double depth);
+
+/net/elena/murat/shape/Box.java:
+public Box(double width, double height, double depth, Material material);
+
+/net/elena/murat/shape/Sphere.java:
+public Sphere(double radius);
+
+/net/elena/murat/shape/Sphere.java:
+public Sphere(double radius, Material material);
+
+/net/elena/murat/shape/Ellipsoid.java:
+public Ellipsoid(Point3 center, double a, double b, double c);
+
+/net/elena/murat/shape/Triangle.java:
+public Triangle(Point3 v0, Point3 v1, Point3 v2);
+
+/net/elena/murat/shape/EmojiBillboard.java:
+public EmojiBillboard(double width, double height, boolean isRectangle, boolean isVisible, BufferedImage texture);
+
+/net/elena/murat/shape/EmojiBillboard.java:
+public EmojiBillboard(double width, double height);
+
+/net/elena/murat/shape/EmojiBillboard.java:
+public EmojiBillboard(double size);
+
+/net/elena/murat/shape/EmojiBillboard.java:
+public EmojiBillboard();
+
+/net/elena/murat/shape/CSGShape.java:
+public CSGShape(EMShape left, EMShape right);
+
+/net/elena/murat/shape/IntersectionCSG.java:
+public IntersectionCSG(EMShape left, EMShape right);
+
+/net/elena/murat/shape/Rectangle3D.java:
+public Rectangle3D(Point3 p1, Point3 p2, float thickness);
+
+/net/elena/murat/shape/Cone.java:
+public Cone(double radius, double height);
+
+/net/elena/murat/shape/Torus.java:
+public Torus(double majorRadius, double minorRadius);
+
+/net/elena/murat/shape/TransparentPlane.java:
+public TransparentPlane(Point3 pointOnPlane, Vector3 normal, double thickness);
+
+/net/elena/murat/shape/RectangularPrism.java:
+public RectangularPrism(double width, double height, double depth);
+
+/net/elena/murat/shape/RectangularPrism.java:
+public RectangularPrism(double width, double height, double depth, Material material);
+
+/net/elena/murat/shape/Cylinder.java:
+public Cylinder(double radius, double height);
+
+/net/elena/murat/shape/Cylinder.java:
+public Cylinder(Point3 startPoint, Point3 endPoint, double radius, double height);
+
+/net/elena/murat/shape/letters/Letter3D.java:
+public Letter3D(char c);
+
+/net/elena/murat/shape/letters/Letter3D.java:
+public Letter3D(char letter, int baseSize, double widthScale, double heightScale, double thickness, Font font);
+
+/net/elena/murat/shape/letters/Image3D.java:
+public Image3D(BufferedImage c);
+
+/net/elena/murat/shape/letters/Image3D.java:
+public Image3D(BufferedImage bimg, int baseSize, double widthScale, double heightScale, double thickness);
+
+/net/elena/murat/lovert/ElenaMuratRayTracer.java:
+public ElenaMuratRayTracer(Scene scene, int width, int height, Color backgroundColor);
 
