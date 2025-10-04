@@ -1,0 +1,99 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+
+// Custom classes
+import net.elena.murat.shape.*;
+import net.elena.murat.lovert.*;
+import net.elena.murat.material.*;
+import net.elena.murat.math.*;
+import net.elena.murat.light.*;
+//import net.elena.murat.util.*;
+
+final public class Hologram extends Object {
+  
+  private Hologram() {
+    super();
+  }
+  
+  public String toString() {
+    return "";
+  }
+  
+  final private static void generateSaveRenderedImage() throws IOException {
+    // 1. Create the Scene
+    Scene scene = new Scene();
+    
+    // 2. Create the Ray Tracer object
+    int imageWidth = 800;
+    int imageHeight = 600;
+    Color rendererBackgroundColor = new Color(5, 5, 5);
+    
+    ElenaMuratRayTracer rayTracer = new ElenaMuratRayTracer(scene, imageWidth, imageHeight, rendererBackgroundColor);
+    
+    // 3. Set Ray Tracer settings
+    rayTracer.setCameraPosition(new Point3(2, 1.5, 4));  // Daha yakın pozisyon
+    rayTracer.setLookAt(new Point3(0, 0, 0));
+    rayTracer.setUpVector(new Vector3(0, 1, 0));
+    rayTracer.setOrthographic(false);
+    rayTracer.setFov(45.0);
+    rayTracer.setMaxRecursionDepth(8);
+    
+    // 4. Create and Add Lights (Minimal setup)
+    Light coloredLight = new MuratPointLight(
+      new Point3(2,3,1),
+      new Color(200, 150, 255),
+      1.5
+    );
+    
+    scene.addLight(coloredLight);
+    
+    // 5. Create and Add Shapes and Materials
+    EMShape sphere=new Sphere (1.0);
+    
+    Material hologram = new HolographicDiffractionMaterial(
+      sphere.getInverseTransform(),
+      0.8 // reflection
+    );
+    
+    sphere.setMaterial (hologram);
+    
+    scene.addShape (sphere);
+    
+    // 6. Render the Ray Tracer
+    System.out.println("Render process starting...");
+    long startTime = System.currentTimeMillis();
+    
+    BufferedImage renderedImage = rayTracer.render();
+    
+    long endTime = System.currentTimeMillis();
+    System.out.println("Render process completed. Duration: " + (endTime - startTime) + " ms");
+    
+    // 7. Save the Image
+    try {
+      File outputFile = new File("..\\images\\hologram.png");
+      ImageIO.write(renderedImage, "png", outputFile);
+      System.out.println("Image saved successfully: " + outputFile.getAbsolutePath());
+      } catch (IOException e) {
+      System.err.println("An error occurred while saving the image: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+  
+  final public static void main(final String[] args) {
+    try {
+      generateSaveRenderedImage();
+      } catch (IOException ioe) {
+      ioe.printStackTrace();
+      System.exit(-1);
+    }
+  }
+}
+
+/***
+javac -cp ..\bin\elenaRT.jar; Hologram.java
+java -cp ..\bin\elenaRT.jar; Hologram
+..\images\hologram.png
+ */

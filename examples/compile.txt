@@ -1,1 +1,1 @@
-
+javac -source 1.8 -target 1.8 -sourcepath . -cp ../bin/elenaRT.jar:. -g:none -proc:none -nowarn -O -d . *.java
