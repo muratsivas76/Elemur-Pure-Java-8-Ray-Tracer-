@@ -1,5 +1,6 @@
 package net.elena.murat.shape.letters;
 
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,40 +9,40 @@ import java.util.Collections;
 import net.elena.murat.math.*;
 import net.elena.murat.material.Material;
 import net.elena.murat.shape.EMShape;
-import net.elena.murat.util.ImageUtils3D;
+import net.elena.murat.util.LetterUtils3D;
 
-public class Image3D implements EMShape {
-  private final BufferedImage bimg;
+public class Letter3D implements EMShape {
+  private final char letter;
   private final double thickness;
   private Matrix4 transform;
   private Matrix4 inverseTransform;
   private Material material;
-  private final ImageUtils3D.ImageMesh mesh;
+  private final LetterUtils3D.LetterMesh mesh;
   
-  public Image3D(BufferedImage c) {
-    this(c, 16, 1, 1, 0.1);
+  public Letter3D(char c) {
+    this(c, 16, 1, 1, 0.1, new Font("Arial", Font.BOLD, 32));
   }
   
-  public Image3D(BufferedImage bimg, int baseSize,
+  public Letter3D(char letter, int baseSize,
     double widthScale, double heightScale,
-    double thickness) {
-    this.bimg = bimg;
+    double thickness, Font font) {
+    this.letter = letter;
     this.thickness = thickness;
     this.transform = Matrix4.identity();
     this.inverseTransform = Matrix4.identity();
     
     // Original render (slow but correct)
-    BufferedImage img = ImageUtils3D.getBufferedImage(bimg, widthScale, heightScale, baseSize);
+    BufferedImage img = LetterUtils3D.getLetterImage(letter, font, widthScale, heightScale, baseSize);
     
     // DEBUG
     try {
-      javax.imageio.ImageIO.write(img, "PNG", new java.io.File("x3dImage.png"));
-      System.out.println ("Created x3dImage.png file.");
+      javax.imageio.ImageIO.write(img, "PNG", new java.io.File("letterImage.png"));
+      System.out.println ("Created letterImage.png file.");
     } catch (java.io.IOException ioe)
     {}
     
-    boolean[][] pixelData = ImageUtils3D.getImagePixelData(img);
-    this.mesh = ImageUtils3D.getImageMeshData(pixelData, thickness);
+    boolean[][] pixelData = LetterUtils3D.getLetterPixelData(img);
+    this.mesh = LetterUtils3D.getLetterMeshData(pixelData, thickness);
   }
   
   @Override
@@ -57,10 +58,10 @@ public class Image3D implements EMShape {
     
     List<IntersectionInterval> intervals = new ArrayList<>(16);
     
-    for (ImageUtils3D.Face face : mesh.faces) {
-      ImageUtils3D.Vertex v1 = mesh.vertices.get(face.v1);
-      ImageUtils3D.Vertex v2 = mesh.vertices.get(face.v2);
-      ImageUtils3D.Vertex v3 = mesh.vertices.get(face.v3);
+    for (LetterUtils3D.Face face : mesh.faces) {
+      LetterUtils3D.Vertex v1 = mesh.vertices.get(face.v1);
+      LetterUtils3D.Vertex v2 = mesh.vertices.get(face.v2);
+      LetterUtils3D.Vertex v3 = mesh.vertices.get(face.v3);
       
       Point3 p1 = new Point3(v1.x, v1.y, v1.z);
       Point3 p2 = new Point3(v2.x, v2.y, v2.z);
@@ -145,10 +146,10 @@ public class Image3D implements EMShape {
     double minDistance = Double.POSITIVE_INFINITY;
     Vector3 closestNormal = new Vector3(0, 1, 0);
     
-    for (ImageUtils3D.Face face : mesh.faces) {
-      ImageUtils3D.Vertex v1 = mesh.vertices.get(face.v1);
-      ImageUtils3D.Vertex v2 = mesh.vertices.get(face.v2);
-      ImageUtils3D.Vertex v3 = mesh.vertices.get(face.v3);
+    for (LetterUtils3D.Face face : mesh.faces) {
+      LetterUtils3D.Vertex v1 = mesh.vertices.get(face.v1);
+      LetterUtils3D.Vertex v2 = mesh.vertices.get(face.v2);
+      LetterUtils3D.Vertex v3 = mesh.vertices.get(face.v3);
       
       Point3 p1 = new Point3(v1.x, v1.y, v1.z);
       Point3 p2 = new Point3(v2.x, v2.y, v2.z);
