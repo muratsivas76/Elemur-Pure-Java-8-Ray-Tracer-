@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Eternal Love Between Elena and Murat
+Main-Class: net.elena.murat.lovert.ElenaMuratRayTracer
+Class-Path: 
