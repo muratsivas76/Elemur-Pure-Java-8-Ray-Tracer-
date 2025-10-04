@@ -1,0 +1,45 @@
+Tüm Material sınıfları elden geçecek. 
+İçlerinde Vector3 getDirection falan varsa 
+eksik ışıklar eklenecek. 
+
+Tüm materyal sınıflarında geçen ışık adları gözden geçirilecek, 
+eksik ışık varsa eklenecek.
+
+Tüm materyal sınıflarında multiplyColors DİKKAT.txt 
+içeriğine göre düzenlenecek ki RGB değerleri 0-255 arasında kalsın. 
+
+public class Ray {
+    // Mevcut alanlarınıza dokunmayın
+    private double energy = 1.0; // Sadece bu satırı ekleyin
+
+    public double getEnergy() { return energy; } // Enerji okuma
+    public void setEnergy(double energy) { this.energy = energy; } // Enerji yazma
+}
+
+public Color traceRay(Ray ray, int depth) {
+    // 1. Enerji kontrolü (Eklenen)
+    if (ray.getEnergy() < 0.01) return Color.BLACK;
+
+    // Mevcut kesişim kodunuz
+    Intersection hit = findClosestIntersection(ray);
+    if (hit == null) return BACKGROUND_COLOR;
+
+    // 2. Yansıma öncesi enerji güncelleme (Eklenen)
+    double reflectionCoeff = 0.5; // Varsayılan değer
+    ray.setEnergy(ray.getEnergy() * reflectionCoeff);
+
+    // 3. Recursive çağrı (Mevcut)
+    Color reflectedColor = traceRay(reflectedRay, depth + 1);
+    
+    return shade(hit, ray).add(reflectedColor);
+}
+
+// Sadece cam küre için özel bir PhongMaterial oluştur
+Material glassMaterial=new Material() {
+    public Color getColorAt(Point3 p, Vector3 n, Light l, Point3 v) {
+        return new Color(250, 20, 25); // Açık mavi
+   }
+   public double getReflectivity() { return 0.1; }
+   public double getTransparency() { return 0.9; } // %90 şeffaf
+   public double getIndexOfRefraction() { return 1.50; } // Cam IOR
+};

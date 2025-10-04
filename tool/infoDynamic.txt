@@ -1,0 +1,22 @@
+# Dynamic Word Art Generator Configuration
+# Add one setting per line using the format: key:value
+
+# Fonts (add additional fonts available on your system)
+font:Algerian
+font:Bauhaus 93
+font:Berlin Sans FB
+
+# Color palettes (comma-separated ARGB hex values)
+color_palette:#FFFFDD,#FFDD88,#FFBB33,#FF9900
+color_palette:#DDFFDD,#88FF88,#33FF33,#00CC00
+color_palette:#CCEEFF,#88CCFF,#3388FF,#0066CC
+
+# Textures (path to image files)
+#texture:metal_texture.jpg
+#texture:paper_texture.png
+#texture:wood_texture.jpg
+
+# Sizing options
+image_size:256
+min_font_size:24
+max_font_size:60

@@ -1,0 +1,17 @@
+// 4 materiallı karışım
+Material diffuse = new DiffuseMaterial(Color.RED, 0.0, 0.0, 1.0);
+Material specular = new SpecularMaterial(Color.WHITE, Color.WHITE, 0.8, 0.0, 1.0);
+Material reflective = new ReflectiveMaterial(Color.GRAY, 0.5, 0.0, 1.0);
+Material emissive = new EmissiveMaterial(Color.YELLOW, 1.0);
+
+MultiMixMaterial complexMaterial = new MultiMixMaterial(
+    new Material[]{diffuse, specular, reflective, emissive},
+    new double[]{0.5, 0.3, 0.1, 0.1}
+);
+
+// Builder-style kullanım
+MultiMixMaterial builtMaterial = new MultiMixMaterial()
+    .withMaterial(new CheckerboardMaterial(Color.BLACK, Color.WHITE, 0, 0, 1), 0.4)
+    .withMaterial(new BrightnessMaterial(Color.BLUE, 1.5), 0.3)
+    .withMaterial(new ContrastMaterial(Color.RED, 1.8), 0.2)
+    .withMaterial(new ThresholdMaterial(Color.GRAY, 0.6), 0.1);

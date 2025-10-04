@@ -1,0 +1,23 @@
+// Berrak cam
+Material clearGlass = new AdvancedGlassMaterial(
+    1.5f,    // Kırılma indisi
+    0.9f,    // Şeffaflık
+    new Color(220, 240, 255), // Hafif mavi ton
+    0.1f     // Yansıma
+);
+
+// Renkli cam
+Material stainedGlass = new AdvancedGlassMaterial(
+    1.5f,
+    0.8f,
+    new Color(255, 200, 200), // Pembe ton
+    0.05f
+);
+
+// Aynalı cam
+Material mirroredGlass = new AdvancedGlassMaterial(
+    1.5f,
+    0.3f,
+    new Color(200, 220, 240),
+    0.8f     // Yüksek yansıma
+);

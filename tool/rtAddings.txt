@@ -1,0 +1,11 @@
+checkerboard sağ ve ileri vektör olunca 
+kareler gözükmüyor.
+
+Checkerboard, triangle material, squared olunca da 
+recursive tanınsın.
+
+emshpe içine göre gerekirse setmatrix, setrotation eklenir.
+
+Cube ve sphere hariç tüm shapeler rotate olabilsin.
+Elena Rt from scene sınıfı buna göre dizayn edilir..
+scene dosyaları ıslah edilir..

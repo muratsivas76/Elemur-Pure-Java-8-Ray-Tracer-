@@ -1,0 +1,367 @@
+// Düzlem: 0.0.0 noktasında, normali (0,1,0)
+Plane plane = new Plane(new Point3(0,0,0), new Vector3(0,1,0));
+
+// Kamera ayarı (45 derece açıyla görecek şekilde)
+rayTracer.setCameraPosition(new Point3(2, 2, 2)); // X,Y,Z eksenlerinde offset
+rayTracer.setLookAt(new Point3(0,0,0)); // Düzlemin merkezine bak
+rayTracer.setUpVector(new Vector3(0,1,0)); // Dünyanın "yukarı" yönü
+rayTracer.setFov(45); // Geniş görüş açısı
+
+///
+// XZ düzlemine döndür (normal = (0,1,0) -> (0,0,1))
+Matrix4 rotation = Matrix4.rotationX(Math.toRadians(90));
+plane.setTransform(rotation);
+
+///
+// Düzlemi yukarı kaldır
+Plane plane = new Plane(new Point3(0,1,0), new Vector3(0,1,0));
+
+///
+// Yukarıdan 30 derece açıyla bakış
+rayTracer.setCameraPosition(new Point3(0, 3, 3));
+
+// 1. Düzlem oluştur (normal +Y)
+Plane plane = new Plane(new Point3(0,0,0), new Vector3(0,1,0));
+
+// 2. Honeycomb materyali uygula
+plane.setMaterial(new HexagonalHoneycombMaterial(
+    Color.YELLOW, Color.WHITE, 0.5, 0.05
+));
+
+// 3. Kamera ayarı (45 derece açı)
+rayTracer.setCameraPosition(new Point3(3, 3, 3));
+rayTracer.setLookAt(new Point3(0,0,0));
+rayTracer.setUpVector(new Vector3(0,1,0));
+
+////
+Görünmeme Nedenleri ve Çözüm Tablosu
+Problem	Kontrol Edilecekler	Çözüm
+Düzlem kameraya paralel	Kamera konumu vs. normal vektör	Kamerayı açılı yerleştir (X,Z ≠ 0)
+Düzlem kamera arkasında	Kamera lookAt yönü	setLookAt(plane.getCenter())
+Düzlem çok küçük	Düzlem boyutu vs. kamera uzaklığı	plane.setScale(10) veya kamerayı yaklaştır
+Işık yanlış yönde	Işık kaynağı konumu	Light'ı düzlemin önüne yerleştirin
+
+////////
+new Point3(1, 0, 0);  // Tam sağda
+new Point3(0, 1, 0);  // Tam yukarıda
+new Point3(0, 0, 1);  // Tam karşınızda (size yakın)
+new Point3(0, 0, -1); // Tam arkada (uzakta)
+
+
++X: Sağ 
+-X:  Sol
++Y: Yukarı 
+-Y:  Aşağı 
++Z: Geri 
+-Z:  İleri
+
+// Kamera (0,0,5)'te, (0,0,0)'a bakıyor:
+cameraPosition = new Point3(0, 0, 5); // Kamera Z+ yönünde (size yakın)
+lookAt = new Point3(0, 0, 0);         // Orjine bakıyor
+
+////
+// Tavan ışığı (tam tepeden -Y yönünde)
+Light ceilingLight = new ElenaDirectionalLight(
+    new Vector3(0, -1, 0),  // Işık yönü (aşağıya doğru)
+    Color.WHITE,             // Işık rengi
+    1.5                      // Işık şiddeti
+);
+scene.addLight(ceilingLight);
+
+////
+// Tavanda asılı lamba (tam merkezde)
+Light hangingLight = new MuratPointLight(
+    new Point3(0, 5, 0),     // Işık konumu (yüksekte)
+    new Color(255, 240, 200), // Sıcak beyaz
+    3.0,                     // Şiddet
+    0.5, 0.2, 0.1            // Sırasıyla: constant, linear, quadratic attenuation
+);
+scene.addLight(hangingLight);
+
+////
+// Avize efekti (aşağıya odaklı)
+Light chandelier = new SpotLight(
+    new Point3(0, 4, 0),     // Konum
+    new Vector3(0, -1, 0),    // Yön
+    Math.toRadians(45),       // Açı (45 derece)
+    Color.WHITE, 
+    2.0,
+    0.5, 0.1, 0.01           // Attenuation
+);
+scene.addLight(chandelier);
+
+////
+// 1. Düzlem (yer)
+Plane floor = new Plane(new Point3(0, -1, 0), new Vector3(0, 1, 0));
+floor.setMaterial(new LambertMaterial(new Color(200, 200, 200)));
+
+// 2. Tavan ışığı
+Light ceilingLight = new ElenaDirectionalLight(
+    new Vector3(0, -1, 0),
+    new Color(255, 250, 220),
+    1.8
+);
+
+// 3. Işığa duyarlı test objesi (küre)
+Sphere testSphere = new Sphere(new Point3(0, 0, 0), 1.0);
+testSphere.setMaterial(new PhongMaterial(Color.BLUE, 0.3, 50));
+
+// 4. Kamera (45 derece açı)
+rayTracer.setCameraPosition(new Point3(3, 3, 3));
+rayTracer.setLookAt(new Point3(0, 0, 0));
+
+// Sahneye ekle
+scene.addObjects(floor, testSphere);
+scene.addLight(ceilingLight);
+
+Işık Türleri Karşılaştırması
+Özellik	DirectionalLight	PointLight	SpotLight
+Gerçekçilik	Düşük (güneş gibi)	Yüksek (ampul gibi)	Çok yüksek (avize)
+Gölgeler	Keskin	Yumuşak	Odaklı
+Performans	En hızlı	Orta	Yavaş
+Attenuation	Yok
+
+//Önemli:
+Hızlı Fix Yöntemi (Diffuse Bileşen İçin)
+Tüm getColorAt() metodlarında şu değişikliği yapın:
+
+diff
+- int r = (int)(color.getRed() * intensity * NdotL);
++ int r = (int)(color.getRed() * (light.getColor().getRed()/255.0) * intensity * NdotL);
+(Aynısını green ve blue kanalları için tekrarlayın)
+
+/***
+// Titrek ateş efekti
+PulsatingPointLight fireLight = new PulsatingPointLight(
+    new Point3(0, 2, 0),
+    new Color(255, 100, 50), // Turuncu
+    1.5, // Temel yoğunluk
+    2.0, // Hızlı titreme
+    0.5, // Orta hızda hareket
+    0.3  // Hafif salınım
+);
+
+// Her frame'de güncelle
+fireLight.update(deltaTime);
+
+// Sahnedeki tüm ışıklar için:
+// pointLight.getIntensityAt(hitPoint) kullanılabilir
+*/
+
+/***
+// SpotLight parametreleri:
+// - Pozisyon: (0, 5, 0)
+// - Yön: Aşağı doğru (0, -1, 0)
+// - Renk: Beyaz
+// - Yoğunluk: 2.0
+// - İç açı: 30° (dar koni)
+// - Dış açı: 45°
+SpotLight stageLight = new SpotLight(
+    new Point3(0, 5, 0), 
+    new Vector3(0, -1, 0),
+    Color.WHITE,
+    2.0,
+    30.0,
+    45.0
+);
+
+// Material'e uygulama:
+phongMaterial.getColorAt(..., stageLight, ...);
+
+// Dar ve yoğun spot ışığı
+SpotLight dramaticLight = new SpotLight(
+    new Point3(2, 3, -4), // Çapraz pozisyon
+    new Vector3(-0.5, -0.5, 0.5).normalize(), // Çapraz yön
+    new Color(255, 220, 180), // Sıcak beyaz
+    3.0,
+    15.0, // Çok dar iç koni
+    25.0
+);
+
+// Özel attenuation (ışık düşüşü) ayarları:
+dramaticLight = new SpotLight(
+    dramaticLight.getPosition(),
+    dramaticLight.getDirectionAt(new Point3(0,0,0)),
+    dramaticLight.getColor(),
+    dramaticLight.getIntensity(),
+    15.0,
+    25.0,
+    1.0,  // c1
+    0.05, // c2 (daha az lineer düşüş)
+    0.01  // c3
+);
+
+// Sol far (sarı ışık)
+SpotLight leftHeadlight = new SpotLight(
+    new Point3(-1, 0.5, -3), // Arabanın sol önü
+    new Vector3(0, -0.1, 1).normalize(), // Hafif aşağı + ileri
+    new Color(255, 240, 160), // Sarımsı beyaz
+    4.0,
+    20.0, 
+    35.0
+);
+
+// Sağ far
+SpotLight rightHeadlight = new SpotLight(
+    new Point3(1, 0.5, -3),
+    new Vector3(0, -0.1, 1).normalize(),
+    new Color(255, 240, 160),
+    4.0,
+    20.0,
+    35.0
+);
+
+SpotLight streetLight = new SpotLight(
+    new Point3(0, 8, 0),
+    new Vector3(0, -1, 0),
+    new Color(200, 220, 255), // Hafif mavi beyaz
+    1.5,
+    60.0,  // Geniş iç koni
+    90.0   // Çok yumuşak geçiş
+);
+
+// Kamera/oyuncu pozisyonuna bağlı dinamik ışık
+Point3 playerPos = new Point3(cameraX, cameraY, cameraZ);
+Vector3 playerDir = new Vector3(cameraDirX, cameraDirY, cameraDirZ).normalize();
+
+SpotLight flashlight = new SpotLight(
+    playerPos.add(playerDir.multiply(0.5)), // Ellerinin pozisyonu
+    playerDir,
+    Color.WHITE,
+    3.0,
+    25.0,
+    40.0
+);
+
+// Her frame'de güncelle:
+flashlight = new SpotLight(
+    updatedPlayerPos,
+    updatedPlayerDir,
+    flashlight.getColor(),
+    flashlight.getIntensity(),
+    flashlight.getInnerConeAngle(),
+    flashlight.getOuterConeAngle()
+);
+*/
+
+/***
+MuratPointLight light = new MuratPointLight(
+    new Point3(2, 5, -3),
+    Color.WHITE,
+    1.5
+);
+
+// Daha az düşüşlü ışık (uzun menzil)
+MuratPointLight longRangeLight = new MuratPointLight(
+    new Point3(0, 10, 0),
+    new Color(255, 220, 180),
+    2.0,
+    1.0,  // c1
+    0.02, // c2 (daha az lineer düşüş)
+    0.001 // c3 (çok az karesel düşüş)
+);
+*/
+
+/***
+// Güneş benzeri ışık (yukarıdan)
+ElenaDirectionalLight sunLight = new ElenaDirectionalLight(
+    new Vector3(0, -1, 0.2).normalize(),
+    new Color(255, 240, 220), // Sıcak beyaz
+    1.2
+);
+
+// Sabah ışığı (daha sıcak renk)
+ElenaDirectionalLight morningLight = sunLight
+    .withColor(new Color(255, 220, 180))
+    .withIntensity(0.8);
+*/
+
+// Denizanası sürüsü
+Light jellyfishLight = new BioluminescentLight(
+    List.of(new Point3(1,0,3), new Point3(2,0,3)), 
+    new Color(0, 200, 255), 
+    0.5
+);
+
+// Kara delik efekti
+Light blackHole = new BlackHoleLight(
+    new Point3(0,0,0),
+    2.5,
+    new Color(255, 100, 0)
+);
+
+/***
+Color[] retroPalette = {
+    new Color(255, 0, 0),    // Kırmızı
+    new Color(0, 255, 0),    // Yeşil
+    new Color(0, 0, 255),    // Mavi
+    new Color(255, 255, 0)   // Sarı
+};
+
+PixelArtMaterial pixelMat = new PixelArtMaterial(
+    retroPalette,
+    0.3, // Piksel boyutu
+    object.getInverseTransform()
+);
+
+Color[] gameboyPalette = {
+    new Color(15, 56, 15),   // Koyu yeşil
+    new Color(48, 98, 48),   // Orta yeşil
+    new Color(139, 172, 15), // Açık yeşil
+    new Color(155, 188, 15)  // Vurgu yeşili
+};
+
+PixelArtMaterial gbMat = new PixelArtMaterial(
+    gameboyPalette,
+    0.5, // Daha büyük pikseller
+    object.getInverseTransform()
+);
+
+// Directional Light (Güneş)
+Light sun = new DirectionalLight(
+    new Vector3(0, -1, 0), // Yukarıdan aşağı
+    Color.WHITE, 
+    1.5
+);
+
+// Point Light (Ampul)
+Light bulb = new PointLight(
+    new Point3(2, 3, 0), // Konum
+    Color.YELLOW, 
+    2.0
+);
+*/
+
+/***
+// Sahneye ekleme
+Plane flowerPlane = new Plane(new Point3(0,0,0), new Vector3(0,1,0));
+Material flowerMat = new ProceduralFlowerMaterial(
+    5,            // 5 yapraklı
+    Color.RED,    // Yaprak rengi
+    Color.YELLOW  // Orta kısım rengi
+);
+flowerPlane.setMaterial(flowerMat);
+
+// Kamera ayarı
+rayTracer.setCameraPosition(new Point3(0, 2, 3));
+*/
+
+// Hologram materyali
+Material hologram = new HolographicDiffractionMaterial(
+    object.getInverseTransform(),
+    0.8 // Yansıma oranı
+);
+
+// Kara delik materyali
+Material blackHole = new BlackHoleMaterial(
+    new Point3(1,0,0), // Özelleştirilmiş singularite pozisyonu
+    object.getInverseTransform()
+);
+
+// Işık testi
+Light coloredLight = new PointLight(
+    new Point3(2,3,1),
+    new Color(200, 150, 255), // Mor ışık
+    1.5
+);
+

@@ -1,0 +1,94 @@
+// COLORUTIL.java
+Color lerp(Color a, Color b, float t);
+Color multiply(Color c, float factor);
+Color adjustContrast(Color c, float level);
+float[] getFloatComponents(Color c);
+
+// VECTOR3.java
+Vector3 normalize();
+Vector3 reflect(Vector3 normal);
+static Vector3 randomInUnitSphere();
+double dot(Vector3 other);
+Vector3 cross(Vector3 other);
+
+// POINT3.java
+Vector3 subtract(Point3 other);
+
+
+public interface PBRCapableMaterial {
+    Color getAlbedo();
+    double getRoughness();
+    double getMetalness();
+    MaterialType getMaterialType(); // METAL/DIELECTRIC
+    double getReflectivity();
+    double getIndexOfRefraction();
+    double getTransparency();
+}
+
+// Altın (GoldPBRMaterial)
+new GoldPBRMaterial(roughness: 0.05, reflectivity: 0.9);
+
+// Seramik (CeramicTilePBRMaterial)
+new CeramicTilePBRMaterial(
+    tileColor: WHITE, 
+    groutColor: GRAY,
+    tileRoughness: 0.1, // Parlak
+    groutRoughness: 0.6
+);
+
+// Ahşap (HybridWoodMaterial)
+new HybridWoodMaterial(
+    color1: OAK, 
+    color2: PINE,
+    roughness: 0.3,
+    specularScale: 1.5
+);
+
+// Ambient
+new ElenaMuratAmbientLight(color: WARM_WHITE, intensity: 1.2);
+
+// Noktasal
+new MuratPointLight(
+    position: new Point3(2, 5, 3),
+    color: Color.WHITE, 
+    intensity: 2.0
+);
+
+// Yönlü
+new ElenaDirectionalLight(
+    direction: new Vector3(-1, -1, -0.5),
+    color: LIGHT_AMBER,
+    intensity: 1.5
+);
+
+// Düzlem için
+plane.setTransform(
+    new Matrix4()
+        .rotateX(-90) // Yatay hale getir
+        .translate(0, -1.5, 0)
+);
+
+// 1. IŞIKLANDIRMA
+scene.addLight(new MuratPointLight(
+    new Point3(2, 5, 3), 
+    new Color(255, 245, 235), 
+    2.5
+));
+
+// 2. MATERYAL
+Material gold = new GoldPBRMaterial(
+    new Color(255, 215, 0),
+    0.05, // roughness
+    0.95  // reflectivity
+);
+
+// 3. OBJE
+Sphere sphere = new Sphere(1.0);
+sphere.setMaterial(gold);
+scene.addObject(sphere);
+
+// 4. KAMERA
+camera.setPosition(new Point3(3, 2, 5));
+camera.setLookAt(Point3.ZERO);
+
+Sınıflarım hakkında bilgi sahibi olmanız için gönderiyorum bunu.

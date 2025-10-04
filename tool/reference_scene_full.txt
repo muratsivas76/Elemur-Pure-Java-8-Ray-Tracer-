@@ -1,0 +1,2531 @@
+# ===================================================================
+# reference_scene_full.txt
+#
+# ElenaMurat Ray Tracer (ElenaMuratRT) — Complete Reference Scene
+#
+# PURPOSE:
+# - Demonstrate every single constructor of every relevant class
+# - Provide a full lookup guide for users
+# - No omissions, no placeholders, no "etc."
+# - All parameters are in English
+# - This file is NOT meant to be rendered (it's too complex)
+# - Used for documentation, IDE autocomplete, and learning
+#
+# GENERATED: 2025-04-05 (5 April 2025)
+# VERSION: 1.0 (Complete API Coverage)
+# ===================================================================
+
+# ===================================================================
+# NOTE: If a shape or material does not work, please check the 
+#       `buildShapeOrMaterial` method in ElenaParser.java and ensure 
+#       all required parameters are properly defined. This file serves 
+#       as an example and reference only.
+#
+# IMPORTANT: Some materials may not be compatible with certain shapes 
+#            due to mathematical constraints. If you encounter issues, 
+#            try using a different material with that shape.
+#
+# ORDER MATTERS: Define properties in the following order:
+#                transform, material, transparency, imagePath
+#
+# NAMING WARNING: Using the same name for multiple shapes or materials 
+#                 may cause errors. To avoid conflicts, use unique names. 
+#                 For example, if you use a material named "wordMaterial" 
+#                 on two different shapes, create a second material with 
+#                 a distinct name (e.g., "wordMaterial2") and assign it 
+#                 accordingly.
+#
+# Color Format Examples:
+#   - Hex:       #FF0000 (RGB), #FF0000FF (RGBA)
+#   - Decimal:   "255, 0, 255", "255, 0, 0, 255"
+#   - Hex Pairs: "1F, 0F, 0F", "1F, 0F, 0F, 1F"
+#   - Keywords:  red, green, blue
+# ===================================================================
+
+########################################################
+# Convert Character for "text=..." arguments:
+  private final String convertToLatin(String text) {
+    if (text == null) return "NullTextError!";
+    if (text.length() < 1) return text;
+    
+    // Turkish minusculo
+    text = text.replaceAll("ccc", "\u00E7"); // ch
+    text = text.replaceAll("sss", "\u015F"); // sh
+    text = text.replaceAll("kikiki", "\u0131"); // ı
+    text = text.replaceAll("ggg", "\u011F"); // yumusak g
+    text = text.replaceAll("kokoko", "\u00F6"); // ö
+    text = text.replaceAll("kukuku", "\u00FC"); // ü
+    
+    // Turkish mayusculo
+    text = text.replaceAll("CCC", "\u00C7"); // CH
+    text = text.replaceAll("SSS", "\u015E"); // SH
+    text = text.replaceAll("bibibi", "\u0130"); // İ
+    text = text.replaceAll("GGG", "\u011E"); // Yumusak buyuk G
+    text = text.replaceAll("bobobo", "\u00D6"); // Ö
+    text = text.replaceAll("bububu", "\u00DC"); // Ü
+    
+    // Portugues tilde (~)
+    text = text.replaceAll("AAAAAA", "\u00C3"); // Ã
+    text = text.replaceAll("OOOOOO", "\u00D5"); // Õ
+    text = text.replaceAll("aaaaaa", "\u00E3"); // ã
+    text = text.replaceAll("oooooo", "\u00F5"); // õ
+    
+    // Shapka (^)
+    text = text.replaceAll("AAAAA", "\u00C2"); // Â
+    text = text.replaceAll("\u0130\u0130\u0130\u0130\u0130", "\u00CE"); // Î
+    text = text.replaceAll("UUUUU", "\u00DB"); // Û
+    text = text.replaceAll("EEEEE", "\u00CA"); // Ê
+    text = text.replaceAll("OOOOO", "\u00D4"); // Ô
+    text = text.replaceAll("aaaaa", "\u00E2"); // â
+    text = text.replaceAll("eeeee", "\u00EA"); // ê
+    text = text.replaceAll("iiiii", "\u00EE"); // î
+    text = text.replaceAll("ooooo", "\u00F4"); // ô
+    text = text.replaceAll("uuuuu", "\u00FB"); // û
+    
+    // Grave (`) 
+    text = text.replaceAll("AAAA", "\u00C0"); // À
+    text = text.replaceAll("EEEE", "\u00C8"); // È
+    text = text.replaceAll("\u0130\u0130\u0130\u0130", "\u00CC"); // Ì
+    text = text.replaceAll("IIII", "\u00CC"); // Ì
+    text = text.replaceAll("OOOO", "\u00D2"); // Ò
+    text = text.replaceAll("UUUU", "\u00D9"); // Ù
+    text = text.replaceAll("aaaa", "\u00E0"); // à
+    text = text.replaceAll("eeee", "\u00E8"); // è
+    text = text.replaceAll("iiii", "\u00EC"); // ì
+    text = text.replaceAll("oooo", "\u00F2"); // ò
+    text = text.replaceAll("uuuu", "\u00F9"); // ù
+    
+    // Acute (´)
+    text = text.replaceAll("AAA", "\u00C1"); // Á
+    text = text.replaceAll("EEE", "\u00C9"); // É
+    text = text.replaceAll("III", "\u00CD"); // Í
+    text = text.replaceAll("OOO", "\u00D3"); // Ó
+    text = text.replaceAll("UUU", "\u00DA"); // Ú
+    text = text.replaceAll("NNN", "\u00D1"); // Ñ
+    text = text.replaceAll("\\?\\?\\?", "\u00BF"); // ¿
+    text = text.replaceAll("!!!", "\u00A1"); // ¡
+    text = text.replaceAll("aaa", "\u00E1"); // á
+    text = text.replaceAll("eee", "\u00E9"); // é
+    text = text.replaceAll("iii", "\u00ED"); // í
+    text = text.replaceAll("ooo", "\u00F3"); // ó
+    text = text.replaceAll("uuu", "\u00FA"); // ú
+    text = text.replaceAll("nnn", "\u00F1"); // ñ
+    
+    // Norvegian mayusculo
+    text = text.replaceAll("AAAEEE", "\u00C6"); // Æ
+    text = text.replaceAll("OOO///", "\u00D8"); // Ø
+    text = text.replaceAll("AAAooo", "\u00C5"); // Å
+    
+    // Norwegian minusculo
+    text = text.replaceAll("aaaece", "\u00E6"); // æ
+    text = text.replaceAll("ooo///", "\u00F8"); // ø
+    text = text.replaceAll("aaaooo", "\u00E5"); // å
+    
+    return text;
+  }
+#
+########################################################
+
+# ===================================================================
+# 1. CAMERA
+# ===================================================================
+
+Camera mainCamera {
+    position = P(0.0, 2.0, 10.0);
+    lookAt = P(0.0, 0.0, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 5;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# ===================================================================
+# 2. BACKGROUND
+# ===================================================================
+
+Renderer Settings {
+    width = 800;
+    height = 600;
+	backgroundColor = #EFEFEF;
+	shadowColor = 0.0f, 0.0f, 0.0f, 1.0f;
+}
+
+# ===================================================================
+# 3. LIGHTS
+# ===================================================================
+
+# BioluminescentLight(List<Point3> positions, Color color, double pulseSpeed)
+BioluminescentLight bioLight1 {
+    positions = [P(-2.0, 1.0, 0.0), P(0.0, 1.0, 0.0), P(2.0, 1.0, 0.0)];
+    color = #00FFAA;
+    pulseSpeed = 1.8;
+}
+
+# BioluminescentLight(List<Point3> positions, Color color, double pulseSpeed, double baseIntensity, double attenuationFactor)
+BioluminescentLight bioLight2 {
+    positions = [P(-1.0, 2.0, 1.0), P(1.0, 2.0, -1.0)];
+    color = #0088FF;
+    pulseSpeed = 2.0;
+    baseIntensity = 0.7;
+    attenuationFactor = 0.06;
+}
+
+# BlackHoleLight(Point3 singularity, double radius, Color color)
+BlackHoleLight blackHoleLight1 {
+    singularity = P(0.0, 0.0, -5.0);
+    radius = 3.0;
+    color = #000000;
+}
+
+# BlackHoleLight(Point3 singularity, double radius, Color color, double intensity)
+BlackHoleLight blackHoleLight2 {
+    singularity = P(5.0, 5.0, 5.0);
+    radius = 8.0;
+    color = #110022;
+    intensity = 0.4;
+}
+
+# ElenaDirectionalLight(Vector3 direction, Color color, double intensity)
+ElenaDirectionalLight dirLight {
+    direction = V(0.0, -1.0, -0.5);
+    color = #FFFFFF;
+    intensity = 1.2;
+}
+
+# ElenaMuratAmbientLight(Color color, double intensity)
+ElenaMuratAmbientLight ambientLight {
+    color = #444466;
+    intensity = 0.3;
+}
+
+# FractalLight(Point3 position, Color color, double intensity)
+FractalLight fractalLight1 {
+    position = P(0.0, 5.0, 0.0);
+    color = #FF5500;
+    intensity = 1.8;
+}
+
+# FractalLight(Point3 position, Color color, double intensity, int octaves, double persistence, double frequency)
+FractalLight fractalLight2 {
+    position = P(3.0, 4.0, -2.0);
+    color = #AA00FF;
+    intensity = 1.5;
+    octaves = 6;
+    persistence = 0.45;
+    frequency = 2.2;
+}
+
+# MuratPointLight(Point3 position, Color color, double intensity)
+MuratPointLight pointLight1 {
+    position = P(1.0, 3.0, 1.0);
+    color = #FFFF00;
+    intensity = 1.0;
+}
+
+# MuratPointLight(Point3 position, Color color, double intensity, double constantAttenuation, double linearAttenuation, double quadraticAttenuation)
+MuratPointLight pointLight2 {
+    position = P(-3.0, 2.0, 4.0);
+    color = #FF8888;
+    intensity = 1.3;
+    constantAttenuation = 1.0;
+    linearAttenuation = 0.09;
+    quadraticAttenuation = 0.032;
+}
+
+# PulsatingPointLight(Point3 initialPosition, Color baseColor, double baseIntensity, double pulsationSpeed, double movementSpeed, double movementAmplitude)
+PulsatingPointLight pulsatingLight1 {
+    initialPosition = P(0.0, 1.0, 3.0);
+    baseColor = #00FFFF;
+    baseIntensity = 1.1;
+    pulsationSpeed = 2.0;
+    movementSpeed = 0.4;
+    movementAmplitude = 0.7;
+}
+
+# PulsatingPointLight(Point3 initialPosition, Color baseColor, double baseIntensity, double pulsationSpeed, double movementSpeed, double movementAmplitude, double constantAttenuation, double linearAttenuation, double quadraticAttenuation)
+PulsatingPointLight pulsatingLight2 {
+    initialPosition = P(2.0, 1.0, 3.0);
+    baseColor = #FF0088;
+    baseIntensity = 1.2;
+    pulsationSpeed = 1.7;
+    movementSpeed = 0.35;
+    movementAmplitude = 0.9;
+    constantAttenuation = 1.0;
+    linearAttenuation = 0.1;
+    quadraticAttenuation = 0.045;
+}
+
+# SpotLight(Point3 position, Vector3 direction, Color color, double intensity, double innerConeAngle, double outerConeAngle)
+SpotLight spotLight1 {
+    position = P(0.0, 4.0, 0.0);
+    direction = V(0.0, -1.0, 0.0);
+    color = #FFFFFF;
+    intensity = 2.0;
+    innerConeAngle = 12.0;
+    outerConeAngle = 28.0;
+}
+
+# SpotLight(Point3 position, Vector3 direction, Color color, double intensity, double innerConeAngle, double outerConeAngle, double constantAttenuation, double linearAttenuation, double quadraticAttenuation)
+SpotLight spotLight2 {
+    position = P(1.0, 4.0, 1.0);
+    direction = V(-0.5, -1.0, -0.5);
+    color = #FFCC00;
+    intensity = 1.9;
+    innerConeAngle = 10.0;
+    outerConeAngle = 24.0;
+    constantAttenuation = 1.0;
+    linearAttenuation = 0.08;
+    quadraticAttenuation = 0.03;
+}
+
+# ===================================================================
+# 4. MATERIALS
+# ===================================================================
+
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anodizedMaterial1 {
+}
+
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anodizedMaterial2 {
+    baseColor = #2222EE;
+}
+
+# AuroraCeramicMaterial ()
+AuroraCeramicMaterial auceramic1 {
+}
+
+# AuroraCeramicMaterial (Color baseColor, Color auroraColor, double auroraIntensity)
+AuroraCeramicMaterial auceramic2 {
+	baseColor = #F5F5DC;
+	auroraColor = #00FF7F;
+	auroraIntensity = 0.45;
+}
+
+# BlackHoleMaterial(Matrix4 objectInverseTransform)
+BlackHoleMaterial materialBlackHole1 {
+}
+
+# BlackHoleMaterial(Point3 singularity, Matrix4 objectInverseTransform)
+BlackHoleMaterial materialBlackHole2 {
+    singularity = P(0.0, 0.0, -10.0);
+}
+
+# BrunostCheeseMaterial()
+BrunostCheeseMaterial bucheese1 {
+}
+
+# BrunostCheeseMaterial(Color cheeseColor, Color caramelColor, double caramelAmount)
+BrunostCheeseMaterial bucheese2 {
+	cheeseColor = #D2691E;
+	caramelColor = #8B4513;
+	caramelAmount = 0.4;
+}
+
+# BumpMaterial(Material baseMaterial, ImageTexture normalMap, double strength, double uvScale, Matrix4 objectInverseTransform)
+BumpMaterial materialBump {
+    baseMaterial = materialPhong;
+    normalMap = textureNormalMap;
+    strength = 0.3;
+    uvScale = 2.0;
+}
+
+# CalligraphyRuneMaterial ()
+CalligraphyRuneMaterial calig1 {
+}
+
+# CalligraphyRuneMaterial(Color parchmentColor, Color inkColor, Color goldLeafColor, double writingIntensity)
+CalligraphyRuneMaterial calig2 {
+	parchmentColor = #F5DEB3
+	inkColor = #2F4F4F;
+	goldLeafColor = #FFD700;
+	writingIntensity = 0.65;
+}
+
+# CarpetTextureMaterial ()
+CarpetTextureMaterial carpetTexture {
+}
+
+# CarpetTextureMaterial (Color baseColor, Color patternColor)
+CarpetTextureMaterial carpetTexture2 {
+	baseColor = #CC0000;
+	patternColor = #242424;
+}
+
+# CheckerboardMaterial(Color color1, Color color2, double size, Matrix4 objectInverseTransform)
+CheckerboardMaterial materialChecker1 {
+    color1 = #FFFFFF;
+    color2 = #222222;
+    size = 0.5;
+}
+
+CheckerboardMaterial materialPlane {
+    color1 = #FFFFFF;
+    color2 = #222222;
+    size = 0.5;
+}
+
+CheckerboardMaterial materialPredefined {
+    color1 = #FFFFFF;
+    color2 = #222222;
+    size = 0.5;
+}
+
+# CheckerboardMaterial(Color color1, Color color2, double size, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+CheckerboardMaterial materialChecker2 {
+    color1 = #CCCCCC;
+    color2 = #444444;
+    size = 0.4;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.6;
+    specularCoeff = 0.3;
+    shininess = 35.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# CircleTextureMaterial(Color solidColor, Color patternColor, double patternSize, Matrix4 objectInverseTransform)
+CircleTextureMaterial materialCircle1 {
+    solidColor = #FFDDAA;
+    patternColor = #AA4400;
+    patternSize = 0.3;
+}
+
+CircleTextureMaterial materialTorus {
+    solidColor = #FFDDAA;
+    patternColor = #AA4400;
+    patternSize = 0.3;
+}
+
+# CircleTextureMaterial(Color solidColor, Color patternColor, double patternSize, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+CircleTextureMaterial materialCircle2 {
+    solidColor = #0088FF;
+    patternColor = #002288;
+    patternSize = 0.25;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.3;
+    shininess = 40.0;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# CopperMaterial()
+CopperMaterial materialCopperPlain {
+}
+
+# CrystalClearMaterial(Color glassTint, double clarity, double ior, double dispersion, Matrix4 objectInverseTransform)
+CrystalClearMaterial materialCrystal {
+    glassTint = #AADDFF;
+    clarity = 0.95;
+    ior = 1.52;
+    dispersion = 0.02;
+}
+
+# DamaskCeramicMaterial(Color primary, Color secondary, double shininess, Matrix4 invTransform)
+DamaskCeramicMaterial materialDamask1 {
+    primary = #AA6644;
+    secondary = #663311;
+    shininess = 45.0;
+}
+
+# DamaskCeramicMaterial(Color primary, Color secondary, double shininess, double ambient, double specular, Matrix4 invTransform)
+DamaskCeramicMaterial materialDamask2 {
+    primary = #885533;
+    secondary = #442211;
+    shininess = 50.0;
+    ambient = 0.2;
+    specular = 0.4;
+}
+
+# DewDropMaterial(Color baseColor, Color dropColor, double dropDensity, double dropSize, Matrix4 objectInverseTransform)
+DewDropMaterial materialDew1 {
+    baseColor = #00AA22;
+    dropColor = #00FFFF;
+    dropDensity = 0.7;
+    dropSize = 0.06;
+}
+
+# DewDropMaterial(Color baseColor, Color dropColor, double dropDensity, double dropSize, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+DewDropMaterial materialDew2 {
+    baseColor = #008811;
+    dropColor = #00CCCC;
+    dropDensity = 0.8;
+    dropSize = 0.05;
+    ambient = 0.1;
+    diffuse = 0.6;
+    specular = 0.4;
+    shininess = 45.0;
+    reflectivity = 0.25;
+    ior = 1.33;
+    transparency = 0.1;
+}
+
+# DiagonalCheckerMaterial(Color color1, Color color2, double scale, Matrix4 objectInverseTransform)
+DiagonalCheckerMaterial materialDiag1 {
+    color1 = #660000;
+    color2 = #000066;
+    scale = 0.7;
+}
+
+# DiagonalCheckerMaterial(Color color1, Color color2, double scale, double ambient, double diffuse, double specular, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+DiagonalCheckerMaterial materialDiag2 {
+    color1 = #880000;
+    color2 = #000088;
+    scale = 0.6;
+    ambient = 0.1;
+    diffuse = 0.65;
+    specular = 0.3;
+    shininess = 30.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.18;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# DiffuseMaterial(Color color)
+DiffuseMaterial materialDiffuse1 {
+    color = #FF6666;
+}
+
+# DiffuseMaterial(Color color)
+DiffuseMaterial materialSphere {
+    color = #FF6666;
+}
+
+# DiffuseMaterial(Color color, double diffuseCoefficient, double reflectivity, double ior, double transparency)
+DiffuseMaterial materialDiffuse2 {
+    color = #66AAFF;
+    diffuseCoefficient = 0.8;
+    reflectivity = 0.1;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# ElenaTextureMaterial(String imagePath, Matrix4 objectInverseTransform)
+ElenaTextureMaterial materialElenaTex1 {
+    imagePath = "textures/elena.png";
+}
+
+# ElenaTextureMaterial(String imagePath, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+ElenaTextureMaterial materialElenaTex2 {
+    transparency = 0.0;
+	imagePath = "textures/elena.png";
+    ambientCoeff = 0.1;
+    diffuseCoeff = 0.8;
+    specularCoeff = 0.2;
+    shininess = 25.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.15;
+    ior = 1.0;
+}
+
+# EmissiveMaterial(Color emissiveColor, double emissiveStrength)
+EmissiveMaterial materialEmissive {
+    emissiveColor = #FF8800;
+    emissiveStrength = 2.0;
+}
+
+# FractalBarkMaterial(Matrix4 objectInverseTransform)
+FractalBarkMaterial materialFractalBark1 {
+}
+
+# FractalBarkMaterial(Matrix4 objectInverseTransform, double roughness)
+FractalBarkMaterial materialFractalBark2 {
+    roughness = 0.8;
+}
+
+# FractalFireMaterial(int iterations, double chaos, double scale, double speed)
+FractalFireMaterial materialFractalFire {
+    iterations = 5;
+    chaos = 0.75;
+    scale = 1.8;
+    speed = 0.04;
+}
+
+# GoldMaterial()
+GoldMaterial materialGoldPlain {
+}
+
+# GradientChessMaterial(Color baseColor1, Color baseColor2, double squareSize, Matrix4 objectInverseTransform)
+GradientChessMaterial materialGradientChess1 {
+    baseColor1 = #FFFFFF;
+    baseColor2 = #000000;
+    squareSize = 0.5;
+}
+
+# GradientChessMaterial(Color baseColor1, Color baseColor2, double squareSize, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+GradientChessMaterial materialGradientChess2 {
+    baseColor1 = #EEEEEE;
+    baseColor2 = #222222;
+    squareSize = 0.45;
+    ambient = 0.12;
+    diffuse = 0.68;
+    specular = 0.3;
+    shininess = 32.0;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# GradientTextMaterial(String text)
+GradientTextMaterial materialGradientText1 {
+    text = "Welcome";
+}
+
+# GradientTextMaterial(String text, int xOffset, int yOffset)
+GradientTextMaterial materialGradientText2 {
+    text = "Hello";
+    xOffset = 10;
+    yOffset = -5;
+}
+
+# GradientTextMaterial(Color bgStart, Color bgEnd, Color textStart, Color textEnd, String text, Font font, GradientDirection direction, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform, int xOffset, int yOffset)
+GradientTextMaterial materialGradientText3 {
+    bgStart = #000000;
+    bgEnd = #0000AA;
+    textStart = #FFFF00;
+    textEnd = #FF0000;
+    text = "ELENA";
+    font = "Serif";
+    fontSize = 200;
+    fontStyle = 1;
+    direction = DIAGONAL;
+    reflectivity = 0.25;
+    ior = 1.0;
+    transparency = 0.0;
+    xOffset = 0;
+    yOffset = 0;
+}
+
+# GradientImageTextMaterial(BufferedImage bimgBG, String text)
+GradientImageTextMaterial materialImageGradientText1 {
+	imagePath = "textures\elena.png";
+    text = "Welcome";
+}
+
+# GradientImageTextMaterial(BufferedImage bimgBG, String text, int xOffset, int yOffset)
+GradientImageTextMaterial materialImageGradientText2 {
+    imagePath = "textures\elena.png";
+    text = "Hello";
+    xOffset = 10;
+    yOffset = -5;
+}
+
+# GradientImageTextMaterial(Color bgStart, Color bgEnd, Color textStart, Color textEnd, BufferedImage bimgBG, float bgAlpha, float textAlpha, String text, Font font, GradientDirection direction, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform, int xOffset, int yOffset)
+GradientImageTextMaterial materialImageGradientText3 {
+    bgStart = #000000;
+    bgEnd = #0000AA;
+    textStart = #FFFF00;
+    textEnd = #FF0000;
+	transparency = 0.0;
+	imagePath = "textures\elena.png";
+	bgAlpha = 1F;
+	textAlpha = 1F;
+    text = "ELENA";
+    font = "Serif";
+    fontSize = 200;
+    fontStyle = 1;
+    direction = DIAGONAL;
+    reflectivity = 0.25;
+    ior = 1.0;
+    xOffset = 0;
+    yOffset = 0;
+	imgOffsetX = 100;
+	imgOffsetY = 150;
+	isWrap = false;
+}
+
+GradientImageTextMaterial materialImageGradientText4 {
+    bgStart = 0, 0, 0; //int rgb
+    bgEnd = 0F, 0F, 0.80F; //float rgb
+    textStart = #FF0000; //hex rgb 
+    textEnd = 0.08F, 0.95F, 0.02F, 1F; //float rgba
+    transparency = 0.0;
+	imagePath = "textures\elena.png";
+	bgAlpha = 1F;
+	textAlpha = 1F;
+    text = "HEI";
+    font = "Arial";
+    fontSize = 150;
+    fontStyle = 1;
+    direction = HORIZONTAL;
+    reflectivity = 0.25;
+    ior = 1.0;
+    xOffset = -200;
+    yOffset = -70;
+	imgOffsetX = 120;
+	imgOffsetY = 50;
+	isWrap = false;
+}
+
+# HexagonalHoneycombMaterial(Color primary, Color secondary, double cellSize, double borderWidth)
+HexagonalHoneycombMaterial materialHoneycomb1 {
+    primary = #FFCC00;
+    secondary = #000000;
+    cellSize = 0.35;
+    borderWidth = 0.05;
+}
+
+# HexagonalHoneycombMaterial(Color primary, Color secondary, Color borderColor, double cellSize, double borderWidth, double ambientStrength, double specularStrength, double shininess)
+HexagonalHoneycombMaterial materialHoneycomb2 {
+    primary = #FFDD33;
+    secondary = #222222;
+    borderColor = #000000;
+    cellSize = 0.3;
+    borderWidth = 0.06;
+    ambientStrength = 0.1;
+    specularStrength = 0.35;
+    shininess = 40.0;
+}
+
+# HologramDataMaterial(double dataDensity, int resolution)
+HologramDataMaterial materialHologramData {
+    dataDensity = 0.8;
+    resolution = 512;
+}
+
+# HolographicDiffractionMaterial(Matrix4 objectInverseTransform)
+HolographicDiffractionMaterial materialHoloDiff1 {
+}
+
+# HolographicDiffractionMaterial(Matrix4 objectInverseTransform, double reflectivity)
+HolographicDiffractionMaterial materialHoloDiff2 {
+    reflectivity = 0.9;
+}
+
+# HotCopperMaterial()
+HotCopperMaterial hotcopper1 {
+}
+
+# HotCopperMaterial(Color copperColor, Color patinaColor, double patinaAmount)
+HotCopperMaterial hotcopper2 {
+	copperColor = #B87333;
+	patinaColor = #339977;
+	patinaAmount = 0.25;
+}
+
+# ImageTexture(BufferedImage image, double scale)
+# Note: Cannot embed image — use path
+# Simulated via texture reference
+ImageTexture textureDefault {
+    imagePath = "textures/elena.png";
+    scale = 1.0;
+}
+
+# ImageTexture(BufferedImage image, double scaleU, double scaleV, double offsetU, double offsetV)
+ImageTexture textureTiled {
+    imagePath = "textures/elena.png";
+    uScale = 2.0;
+    vScale = 2.0;
+    uOffset = 0.1;
+    vOffset = 0.1;
+}
+
+# ImageTextureMaterial(BufferedImage image, Matrix4 objectInverseTransform)
+ImageTextureMaterial materialImageTex1 {
+	imagePath = "textures\elena.png";
+	reflectivity = 0.3;
+	ior = 1.0;
+	uScale = 3.0;
+    vScale = 3.0;
+    uOffset = 0.0;
+    vOffset = 0.0;
+}
+
+# ImageTextureMaterial(BufferedImage image, double scale, Matrix4 objectInverseTransform)
+ImageTextureMaterial materialImageTex2 {
+	imagePath = "textures\elena.png";
+    scale = 2.0;
+	reflectivity = 0.3;
+	ior = 1.0;
+	uScale = 3.0;
+    vScale = 3.0;
+    uOffset = 0.0;
+    vOffset = 0.0;
+}
+
+# ImageTextureMaterial(BufferedImage image, double uScale, double vScale, double uOffset, double vOffset, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, Matrix4 objectInverseTransform)
+ImageTextureMaterial materialImageTex3 {
+	imagePath = "textures\\elena.png";
+    uScale = 3.0;
+    vScale = 3.0;
+    uOffset = 0.0;
+    vOffset = 0.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.8;
+    specularCoefficient = 0.2;
+    shininess = 20.0;
+	reflectivity = 0.3;
+	ior = 1.0;
+}
+
+# ImageTextureMaterial(BufferedImage image, double uScale, double vScale, double uOffset, double vOffset, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+ImageTextureMaterial materialImageTex4 {
+	imagePath = "textures\elena.png";
+    uScale = 2.5;
+    vScale = 2.5;
+    uOffset = 0.05;
+    vOffset = 0.05;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.4;
+    shininess = 50.0;
+    reflectivity = 0.3;
+    ior = 1.0;
+}
+
+# Image3D(BufferedImage c)
+Image3D imageShape1 {
+    imagePath = "textures/elena.png"; 
+    transform = translate(-2.0, 0.5, -3.0) * scale(0.05, 0.05, 0.05);	
+    material = materialImageTex1;
+}
+
+# Image3D(BufferedImage bimg, int baseSize, double widthScale, double heightScale, double thickness)
+Image3D imageShape2 {
+    imagePath = "textures/elena.png";
+    baseSize = 64;
+    widthScale = 1.0;
+    heightScale = 1.0;
+    thickness = 0.2;
+    transform = translate(2.0, 0.5, -3.0) * scale(0.05, 0.05, 0.05);
+    material = materialPhong;
+}
+
+# LambertMaterial(Color color)
+LambertMaterial materialLambert1 {
+    color = #AA3333;
+}
+
+# LambertMaterial(Color color, double ambientCoeff, double diffuseCoeff)
+LambertMaterial materialLambert2 {
+    color = #33AA33;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.75;
+}
+
+# LavaFlowMaterial(Color hotColor, Color coolColor, double flowSpeed, Matrix4 invTransform)
+LavaFlowMaterial materialLava {
+    hotColor = #FF4400;
+    coolColor = #330000;
+    flowSpeed = 0.3;
+}
+
+# Letter3D(char c)
+Letter3D letterA {
+    letter = 'A';
+    transform = translate(-1.0, 0.5, -4.0) * scale(0.3, 0.3, 0.3);
+    material = materialGoldPlain;
+}
+
+# Letter3D(char letter, int baseSize, double widthScale, double heightScale, double thickness, Font font)
+Letter3D letterB {
+    letter = 'B';
+    baseSize = 32;
+    widthScale = 1.1;
+    heightScale = 1.0;
+    thickness = 0.15;
+    font = "Arial";
+    fontStyle = 1;  
+    fontSize = 24;
+    transform = translate(1.0, 0.5, -4.0) * scale(0.3, 0.3, 0.3);
+    material = materialPhongElena1;
+}
+
+# LightningMaterial()
+LightningMaterial materialLightning1 {
+}
+
+# LightningMaterial(Color baseColor, double intensity)
+LightningMaterial materialLightning2 {
+    baseColor = #00FFFF;
+    intensity = 1.8;
+}
+
+# MarbleMaterial(Color baseColor, Color veinColor, double scale, double veinDensity, double turbulence, Matrix4 objectInverseTransform)
+MarbleMaterial materialMarble1 {
+    baseColor = #FFFFFF;
+    veinColor = #666666;
+    scale = 2.0;
+    veinDensity = 0.7;
+    turbulence = 2.5;
+}
+
+# MarbleMaterial(Color baseColor, Color veinColor, double scale, double veinDensity, double turbulence, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+MarbleMaterial materialMarble2 {
+    baseColor = #EEEEEE;
+    veinColor = #888888;
+    scale = 1.8;
+    veinDensity = 0.8;
+    turbulence = 3.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.25;
+    shininess = 28.0;
+    reflectivity = 0.2;
+    ior = 1.5;
+    transparency = 0.0;
+}
+
+# MetallicMaterial(Color metallicColor, Color specularColor, double reflectivity, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient)
+MetallicMaterial materialMetallic {
+    metallicColor = #BBBBBB;
+    specularColor = #FFFFFF;
+    reflectivity = 0.9;
+    shininess = 90.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.3;
+    specularCoefficient = 0.8;
+}
+
+# NeutralMaterial(Color baseColor)
+NeutralMaterial materialNeutral1 {
+    baseColor = #888888;
+}
+
+# NeutralMaterial(Color baseColor, double reflectivity, double transparency, double indexOfRefraction)
+NeutralMaterial materialNeutral2 {
+    baseColor = #999999;
+    reflectivity = 0.15;
+    transparency = 0.05;
+    indexOfRefraction = 1.1;
+}
+
+# OpticalIllusionMaterial(Color color1, Color color2, double frequency, double smoothness, Matrix4 objectInverseTransform)
+OpticalIllusionMaterial materialOptIllusion1 {
+    color1 = #000000;
+    color2 = #FFFFFF;
+    frequency = 20.0;
+    smoothness = 0.3;
+}
+
+# OpticalIllusionMaterial(Color color1, Color color2, double frequency, double smoothness, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+OpticalIllusionMaterial materialOptIllusion2 {
+    color1 = #333333;
+    color2 = #CCCCCC;
+    frequency = 18.0;
+    smoothness = 0.35;
+    ambient = 0.1;
+    diffuse = 0.6;
+    specular = 0.2;
+    shininess = 20.0;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, boolean useGradient, Color gradientColor, BufferedImage wordImage, int width, int height)
+WordMaterial wmat {
+	text = "SELAM";
+	width = 512;  // pixel
+	height = 256;  // pixel
+	backgroundColor = #00000000;
+	foregroundColor = #FF0000;
+	fontName = "Arial";
+	fontSize = 50;
+	fontStyle = 1;
+	wordImage = "null"; //"null" or "imagePath"
+	gradientColor = 0F, 0.75F, 0F;
+	uOffset = 0.0;
+	vOffset = 0.0;
+	uScale = 1.0;
+	vScale = 1.0;
+	isRepeatTexture = false;
+	isTriangleEtc = false;
+}
+
+# pbr.CeramicTilePBRMaterial()
+CeramicTilePBRMaterial materialCeramicTile1 {
+}
+
+# pbr.CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness)
+CeramicTilePBRMaterial materialCeramicTile2 {
+    tileColor = #EEEEEE;
+    groutColor = #888888;
+    tileSize = 0.3;
+    groutWidth = 0.02;
+    tileRoughness = 0.2;
+    groutRoughness = 0.4;
+}
+
+# pbr.CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness)
+CeramicTilePBRMaterial floorMat {
+    tileColor = #FFFFFF;
+    groutColor = #EFEFEF;
+    tileSize = 0.3;
+    groutWidth = 0.012;
+    tileRoughness = 0.08;
+    groutRoughness = 0.8;
+    tileSpecular = 0.75; //Optimal
+    groutSpecular = 0.05; //Optimal
+    fresnelIntensity = 0.9; //Optimal
+    normalMicroFacet = 0.02; //Optimal
+    reflectionSharpness = 0.95; //Optimal
+    energyConservation = 1.0; //Optimal
+}  
+        
+# pbr.GlassicTilePBRMaterial()
+GlassicTilePBRMaterial materialGlassicTile1 {
+}
+
+# pbr.GlassicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness)
+GlassicTilePBRMaterial materialGlassicTile2 {
+    tileColor = #EEEEEE;
+    groutColor = #888888;
+    tileSize = 0.3;
+    groutWidth = 0.02;
+    tileRoughness = 0.2;
+    groutRoughness = 0.4;
+}
+
+# pbr.ChromePBRMaterial()
+ChromePBRMaterial materialChrome1 {
+}
+
+# pbr.ChromePBRMaterial(Color baseReflectance, double roughness, double anisotropy, double clearCoat, Color edgeTint)
+ChromePBRMaterial materialChrome2 {
+    baseReflectance = #FFFFFF;
+    roughness = 0.05;
+    anisotropy = 0.7;
+    clearCoat = 0.4;
+    edgeTint = #FFFFDD;
+}
+
+# pbr.CopperPBRMaterial()
+CopperPBRMaterial materialCopperPBR1 {
+}
+
+# pbr.CopperPBRMaterial(double roughness, double oxidation)
+CopperPBRMaterial materialCopperPBR2 {
+    roughness = 0.3;
+    oxidation = 0.4;
+}
+
+# pbr.CopperPBRMaterial(Color baseColor, double roughness, double oxidation)
+CopperPBRMaterial materialCopperPBR3 {
+    baseColor = #B87333;
+    roughness = 0.25;
+    oxidation = 0.3;
+}
+
+# pbr.GoldPBRMaterial(double roughness)
+GoldPBRMaterial materialGoldPBR1 {
+    roughness = 0.1;
+}
+
+# pbr.GoldPBRMaterial(double roughness)
+GoldPBRMaterial materialDiffCSG {
+    roughness = 0.1;
+}
+
+# pbr.GoldPBRMaterial(Color albedo, double roughness, double metalness)
+GoldPBRMaterial materialGoldPBR2 {
+    albedo = #FFD700;
+    roughness = 0.08;
+    metalness = 1.0;
+}
+
+# pbr.HolographicPBRMaterial()
+HolographicPBRMaterial materialHolographicPBR1 {
+}
+
+# pbr.HolographicPBRMaterial(Color baseColor, double rainbowSpeed, double scanLineDensity, double glitchIntensity, double timeOffset, double distortionFactor, double dataDensity)
+HolographicPBRMaterial materialHolographicPBR2 {
+    baseColor = #000000;
+    rainbowSpeed = 0.5;
+    scanLineDensity = 10.0;
+    glitchIntensity = 0.3;
+    timeOffset = 0.0;
+    distortionFactor = 0.2;
+    dataDensity = 0.9;
+}
+
+# pbr.MarblePBRMaterial()
+MarblePBRMaterial materialMarblePBR1 {
+}
+
+# pbr.MarblePBRMaterial(Color baseColor, Color veinColor, double veinScale, double veinContrast, double roughness, double reflectivity, double veinIntensity)
+MarblePBRMaterial materialMarblePBR2 {
+    baseColor = #FFFFFF;
+    veinColor = #666666;
+    veinScale = 4.0;
+    veinContrast = 0.6;
+    roughness = 0.3;
+    reflectivity = 0.4;
+    veinIntensity = 1.0;
+}
+
+# NorwegianRoseMaterial ()
+NorwegianRoseMaterial norwegianRose {
+}
+
+# NorwegianRoseMaterial(Color woodColor, Color roseColor)
+NorwegianRoseMaterial norwegianRose2 {
+	woodColor = #654321;
+	roseColor = #C83232;
+}
+
+# pbr.PlasticPBRMaterial(Color albedo)
+PlasticPBRMaterial materialPlastic1 {
+    albedo = #FF6600;
+}
+
+# pbr.PlasticPBRMaterial(Color albedo, double roughness, double reflectivity, double ior, double transparency)
+PlasticPBRMaterial materialPlastic2 {
+    albedo = #FF8844;
+    roughness = 0.4;
+    reflectivity = 0.2;
+    ior = 1.3;
+    transparency = 0.0;
+}
+
+# pbr.SilverPBRMaterial(double roughness)
+SilverPBRMaterial materialSilverPBR1 {
+    roughness = 0.05;
+}
+
+# pbr.SilverPBRMaterial(Color albedo, double roughness, double metalness)
+SilverPBRMaterial materialSilverPBR2 {
+    albedo = #CCCCCC;
+    roughness = 0.04;
+    metalness = 1.0;
+}
+
+# pbr.WaterPBRMaterial()
+WaterPBRMaterial materialWaterPBR1 {
+}
+
+# pbr.WaterPBRMaterial(Color waterColor, double roughness, double waveIntensity, double murkiness, double foamThreshold)
+WaterPBRMaterial materialWaterPBR2 {
+    waterColor = #0088AA;
+    roughness = 0.1;
+    waveIntensity = 0.6;
+    murkiness = 0.2;
+    foamThreshold = 0.8;
+}
+
+# pbr.WoodPBRMaterial()
+WoodPBRMaterial materialWoodPBR1 {
+}
+
+# pbr.WoodPBRMaterial(Color color1, Color color2, double tileSize, double roughness, double specularScale)
+WoodPBRMaterial materialWoodPBR2 {
+    color1 = #AA6633;
+    color2 = #884411;
+    tileSize = 0.4;
+    roughness = 0.5;
+    specularScale = 0.3;
+}
+
+# PhongElenaMaterial(Color diffuseColor, double reflectivity, double shininess)
+PhongElenaMaterial materialPhongElena1 {
+    diffuseColor = #00AAFF;
+    reflectivity = 0.3;
+    shininess = 50.0;
+}
+
+# PhongElenaMaterial(Color diffuseColor, double reflectivity, double shininess, double ambientCoefficient)
+PhongElenaMaterial materialPhongElena2 {
+    diffuseColor = #0088CC;
+    reflectivity = 0.35;
+    shininess = 60.0;
+    ambientCoefficient = 0.15;
+}
+
+# PhongMaterial(Color diffuseColor)
+PhongMaterial materialPhong {
+    diffuseColor = #00AAFF;
+}
+
+# PhongMaterial(Color diffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency)
+PhongMaterial materialPhongFull {
+    diffuseColor = #0088CC;
+    specularColor = #FFFFFF;
+    shininess = 55.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.8;
+    specularCoefficient = 0.9;
+    reflectivity = 0.3;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# PixelArtMaterial(Color[] palette, double pixelSize, Matrix4 objectInverseTransform)
+PixelArtMaterial materialPixelArt1 {
+    palette = [#000000, #FFFFFF, #FF0000, #00FF00, #0000FF];
+    pixelSize = 0.05;
+}
+
+# PixelArtMaterial(Color[] palette, double pixelSize, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+PixelArtMaterial materialPixelArt2 {
+    palette = [#111111, #EEEEEE, #FF4444];
+    pixelSize = 0.04;
+    ambient = 0.1;
+    diffuse = 0.7;
+    specular = 0.3;
+    shininess = 30.0;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# PlatinumMaterial(Matrix4 objectInverseTransform)
+PlatinumMaterial materialPlatinum1 {
+}
+
+# PlatinumMaterial(Matrix4 objectInverseTransform, double specularBalance)
+PlatinumMaterial materialPlatinum2 {
+    specularBalance = 0.8;
+}
+
+# ProceduralFlowerMaterial(double petalCount, Color petalColor, Color centerColor)
+ProceduralFlowerMaterial materialFlower1 {
+    petalCount = 8.0;
+    petalColor = #FF66AA;
+    centerColor = #FFFF00;
+}
+
+# ProceduralFlowerMaterial(double petalCount, Color petalColor, Color centerColor, double ambientStrength)
+ProceduralFlowerMaterial materialFlower2 {
+    petalCount = 6.0;
+    petalColor = #FF3366;
+    centerColor = #FFCC00;
+    ambientStrength = 0.2;
+}
+
+# PureWaterMaterial()
+PureWaterMaterial materialPureWater1 {
+}
+
+# PureWaterMaterial(Color baseColor, double flowSpeed)
+PureWaterMaterial materialPureWater2 {
+    baseColor = #00AAAA;
+    flowSpeed = 0.25;
+}
+
+# QuantumFieldMaterial(Color primary, Color secondary, double energy, Matrix4 invTransform)
+QuantumFieldMaterial materialQuantumField {
+    primary = #0000FF;
+    secondary = #FF00FF;
+    energy = 1.6;
+}
+
+# RandomMaterial(Matrix4 invTransform)
+RandomMaterial materialRandom {
+}
+
+# RectangleCheckerMaterial(Color color1, Color color2, double rectWidth, double rectHeight, Matrix4 objectInverseTransform)
+RectangleCheckerMaterial materialRectChecker1 {
+    color1 = #FFFFFF;
+    color2 = #000000;
+    rectWidth = 0.6;
+    rectHeight = 0.3;
+}
+
+# RectangleCheckerMaterial(Color color1, Color color2, double rectWidth, double rectHeight, double ambient, double diffuse, double specular, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+RectangleCheckerMaterial materialRectChecker2 {
+    color1 = #DDDDDD;
+    color2 = #333333;
+    rectWidth = 0.5;
+    rectHeight = 0.4;
+    ambient = 0.1;
+    diffuse = 0.65;
+    specular = 0.25;
+    shininess = 30.0;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# ReflectiveMaterial()
+ReflectiveMaterial materialReflective1 {
+}
+
+# ReflectiveMaterial(Color baseColor, double reflectivity, double roughness)
+ReflectiveMaterial materialReflective2 {
+    baseColor = #CCCCCC;
+    reflectivity = 0.95;
+    roughness = 0.05;
+}
+
+# RoughMaterial(Color color, double roughness)
+RoughMaterial materialRough1 {
+    color = #775533;
+    roughness = 0.7;
+}
+
+# RoughMaterial(Color color, double roughness, double diffuseCoefficient, double reflectivity)
+RoughMaterial materialRough2 {
+    color = #664422;
+    roughness = 0.65;
+    diffuseCoefficient = 0.6;
+    reflectivity = 0.1;
+}
+
+# SilverMaterial()
+SilverMaterial materialSilverPlain {
+}
+
+# SmartGlassMaterial()
+SmartGlassMaterial materialSmartGlass1 {
+}
+
+# SmartGlassMaterial(Color color, double clarity)
+SmartGlassMaterial materialSmartGlass2 {
+    color = #0088FF;
+    clarity = 0.7;
+}
+
+# SolidCheckerboardMaterial(Color color1, Color color2, double size, double ambient, double diffuse, Matrix4 inverseTransform)
+SolidCheckerboardMaterial materialSolidChecker {
+    color1 = #FFFFFF;
+    color2 = #444444;
+    size = 0.5;
+    ambient = 0.1;
+    diffuse = 0.6;
+}
+
+# SolidColorMaterial(Color color)
+SolidColorMaterial materialSolidColor {
+    color = #AA33AA;
+}
+
+# SquaredMaterial(Color color1, Color color2, double scale, Matrix4 objectInverseTransform)
+SquaredMaterial materialSquared1 {
+    color1 = #000000;
+    color2 = #FFFFFF;
+    scale = 0.4;
+}
+
+# SquaredMaterial(Color color1, Color color2, double scale, double ambient, double diffuse, double specular, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+SquaredMaterial materialSquared2 {
+    color1 = #222222;
+    color2 = #DDDDDD;
+    scale = 0.35;
+    ambient = 0.1;
+    diffuse = 0.7;
+    specular = 0.3;
+    shininess = 30.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# StainedGlassMaterial(Color tint, double roughness, Matrix4 invTransform)
+StainedGlassMaterial materialStainedGlass {
+    tint = #8800FF;
+    roughness = 0.1;
+}
+
+# StarfieldMaterial(Matrix4 objectInverseTransform)
+StarfieldMaterial materialStarfield1 {
+}
+
+# StarfieldMaterial(Matrix4 objectInverseTransform, Color nebulaColor, double starSize, double starDensity, double twinkleSpeed)
+StarfieldMaterial materialStarfield2 {
+    nebulaColor = #330066;
+    starSize = 1.8;
+    starDensity = 0.012;
+    twinkleSpeed = 0.6;
+}
+
+# StripedMaterial(Color color1, Color color2, double stripeSize, Matrix4 objectInverseTransform)
+StripedMaterial materialStriped1 {
+    color1 = #FFFFFF;
+    color2 = #000000;
+    stripeSize = 0.2;
+}
+
+# StripedMaterial(Color color1, Color color2, double stripeSize, StripeDirection direction, Matrix4 objectInverseTransform)
+StripedMaterial materialStriped2 {
+    color1 = #AA0000;
+    color2 = #0000AA;
+    stripeSize = 0.15;
+    direction = HORIZONTAL;
+}
+
+# StripedMaterial(Color color1, Color color2, double stripeSize, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+StripedMaterial materialStriped3 {
+    color1 = #880000;
+    color2 = #000088;
+    stripeSize = 0.18;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.65;
+    specularCoefficient = 0.3;
+    shininess = 30.0;
+    reflectivity = 0.18;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# SultanKingMaterial ()
+SultanKingMaterial sultan1 {
+}
+
+# SultanKingMaterial(Color goldColor, Color rubyColor, Color sapphireColor, double royaltyIntensity)
+SultanKingMaterial sultan2 {
+	goldColor = #FF7000;
+	rubyColor = #DC143C;
+	sapphireColor = #0064CD;
+	royaltyIntensity = 0.75;
+}
+
+# TexturedPhongMaterial(Color baseDiffuseColor, BufferedImage texture, Matrix4 objectInverseTransform)
+TexturedPhongMaterial materialTextured1 {
+    baseDiffuseColor = #00AAFF;
+    imagePath = "textures/elan.png";
+}
+
+# TexturedPhongMaterial(Color baseDiffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency, BufferedImage texture, Matrix4 objectInverseTransform)
+TexturedPhongMaterial materialTextured2 {
+    baseDiffuseColor = #0088CC;
+    specularColor = #FFFFFF;
+    shininess = 50.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.8;
+    specularCoefficient = 0.9;
+    reflectivity = 0.3;
+    ior = 1.0;
+    transparency = 0.0;
+    imagePath = "textures/elena.png";
+}
+
+# TexturedPhongMaterial(Color baseDiffuseColor, Color specularColor, double shininess, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double reflectivity, double ior, double transparency, BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, Matrix4 objectInverseTransform)
+TexturedPhongMaterial materialTextured3 {
+    baseDiffuseColor = #0066AA;
+    specularColor = #FFFFFF;
+    shininess = 55.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.82;
+    specularCoefficient = 0.92;
+    reflectivity = 0.33;
+    ior = 1.0;
+    transparency = 0.0;
+    imagePath = "textures/elena.png";
+    uOffset = 0.0;
+    vOffset = 0.0;
+    uScale = 2.0;
+    vScale = 2.0;
+}
+
+# TexturedPhongMaterial(Color diffuseColor, Matrix4 objectInverseTransform)
+TexturedPhongMaterial materialTextured4 {
+    diffuseColor = #FF6600;
+	imagePath = "textures/elena.png";
+}
+
+# TextureMaterial(BufferedImage texture)
+TextureMaterial materialTexture {
+    imagePath = "textures/elena.png";
+}
+
+# TriangleMaterial(Color color1, Color color2, double triangleSize, Matrix4 objectInverseTransform)
+TriangleMaterial materialTriangle1 {
+    color1 = #FF0000;
+    color2 = #0000FF;
+    triangleSize = 0.3;
+}
+
+# BrightnessMaterial()
+BrightnessMaterial bright1 {
+}
+
+# BrightnessMaterial(Color baseColor, double brightness, boolean useLightColor)
+BrightnessMaterial bright2 {
+	baseColor = #FF0000;
+	brightness = 0.6;
+	useLightColor = true;
+}
+
+# ContrastMaterial()
+ContrastMaterial contrast1 {
+}
+
+# ContrastMaterial(Color baseColor, double contrast, boolean useLightColor)
+ContrastMaterial contrast2 {
+	baseColor = #FF0000;
+	contrast = 0.6;
+	useLightColor = false;
+}
+
+// GhostTextMaterial(String word, Color textColor, Color gradientColor,
+//                  String gradientType, Color bgColor,
+//                  String fontFamily, int fontStyle, int fontSize,
+//                  int uOffset, int vOffset,
+//                  BufferedImage imageObject, int imageWidth, int imageHeight,
+//                  int imageUOffset, int imageVOffset,
+//                  double transparency, double reflectivity, double ior)
+// Info: 1.0->transparent; 0.0->opaque
+// AE: Æ; O/: Ø; A0: Å; ae: æ; o/: ø; a0: å
+// gradientType: "horizontal", "vertical", "diagonal"
+// Not that all parameters are optional.
+GhostTextMaterial ghostWordTR {
+    word = "GÜNEŞ"; 
+    textColor = #FF0000;
+    gradientColor = #FFFF00;
+    gradientType = "horizontal"; 
+    fontFamily = Arial; //Arial_black
+    fontStyle = 1;
+    fontSize = 50;
+    uOffset = 30;
+    vOffset = 20; // -90
+    transparency = 0.95;
+    reflectivity = 0.15;
+    ior = 1.52;
+    imageObject = "textures/turkeyFlag.png"; //or "null"
+    imageWidth = 192; 
+    imageHeight = 250;
+    imageUOffset = 30;
+    imageVOffset = 0; //-180
+}
+
+# ThresholdMaterial()
+ThresholdMaterial threshold1 {
+}
+
+# ThresholdMaterial(Color baseColor, double threshold, Color aboveColor, Color belowColor, boolean useLightColor, boolean invertThreshold)
+ThresholdMaterial threshold2 {
+    baseColor = #444444;        
+    aboveColor = #00DD00;    
+    belowColor = #0000DD;   
+    threshold = 0.5;
+    useLightColor = true;
+    invertThreshold = false;  
+}
+
+// SphereWordTextureMaterial(String word, Color textColor, Color gradientColor, String gradientType, Color bgColor, 
+//                           String fontFamily, int fontStyle, int fontSize, double reflectivity, double ior,
+//                           double transparency, int uOffset, int vOffset, BufferedImage imageObject, 
+//                           int imageWidth, int imageHeight, int imageUOffset, int imageVOffset)
+// Info: 1.0->transparent; 0.0->opaque
+// Note that all parameters are optional
+// AE: Æ; O/: Ø; A0: Å; ae: æ; o/: ø; a0: å
+// gradientType: "horizontal", "vertical", "diagonal"
+SphereWordTextureMaterial sphereWord {
+    word = "EN_VANN"; 
+    bgColor = #00CC0055;
+    textColor = #FF0000;
+    gradientColor = #FFFF00; 
+    gradientType = "horizontal"; 
+    fontFamily = Arial; //Arial_black
+    fontStyle = 1;
+    fontSize = 100;
+    uOffset = 0;
+    vOffset = 20;
+    reflectivity = 0.3;
+    ior = 1.0;
+	transparency = 0.0;
+    imageObject = "textures\elena.png"; //or "null"
+    imageWidth = 200; 
+    imageHeight = 200;
+    imageUOffset = 0;
+    imageVOffset = -50;
+}
+
+#TextDielectricMaterial(String word, Color textColor, Color gradientColor, 
+//                                 String gradientType, Color bgColor,
+//                                 String fontFamily, int fontStyle, int fontSize,
+//                                 int uOffset, int vOffset,
+//                                 BufferedImage imageObject, int imageWidth, int imageHeight,
+//                                 int imageUOffset, int imageVOffset,
+//                                 Color diffuseColor, double ior, double transparency, double reflectivity,
+//                                 Color filterColorInside, Color filterColorOutside)
+// Info: 1.0->transparent; 0.0->opaque
+// AE: Æ; O/: Ø; A0: Å; ae: æ; o/: ø; a0: å
+// gradientType: "horizontal", "vertical", "diagonal"
+// Not that all parameters are optional.
+TextDielectricMaterial dielectricWord {
+    word = "EN_VANN"; 
+    bgColor = #00CC0055;
+    textColor = #FF0000;
+    gradientColor = #FFFF00;
+	diffuseColor = 0.92f, 0.92f, 0.96f;
+	filterColorInside = 0.0f, 0.0f, 1.0f;
+	filterColorOutside = 0.99f, 0.99f, 0.99f;
+    gradientType = "horizontal"; 
+    fontFamily = Arial; //Arial_black
+    fontStyle = 1;
+    fontSize = 100;
+    uOffset = 0;
+    vOffset = 20;
+	ior = 1.50;
+	transparency = 0.90;
+	reflectivity = 0.15;
+    imageObject = "textures\elena.png"; //or "null"
+    imageWidth = 200; 
+    imageHeight = 200;
+    imageUOffset = 0;
+    imageVOffset = -50;
+}
+
+# TriangleMaterial(Color color1, Color color2, double triangleSize, double ambientCoefficient, double diffuseCoefficient, double specularCoefficient, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+TriangleMaterial materialTriangle2 {
+    color1 = #DD0000;
+    color2 = #0000DD;
+    triangleSize = 0.25;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.65;
+    specularCoefficient = 0.3;
+    shininess = 30.0;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# MultiMixMaterial(Material[] materials, double[] ratios)
+MultiMixMaterial mixed {
+	materials = [threshold1, sphereWord];
+	ratios = [0.4, 0.6]; //total must be 1.0
+}
+
+# XRayMaterial()
+XRayMaterial xray {
+}
+
+# XRayMaterial(Color baseColor, double transparency, double reflectivity)
+XRayMaterial xray2 {
+	baseColor = 0.15f, 0.6f, 1.0f, 0.6f;
+	transparency = 0.92;
+	reflectivity = 0.05;
+}
+
+# AnodizedTextMaterial(String word, Color textColor, Color gradientColor,
+//      String gradientType, Color bgColor,
+//      String fontFamily, int fontStyle, int fontSize,
+//      int uOffset, int vOffset,
+//      BufferedImage imageObject, int imageWidth, int imageHeight,
+//      int imageUOffset, int imageVOffset,
+//      Color baseColor)
+AnodizedTextMaterial anodizedWord {
+    word = "EN_VANN";
+    bgColor = #00CC0055;
+    textColor = #FF0000;
+    gradientColor = #FFFF00;
+    baseColor = 50, 50, 200;  
+    gradientType = "horizontal";
+    fontFamily = Arial;
+    fontStyle = 1;
+    fontSize = 100;
+    uOffset = 0;
+    vOffset = 20;
+    imageObject = "textures\\elena.png";  // or "null"
+    imageWidth = 200;
+    imageHeight = 200;
+    imageUOffset = 0;
+    imageVOffset = -50;
+}
+
+# RubyMaterial()
+RubyMaterial ruby {
+}
+
+# RubyMaterial(Color baseColor, double density, double reflectivity)
+RubyMaterial ruby2 {
+	baseColor = 220, 20, 30;
+	density = 0.8;
+	reflectivity = 0.1;
+}
+
+# ObsidianMaterial()
+ObsidianMaterial obsidian {
+}
+
+# ObsidianMaterial(double edgeSharpness, double reflectivity)
+ObsidianMaterial obsidian2 {
+	edgeSharpness = 0.3;
+	reflectivity = 0.04;
+}
+
+//PhongTextMaterial(String word, Color textColor, Color gradientColor,
+//      String gradientType, Color bgColor,
+//      String fontFamily, int fontStyle, int fontSize,
+//      int uOffset, int vOffset,
+//      BufferedImage imageObject, int imageWidth, int imageHeight,
+//      int imageUOffset, int imageVOffset,
+//      Color diffuseColor, Color specularColor, double shininess,
+//      double ambientCoefficient, double diffuseCoefficient, double specularCoefficient,
+//      double reflectivity, double ior, double transparency)
+PhongTextMaterial phongText {
+    word = "PHONG_TEXT";
+    textColor = #FFAA00;
+    diffuseColor = 0.8f, 0.2f, 0.2f;  // Kırmızımsı difüz
+    specularColor = 1.0f, 1.0f, 1.0f; // Beyaz spekülar
+    shininess = 64.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.8;
+    reflectivity = 0.1;
+    ior = 1.0;
+    transparency = 0.0;
+    gradientType = "horizontal";
+	gradientColor = #00dd00;
+    fontFamily = Arial;
+    fontStyle = 1;
+    fontSize = 80;
+    uOffset = 10;
+    vOffset = 15;
+    imageObject = "textures\\norwayFlag.png";  // or "null"
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;
+    imageVOffset = 100;
+}
+
+# InvertLightColorMaterial()
+InvertLightColorMaterial invert {
+}
+
+# EmeraldMaterial()
+EmeraldMaterial emerald {
+}
+
+# EmeraldMaterial(Color baseColor, double density, double reflectivity)
+EmeraldMaterial emerald2 {
+	baseColor = 20, 220, 60;
+	density = 0.8;
+	reflectivity = 0.12;
+}
+
+# HybridTextMaterial(String word, Color textColor, Color gradientColor,
+//                              String gradientType, Color bgColor,
+//                              String fontFamily, int fontStyle, int fontSize,
+//                              int uOffset, int vOffset,
+//                              BufferedImage imageObject, int imageWidth, int imageHeight,
+//                              int imageUOffset, int imageVOffset,
+//                              Color diffuseColor, double ior, double transparency, double reflectivity,
+//                              Color filterColorInside, Color filterColorOutside,
+//                              Color specularColor, double shininess,
+//                              double ambientCoefficient, double diffuseCoefficient, double specularCoefficient)
+HybridTextMaterial hybridText {
+    word = "HYBRID_GLASS";
+    textColor = #FFAA00;           // Turuncu metin rengi
+    gradientColor = #00dd00;       // Yeşil gradyan bitişi
+    gradientType = "horizontal";   // Yatay gradyan
+    bgColor = #00000000;           // Şeffaf arka plan (RGBA)
+
+    fontFamily = Arial;
+    fontStyle = 1;                 // 0 PLAIN, 1 BOLD, 2 ITALIC, 3 BOLDITALIC
+    fontSize = 80;
+    uOffset = 10;
+    vOffset = 15;
+
+    imageObject = "textures\\norwayFlag.png";  // Görsel dosya yolu ("null" da olabilir)
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;
+    imageVOffset = 100;
+
+    // --- Phong Lighting ---
+    diffuseColor = 0.8f, 0.2f, 0.2f;   // Kırmızımsı difüz temel
+    specularColor = 1.0f, 1.0f, 1.0f;  // Beyaz spekülar
+    shininess = 64.0;                  // Parlaklık (daha keskin ışık yansıması)
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.8;
+
+    // --- Dielectric Properties (Cam gibi davranışı etkinleştir) ---
+    indexOfRefraction = 1.52;      // Cam kırılma indisi
+    transparency = 0.6;            // %60 şeffaflık — ışın geçebilir
+    reflectivity = 0.3;            // %30 yansıma — Fresnel ile dinamik artar
+    filterColorInside = 0.95f, 1.0f, 1.0f;   // Cam içinden bakınca mavi ton
+    filterColorOutside = 1.0f, 0.98f, 0.95f; // Dışarıdan bakınca hafif sarı ton
+}
+
+# EdgeLightColorMaterial ()
+EdgeLightColorMaterial edgeMat {
+	baseColor = 0.9f, 0.1f, 0.1f;
+	edgeColor = 0.2f, 0.2f, 0.2f;
+	edgeThreshold = 0.2f;
+}
+
+# AmberMaterial()
+AmberMaterial amber {
+}
+
+# TurkishTileMaterial ()
+TurkishTileMaterial turkishTile {
+}
+
+# TurkishTileMaterial (Color baseColor, Color patternColor, double tileSize)
+TurkishTileMaterial turkishTile2 {
+	baseColor = #0066CC;
+	patternColor = #FFFFFF;
+	tileSize = 1.0;
+}
+
+// TexturedCheckerboardMaterial — Checkerboard pattern with optional text and image overlay.
+// Lighting: Phong model (ambient + diffuse + specular).
+// No dielectric properties — pure texture material.
+// Note: imageObject expects a file path as String (e.g., "textures/norwayFlag.png") or "null".
+# TexturedCheckerboardMaterial(
+//    Color color1, Color color2, double size,
+//    String text, Color textColor, Color gradientColor, String gradientType, Color bgColor,
+//    String fontFamily, int fontStyle, int fontSize,
+//    int textUOffset, int textVOffset,
+//    BufferedImage imageObject, int imageWidth, int imageHeight,
+//    int imageUOffset, int imageVOffset,
+//    double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor,
+//    double reflectivity, double ior, double transparency,
+//    Matrix4 objectInverseTransform)
+TexturedCheckerboardMaterial checkerText {
+    // Checkerboard base pattern colors and scale
+    color1 = #333333;              // Dark gray squares
+    color2 = #666666;              // Light gray squares
+    size = 1.2;                    // Checkerboard scale (larger = bigger squares)
+
+    // Overlay text properties
+    text = "CHECKER_GLASS";        // Text to render on top
+    textColor = #FFFFFF;           // Text color (supports alpha if needed)
+    gradientColor = #00AAFF;       // Optional gradient end color (e.g., cyan)
+    gradientType = "horizontal";   // Gradient direction: "horizontal", "vertical", "diagonal"
+    bgColor = #00000000;           // Background color (RGBA, transparent by default)
+
+    // Font styling
+    fontFamily = "Arial";
+    fontStyle = 1;                 // 0=PLAIN, 1=BOLD, 2=ITALIC, 3=BOLDITALIC
+    fontSize = 72;
+
+    // Text position offset (relative to center)
+    textUOffset = 0;               // Horizontal offset in pixels
+    textVOffset = 0;              // Vertical offset in pixels
+
+    // Optional image overlay (set to "null" if not used)
+    imageObject = "textures\\elena.png";  // File path as String, or "null"
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;              // Image horizontal offset
+    imageVOffset = 0;            // Image vertical offset
+
+    // --- Phong Lighting Parameters ---
+    ambientCoefficient = 0.15;     // Base ambient light contribution
+    diffuseCoefficient = 0.7;      // Diffuse lighting strength
+    specularCoefficient = 0.9;     // Specular highlight intensity
+    shininess = 80.0;              // Specular exponent (higher = sharper highlight)
+    specularColor = #FFFFFF;       // Color of specular highlights (usually white)
+
+    // --- Material Properties (required by Material interface) ---
+    reflectivity = 0.0;            // Reflection strength (0.0 = none)
+    ior = 1.0;                     // Index of refraction (1.0 = air, no refraction)
+    transparency = 0.0;            // Transparency level (0.0 = opaque, 1.0 = fully transparent)
+}
+
+# MosaicMaterial(Color baseColor, Color tileColor)
+MosaicMaterial mosaic1 {
+	baseColor = #DFEFDF;
+	tileColor = #FEFEFE;
+}
+
+# MosaicMaterial(Color baseColor, Color tileColor, double tileSize, double groutWidth, double randomness)
+MosaicMaterial mosaic2 {
+	baseColor = #DFEFDF;
+	tileColor = #FEFEFE;
+	tileSize = 0.3;
+	groutWidth = 0.05;
+	randomness = 0.2;
+}
+
+# TransparentColorMaterial(Color baseColor, double transparency, 
+//                         double reflectivity, double ior)
+TransparentColorMaterial tcolor {
+	transparency = 0.5;
+	reflectivity = 0.0;
+	ior = 1.5;
+}
+
+# CrystalMaterial(Color baseColor, Color crystalColor)
+CrystalMaterial crystal1 {
+	baseColor = #DFEFDF;
+	crystalColor = #FEFEFE;
+}
+
+# CrystalMaterial(Color baseColor, Color crystalColor, double rayDensity, double raySharpness)
+CrystalMaterial crystal2 {
+	baseColor = #DFEFDF;
+	crystalColor = #FEFEFE;
+	rayDensity = 8.0;
+	raySharpness = 0.7;
+}	
+
+# OrbitalMaterial(Color centerColor, Color orbitColor)
+OrbitalMaterial orbit1 {
+	centerColor = #FF0000;
+	orbitColor = #0000FF;
+}
+
+OrbitalMaterial(Color centerColor, Color orbitColor, double ringWidth, int ringCount)
+OrbitalMaterial orbit2 {
+	centerColor = #FF0000;
+	orbitColor = #0000FF;
+	ringWidth = 0.1;
+	ringCount = 5;   //integer
+}  
+
+# PolkaDotMaterial(Color baseColor, Color dotColor)
+PolkaDotMaterial polka1 {
+	baseColor = #FF0000;
+	dotColor = #0000FF;
+}
+
+PolkaDotMaterial(Color baseColor, Color dotColor, double dotSize, double dotSpacing)
+PolkaDotMaterial polka2 {
+	baseColor = #FF0000;
+	dotColor = #0000FF;
+	dotSize = 0.2;
+	dotSpacing = 0.5;
+}  
+
+# CoffeeFjordMaterial()
+CoffeeFjordMaterial coffoj1 {
+}
+  
+# CoffeeFjordMaterial(Color coffeeColor, Color fjordColor, double blendIntensity)
+CoffeeFjordMaterial coffoj2 {
+    coffeeColor = #4A2C1D;
+    fjordColor = #1E90FF;
+    blendIntensity = 0.4;
+}
+
+# NordicWoodMaterial()
+NordicWoodMaterial nwood1 {
+}
+  
+# NordicWoodMaterial(Color woodColor, Color grainColor, double grainIntensity)
+NordicWoodMaterial nwood2 {
+    woodColor = #8B5A2B;
+    grainColor = #5D4035;
+    grainIntensity = 0.5;
+}
+
+# NordicWeaveMaterial()
+NordicWeaveMaterial nwev1 {
+}
+  
+# NordicWeaveMaterial(Color primaryColor, Color secondaryColor, Color accentColor, double patternScale)
+NordicWeaveMaterial nwev2 {
+    primaryColor = #8B4513;
+    secondaryColor = #006464;
+	accentColor = #DCDCDC;
+    patternScale = 4.0;
+}
+
+# NorthernLightMaterial()
+NorthernLightMaterial northern1 {
+}
+  
+# NorthernLightMaterial(Color primaryAurora, Color secondaryAurora, double intensity)
+NorthernLightMaterial northern2 {
+    primaryAurora = #00FF7F;
+    secondaryAurora = #00BFFF;
+    intensity = 0.85;
+}
+
+# CustomMaterial (...) //Enter your custom material with full className (withORwithout .class) and its parameters
+CustomMaterial testMaterial {
+    className = extraMaterialsShapes\TestMaterial;
+	baseColor = #EEEEEE;
+	dotDensity = 0.5;
+	circleColor = #FF0000;
+	circleRadius = 0.15;
+}
+
+# CustomShape (...) //Enter your custom shape with full className (withORwithout .class) and its parameters
+CustomShape testShape {
+    className = extraMaterialsShapes\TestShape;
+	radius = 0.5;
+	//transform = .... //First transform, then material
+	material = anodizedMaterial2;
+}
+
+# FjordCrystalMaterial()
+FjordCrystalMaterial fcrystal1 {
+}
+ 
+# FjordCrystalMaterial(Color waterColor, Color crystalColor, double clarity)
+FjordCrystalMaterial fcrystal2 {
+	waterColor = #007FFF;
+    crystalColor = #AFEEEE;
+    clarity = 0.75;
+}
+
+# HamamSaunaMaterial()
+HamamSaunaMaterial hamam1 {
+}
+  
+# HamamSaunaMaterial(Color marbleColor, Color woodColor, Color steamColor, double steamIntensity)
+HamamSaunaMaterial hamam2 {
+	marbleColor = #E6E6FE;
+    woodColor = #8B4513;
+    steamColor = #F5F5F5;
+    steamIntensity = 0.55;
+}
+
+# KilimRosemalingMaterial()
+KilimRosemalingMaterial kilim1 {
+}
+
+# KilimRosemalingMaterial(Color kilimColor, Color rosemalingColor, Color accentColor, double patternIntensity) {
+KilimRosemalingMaterial kilim2 {
+	kilimColor = #C40000;
+	rosemalingColor = #006464;
+	accentColor = #FFD700;
+	patternIntensity = 0.7;
+}
+ 
+# RosemalingMaterial()
+RosemalingMaterial rosemal1 {
+}
+
+# RosemalingMaterial(Color backgroundColor, Color flowerColor, Color accentColor, double patternDensity)
+RosemalingMaterial rosemal2 {
+	backgroundColor = #2F4F4F;
+	flowerColor = #FF69B4;
+	accentColor = #FFD700;
+	patternDensity = 0.65;
+}
+
+# RuneStoneMaterial()
+RuneStoneMaterial runeStone1 {
+}
+
+# RuneStoneMaterial(Color stoneColor, Color runeColor, double runeDensity)
+RuneStoneMaterial runeStone2 {
+	stoneColor = #606060;
+	runeColor = #E8D8C8;
+	runeDensity = 0.3;
+}
+
+# TelemarkPatternMaterial()
+TelemarkPatternMaterial telemark1 {
+}
+
+# TelemarkPatternMaterial(Color baseColor, Color patternColor, Color accentColor, double patternScale)
+TelemarkPatternMaterial telemark2 {
+	baseColor = #8B0000;
+	patternColor = #FFD700;
+	accentColor = #006400;
+	patternScale = 5.0;
+}
+
+# TransparentEmojiMaterial ()
+TransparentEmojiMaterial transEmoji1 {
+}
+
+# TransparentEmojiMaterial(BufferedImage image)
+TransparentEmojiMaterial transEmoji2 {
+    imagePath = "textures\elena.png";
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency)
+TransparentEmojiMaterial transEmoji3 {
+    imagePath = "textures\elena.png";
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency, double checkerSize)
+TransparentEmojiMaterial transEmoji4 {
+    imagePath = "textures\elena.png";
+    checkerSize = 0.08;
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency, Color checkerColor1, Color checkerColor2, double checkerSize)
+TransparentEmojiMaterial transEmoji5 {
+    imagePath = "textures\elena.png";
+    checkerColor1 = 200,200,255;    # Light blue
+    checkerColor2 = 150,150,220;    # Dark blue
+    checkerSize = 0.1;
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency, Color checkerColor1, Color checkerColor2, double checkerSize, double uOffset, double vOffset)
+TransparentEmojiMaterial transEmoji6 {
+    imagePath = "textures\elena.png";
+    checkerColor1 = 0F, 0F, 0F, 0F;
+	checkerColor2 = 1F, 1F, 1F, 0F;
+    checkerSize = 0.05;
+    uOffset = 0.5;
+    vOffset = 0.5;
+}
+
+# TransparentEmojiMaterial with named colors
+TransparentEmojiMaterial transEmoji7 {
+    imagePath = "textures\elena.png";
+    checkerColor1 = #FFFFFF;
+    checkerColor2 = #000000;
+    checkerSize = 0.15;
+}
+
+# TransparentEmojiMaterial with hex colors
+TransparentEmojiMaterial transEmoji8 {
+    imagePath = "textures\elena.png";
+    checkerColor1 = #FFD700;    # Gold
+    checkerColor2 = #8B4513;    # SaddleBrown
+    checkerSize = 0.12;
+}
+
+# Minimal checkerboard configuration
+TransparentEmojiMaterial transEmoji9 {
+    imagePath = "textures\elena.png";
+    checkerColor1 = #FF0000;
+    checkerColor2 = #000000;
+}
+
+# Only checkerboard pattern without image (will use default)
+TransparentEmojiMaterial transEmoji10 {
+    checkerColor1 = 255,200,200;  # Light pink
+    checkerColor2 = 200,255,200;  # Light green
+    checkerSize = 0.2;
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency, Color checkerColor1, Color checkerColor2, double checkerSize, double uOffset, double vOffset, double uScale, double vScale)
+TransparentEmojiMaterial transEmoji11 {
+    imagePath = "textures\elena.png";
+    checkerColor1 = 0F, 0F, 0F, 0F;
+	checkerColor2 = 1F, 1F, 1F, 0F;
+    checkerSize = 0.05;
+    uOffset = 0.5;
+    vOffset = 0.5;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = false;
+	isMessy = false;
+}
+
+# TransparentPNGMaterial()
+TransparentPNGMaterial tpng1 {
+}
+
+# TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture)
+TransparentPNGMaterial tpng2 {
+	imagePath = "textures\elena.png";
+	uOffset = 0.5;
+    vOffset = 0.5;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = false;
+}
+
+# NonScaledTransparentPNGMaterial(BufferedImage texture, double billboardWidth, double billboardHeight, double scaleX, double scaleY) 
+# Extra set values: uOffset, vOffset, shadowAlphaThreshold
+NonScaledTransparentPNGMaterial nonScaleTPM {
+	imagePath = "textures\elena.png";
+	billboardWidth = 6.6;
+	billboardHeight = 3.6;
+	shadowAlphaThreshold = 0.1;
+	gammaCorrection = 2.4f; //if no, select 1f
+}
+
+# ProceduralCloudMaterial(Color baseColor, Color highlightColor)
+ProceduralCloudMaterial pcloud {
+	baseColor = #FF0000;
+	highlightColor = #00DD00;
+}
+
+# LinearGradientMaterial(Color topColor, Color bottomColor)
+LinearGradientMaterial linearGradient {
+	topColor = #FF0000;
+	bottomColor = #00DD00;
+}
+
+# RadialGradientMaterial(Color centerColor, Color edgeColor)
+RadialGradientMaterial radialGradient {
+	centerColor = #FF0000;
+	edgeColor = #00DD00;
+}
+							 
+# TransparentEmissivePNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture, Color emissiveColor, double emissiveStrength)
+TransparentEmissivePNGMaterial suEmissivePng {
+	imagePath = "textures\elena.png";
+	emissiveColor = 1F, 1F, 0F, 1F;
+	emissiveStrength = 0.1;
+	uOffset = -0.1;
+    vOffset = -0.25;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = true;
+}
+
+# GlassMaterial()
+GlassMaterial gls1 {
+}
+					
+# GlassMaterial(Color baseColor, double ior, double reflectivity, double transparency)
+GlassMaterial gls2 {
+	baseColor = 240, 240, 255;
+	ior = 1.5;
+	reflectivity = 0.08;
+	transparency = 0.92;
+}
+
+# DielectricMaterial()
+DielectricMaterial dielectric1 {
+}
+					
+# DielectricMaterial(Color diffuseColor, double ior, double reflectivity, double transparency)
+DielectricMaterial dielectric2 {
+	diffuseColor = 0.92f, 0.92f, 0.96f;
+	ior = 1.50;
+	transparency = 0.90;
+	reflectivity = 0.15;
+	filterColorInside = 0.0f, 0.0f, 1.0f;
+	filterColorOutside = 0.99f, 0.99f, 0.99f;
+}
+
+# DiamondMaterial()
+DiamondMaterial diamond1 {
+}
+
+# DiamondMaterial(Color baseColor, double ior, double reflectivity, double transparency, double dispersionStrength, double fireEffect)
+DiamondMaterial diamond2 {
+	baseColor = 255, 250, 245;
+	ior = 2.42;
+	reflectivity = 0.15;
+	transparency = 0.98;
+	dispersionStrength = 0.3;
+	fireEffect = 0.7;
+}
+						
+# TulipFjordMaterial()
+TulipFjordMaterial tulip1 {
+}
+
+# TulipFjordMaterial(Color tulipColor, Color fjordColor, Color stemColor, double bloomIntensity)
+TulipFjordMaterial tulip2 {
+	tulipColor = #FF0000;
+	fjordColor = #007FFF;
+	stemColor = #228B22;
+	bloomIntensity = 0.6;
+}
+
+# VikingRuneMaterial()
+VikingRuneMaterial vikingRune1 {
+}
+
+# VikingRuneMaterial(Color stoneColor, Color runeColor, double runeDepth)
+VikingRuneMaterial vikingRune2 {
+	stoneColor = #606060;
+	runeColor = #E8D8C8;
+	runeDepth = 0.35;
+}
+
+# VikingMetalMaterial()
+VikingMetalMaterial vikingMetal1 {
+}
+
+# VikingMetalMaterial(Color baseColor, Color rustColor, double rustDensity)
+VikingMetalMaterial vikingMetal2 {
+	baseColor = #606060;
+	rustColor = #E8D8C8;
+	rustDensity = 0.35;
+}
+
+# WaterfallMaterial()
+WaterfallMaterial materialWaterfall1 {
+}
+
+# WaterfallMaterial(Color baseColor, double flowSpeed)
+WaterfallMaterial materialWaterfall2 {
+    baseColor = #00AAFF;
+    flowSpeed = 0.4;
+}
+
+# WaterRippleMaterial(Color waterColor, double waveSpeed, Matrix4 invTransform)
+WaterRippleMaterial materialRipple1 {
+    waterColor = #0088FF;
+    waveSpeed = 0.3;
+}
+
+# WaterRippleMaterial(Color waterColor, double waveSpeed, double reflectivity, Matrix4 invTransform)
+WaterRippleMaterial materialRipple2 {
+    waterColor = #0066CC;
+    waveSpeed = 0.35;
+    reflectivity = 0.5;
+}
+
+# WoodMaterial(Color baseColor, Color grainColor, double grainFrequency, double ringVariation, Matrix4 objectInverseTransform)
+WoodMaterial materialWood1 {
+    baseColor = #AA6633;
+    grainColor = #884411;
+    grainFrequency = 10.0;
+    ringVariation = 0.3;
+}
+
+# WoodMaterial(Color baseColor, Color grainColor, double grainFrequency, double ringVariation, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+WoodMaterial materialWood2 {
+    baseColor = #BB7744;
+    grainColor = #995522;
+    grainFrequency = 12.0;
+    ringVariation = 0.25;
+    ambientCoeff = 0.1;
+    diffuseCoeff = 0.7;
+    specularCoeff = 0.3;
+    shininess = 35.0;
+    reflectivity = 0.2;
+    ior = 1.5;
+    transparency = 0.0;
+}
+
+# ===================================================================
+# 5. SHAPES
+# ===================================================================
+
+# Important: First "transform", then "material" order in all shapes
+# Box(double width, double height, double depth)
+Box box1 {
+    width = 2.0;
+    height = 1.5;
+    depth = 1.0;
+    transform = translate(-4.0, 0.0, 0.0);
+    material = materialBox1;
+}
+
+# Box(double width, double height, double depth, Material material)
+Box box2 {
+    width = 1.0;
+    height = 1.0;
+    depth = 1.0;
+    transform = translate(-4.0, 2.0, 0.0);
+    material = materialBox2;
+}
+
+# Cone(double radius, double height)
+Cone cone1 {
+    radius = 1.2;
+    height = 3.0;
+    transform = translate(-2.0, 0.0, 0.0);
+    material = materialCone;
+}
+
+# Crescent (double radius, double cutRadius, double cutDistance)
+Crescent hilal {
+	radius = 1.0;
+	cutRadius = 0.5;
+	cutDistance = 0.2;
+}
+
+# CSGShape(EMShape left, EMShape right) — Base class (abstract, for illustration)
+# Note: Not used directly; only UnionCSG, DifferenceCSG, IntersectionCSG are instantiated
+
+# Cube(double sideLength)
+Cube cube1 {
+    sideLength = 1.8;
+    transform = translate(0.0, 0.0, 0.0);
+    material = materialCube;
+}
+
+# Cube(Point3 min, Point3 max)
+Cube cube2 {
+    min = P(-0.7, -0.7, -0.7);
+    max = P(0.7, 0.7, 0.7);
+    transform = translate(0.0, 2.5, 0.0);
+    material = materialCube;
+}
+
+# Cylinder(double radius, double height)
+Cylinder cylinder1 {
+    radius = 0.9;
+    height = 2.5;
+    transform = translate(2.0, 0.0, 0.0);
+    material = materialCylinder;
+}
+
+# Cylinder(Point3 startPoint, Point3 endPoint, double radius, double height)
+Cylinder cylinder2 {
+    startPoint = P(1.0, 0.0, 1.0);
+    endPoint = P(1.0, 3.5, 1.0);
+    radius = 0.6;
+    height = 3.5;
+    material = materialCylinder;
+}
+
+# DifferenceCSG(EMShape left, EMShape right)
+DifferenceCSG diffCSG1 {
+    left = cylinder1;
+    right = cube1;
+    transform = translate(-6.0, 0.0, 5.0);
+    material = materialDiffCSG;
+}
+
+# Ellipsoid(Point3 center, double a, double b, double c)
+Ellipsoid ellipsoid1 {
+    center = P(4.0, 1.0, 0.0);
+    a = 1.6;
+    b = 1.1;
+    c = 0.9;
+	transform = translate(4.0, 1.0, 0.0);
+    material = materialPredefined;
+}
+
+# EmojiBillboard()
+EmojiBillboard ebilshape1 {
+    transform = translate(0.0, -2.0, 0.0);
+    material = materialPredefined;
+}
+
+# EmojiBillboard(double width, double height)
+EmojiBillboard ebilshape2 {
+	width = 1.2;
+	height = 1.2;
+	transform = translate(0.0, -2.0, 0.0);
+    material = materialPredefined;
+}
+
+# EmojiBillboard(double width, double height, boolean isRectangle, boolean isVisible, BufferedImage texture)
+EmojiBillboard ebilshape3 {
+	width = 1.2;
+	height = 1.2;
+	isRectangle = true; // true is rect, false is oval
+	isVisible = true; //false is total transparent shape
+	imagePath = "textures\elena.png"; //must be same its material image if is invisible
+	transform = translate(0.0, -2.0, 0.0);
+    material = materialPredefined;
+}
+
+# Hyperboloid()
+Hyperboloid hyperboloid1 {
+    transform = translate(0.0, -2.0, 0.0);
+    material = materialPredefined;
+}
+
+# Hyperboloid(double a, double b, double c, double height)
+Hyperboloid hyperboloid2 {
+    a = 1.1;
+    b = 1.1;
+    c = 1.6;
+    height = 4.2;
+    transform = translate(2.0, -2.0, 0.0);
+    material = materialPredefined;
+}
+
+# IntersectionCSG(EMShape left, EMShape right)
+IntersectionCSG intersectCSG1 {
+    left = cylinder1;
+    right = cube1;
+    transform = translate(-6.0, -1.0, 5.0);
+    material = materialPredefined;
+}
+
+# Plane(Point3 pointOnPlane, Vector3 normal)
+Plane plane1 {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = materialPlane;
+}
+
+# TransparentPlane(Point3 pointOnPlane, Vector3 normal, double thickness)
+TransparentPlane trnsPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+	thickness = 0.7;
+    material = materialPlane;
+}
+
+# Rectangle3D(Point3 p1, Point3 p2, float thickness)
+Rectangle3D rect1 {
+    p1 = P(-1.0, 0.0, -1.0);
+    p2 = P(1.0, 0.0, 1.0);
+    thickness = 0.15;
+    material = materialPredefined;
+}
+
+# RectangularPrism(double width, double height, double depth)
+RectangularPrism prism1 {
+    width = 2.2;
+    height = 1.1;
+    depth = 1.6;
+    transform = translate(4.0, 0.0, 0.0);
+    material = materialPredefined;
+}
+
+# RectangularPrism(double width, double height, double depth, Material material)
+RectangularPrism prism2 {
+    width = 1.5;
+    height = 1.5;
+    depth = 1.5;
+    transform = translate(4.0, 2.0, 0.0);
+    material = materialPredefined;
+}
+
+# Sphere(double radius)
+Sphere sphere1 {
+    radius = 1.1;
+    transform = translate(-1.5, 0.6, 0.0);
+    material = materialSphere;
+}
+
+# Sphere(double radius, Material material)
+Sphere sphere2 {
+    radius = 0.8;
+    transform = translate(-1.5, 2.0, 0.0);
+    material = materialSphere;
+}
+
+# Sphere with full transform: translate + rotate + scale
+Sphere sphere3 {
+    radius = 0.9;
+    transform = translate(3.0, 1.5, -2.0) * rotate(0.0, 45.0, 0.0) * scale(1.2, 0.8, 1.2);
+    material = materialSphere;
+}
+
+# Yalnızca X ekseni etrafında döndürme
+Sphere sphere4 {
+    radius = 1.0;
+    transform = rotate(30.0, 0.0, 0.0) * translate(0.0, 0.0, 5.0);
+    material = materialSphere;
+}
+
+# Yalnızca Z ekseni etrafında döndürme (örneğin yatay düzlemde eğim)
+Cone coneTilted {
+    radius = 0.5;
+    height = 1.5;
+    transform = translate(2.0, 1.0, 0.0) * rotate(0.0, 0.0, 25.0);
+    material = materialSphere;
+}
+
+# Karma döndürme: X ve Y ekseni
+Torus twistedTorus {
+    majorRadius = 1.8;
+    minorRadius = 0.3;
+    transform = rotate(15.0, 20.0, 0.0) * scale(1.0, 1.0, 1.0) * translate(-3.0, 1.0, 4.0);
+    material = materialSquared1;
+}
+
+# Torus(double majorRadius, double minorRadius)
+Torus torus1 {
+    majorRadius = 2.1;
+    minorRadius = 0.6;
+    transform = translate(0.0, 0.6, 4.0);
+    material = materialTorus;
+}
+
+# TorusKnot(double R, double r, int p, int q)
+TorusKnot knot1 {
+    R = 2.2;
+    r = 0.55;
+    p = 3;
+    q = 4;
+    transform = translate(3.0, 0.6, 4.0);
+    material = materialKnot;
+}
+
+# Triangle(Point3 v0, Point3 v1, Point3 v2)
+Triangle triangle1 {
+    v0 = P(0.0, 0.0, 0.0);
+    v1 = P(1.2, 0.0, 0.0);
+    v2 = P(0.0, 1.2, 0.0);
+	transform = translate(-3.0, -1.0, -2.0);
+    material = materialTriangle;
+}
+
+# UnionCSG(EMShape left, EMShape right)
+UnionCSG unionCSG1 {
+    left = box1;
+    right = sphere1;
+    transform = translate(-6.0, 1.0, 5.0);
+    material = materialUnionCSG;
+}

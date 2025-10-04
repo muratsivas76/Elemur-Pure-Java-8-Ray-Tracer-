@@ -1,0 +1,17 @@
+// BERRAK CAM için:
+float ior = 1.5f;       // Standart cam kırılma indisi
+float transparency = 0.9f;
+float reflectivity = 0.1f;
+Color glassColor = new Color(220, 240, 255, 200); // Hafif mavi, şeffaf
+
+// RENKLİ CAM için:
+float ior = 1.52f;
+float transparency = 0.7f; 
+float reflectivity = 0.08f;
+Color glassColor = new Color(255, 220, 220, 180); // Hafif pembe
+
+// AYNA ETKİLİ CAM için:
+float ior = 1.6f;
+float transparency = 0.4f;
+float reflectivity = 0.4f; // Daha yüksek yansıma
+Color glassColor = new Color(200, 220, 240, 150);

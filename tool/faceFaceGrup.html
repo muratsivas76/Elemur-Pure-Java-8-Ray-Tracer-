@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türkçe Öğren - Learn Turkish</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f0ff 0%, #f9e6ff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #ff6b6b 0%, #ff8e53 100%);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .language-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .language {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .nav-item {
+            padding: 15px 25px;
+            text-decoration: none;
+            color: #ff6b6b;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-img {
+            height: 200px;
+            background: linear-gradient(45deg, #6b6bff, #6bcaff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .language-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .language-table th, .language-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .language-table th {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .language-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                flex-direction: column;
+            }
+        }
+        
+        .ray-tracer-demo {
+            background: #2c3e50;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+        
+        .ray-tracer-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+        
+        .shapes-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .shape {
+            margin: 15px;
+            text-align: center;
+        }
+        
+        .shape-canvas {
+            width: 150px;
+            height: 150px;
+            background: #1a2530;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffcc00;
+            font-size: 3rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Türkçe Öğreniyoruz</h1>
+            <p class="subtitle">Norveçliler için Temel Türkçe Eğitimi</p>
+            <div class="language-container">
+                <span class="language">Türkçe</span>
+                <span>⇄</span>
+                <span class="language">Norsk</span>
+            </div>
+        </header>
+        
+        <div class="nav">
+            <a href="#" class="nav-item">Ana Sayfa</a>
+            <a href="#" class="nav-item">Dersler</a>
+            <a href="#" class="nav-item">Görseller</a>
+            <a href="#" class="nav-item">Alıştırmalar</a>
+            <a href="#" class="nav-item">Hakkımızda</a>
+        </div>
+        
+        <div class="ray-tracer-demo">
+            <h2 class="ray-tracer-title">Ray Tracer ile Oluşturulmuş Görsel Materyaller</h2>
+            <div class="shapes-container">
+                <div class="shape">
+                    <div class="shape-canvas">🔴</div>
+                    <p>Sphere - Küre</p>
+                </div>
+                <div class="shape">
+                    <div class="shape-canvas">🔶</div>
+                    <p>Box - Kutu</p>
+                </div>
+                <div class="shape">
+                    <div class="shape-canvas">🔷</div>
+                    <p>Cone - Koni</p>
+                </div>
+                <div class="shape">
+                    <div class="shape-canvas">⭐</div>
+                    <p>Complex - Karmaşık</p>
+                </div>
+            </div>
+            <p>Ray Tracer uygulamamızla oluşturduğumuz 3D görsellerle Türkçe öğrenmek daha eğlenceli!</p>
+        </div>
+        
+        <h2>Temel Kelimeler ve Görseller</h2>
+        <div class="gallery">
+            <div class="card">
+                <div class="card-img">💧</div>
+                <div class="card-content">
+                    <h3>Su - Vann</h3>
+                    <p>Türkçe: Su<br>Norveççe: Vann<br>Örnek: Lütfen bana bir bardak su verir misiniz?</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-img">🔥</div>
+                <div class="card-content">
+                    <h3>Ateş - Ild</h3>
+                    <p>Türkçe: Ateş<br>Norveççe: Ild<br>Örnek: Kamp ateşi etrafında toplandık.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-img">🍎</div>
+                <div class="card-content">
+                    <h3>Elma - Eple</h3>
+                    <p>Türkçe: Elma<br>Norveççe: Eple<br>Örnek: Bu elma çok tatlı.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Temel Dilbilgisi Karşılaştırması</h2>
+        <table class="language-table">
+            <thead>
+                <tr>
+                    <th>Türkçe</th>
+                    <th>Norveççe</th>
+                    <th>Örnek Cümle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ben gidiyorum</td>
+                    <td>Jeg går</td>
+                    <td>Ben okula gidiyorum. (Jeg går til skolen.)</td>
+                </tr>
+                <tr>
+                    <td>Sen geliyorsun</td>
+                    <td>Du kommer</td>
+                    <td>Sen yarın geliyorsun. (Du kommer i morgen.)</td>
+                </tr>
+                <tr>
+                    <td>O okuyor</td>
+                    <td>Han/Hun leser</td>
+                    <td>O kitap okuyor. (Han leser en bok.)</td>
+                </tr>
+                <tr>
+                    <td>Biz yapıyoruz</td>
+                    <td>Vi gjør</td>
+                    <td>Biz ödev yapıyoruz. (Vi gjør lekser.)</td>
+                </tr>
+                <tr>
+                    <td>Siz biliyorsunuz</td>
+                    <td>Dere vet</td>
+                    <td>Siz cevabı biliyorsunuz. (Dere vet svaret.)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="text-align: center;">
+            <a href="#" class="cta-button">Facebook Grubuna Katıl</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Türkçe Öğreniyoruz - Norveçliler için Türkçe Eğitim Platformu</p>
+    </div>
+
+    <script>
+        // Basit bir görsel efekti için JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            const shapes = document.querySelectorAll('.shape-canvas');
+            
+            // Kartlara hover efekti
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Şekillere animasyon efekti
+            shapes.forEach(shape => {
+                shape.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                shape.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
