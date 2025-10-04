@@ -1,0 +1,245 @@
+# ===================================================
+# RUBY vs. TESTS - SCENE
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 1024;
+    height = 768;
+    backgroundColor = 224, 224, 224;
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 0.8;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 5.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.3;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4.0, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0);
+    color = #88CCFF;
+    intensity = 0.7;
+}
+
+# Materials
+
+# CheckerboardMaterial(Color color1, Color color2, double size, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+CheckerboardMaterial floorMat {
+    color1 = #CCCCCC;
+    color2 = #444444;
+    size = 2.5;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.6;
+    specularCoeff = 0.3;
+    shininess = 20.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+LambertMaterial lambertMat {
+    color = 164, 14, 64; 
+}
+
+# RubyMaterial(Color baseColor, double density, double reflectivity)
+RubyMaterial rubyMat {
+	baseColor = 30, 20, 220;
+	density = 0.5;
+	reflectivity = 0.25;
+}
+
+# ObsidianMaterial(double edgeSharpness, double reflectivity)
+ObsidianMaterial obsidianMat {
+	edgeSharpness = 0.3;
+	reflectivity = 0.05;
+}
+
+# EmeraldMaterial(Color baseColor, double density, double reflectivity)
+EmeraldMaterial emeraldMat {
+	baseColor = 20, 220, 60;
+	density = 0.8;
+	reflectivity = 0.12;
+}
+
+# EdgeLightColorMaterial ()
+EdgeLightColorMaterial edgeMat {
+	baseColor = 0.9f, 0.1f, 0.1f;
+	edgeColor = 0.7f, 0.5f, 0.2f;
+	edgeThreshold = 0.7f;
+}
+
+# InvertLightColorMaterial()
+InvertLightColorMaterial invert {
+}
+
+# GlassMaterial(Color baseColor, double ior, double reflectivity, double transparency)
+GlassMaterial glass {
+	baseColor = 230, 230, 255;
+	ior = 1.52;
+	reflectivity = 0.15;
+	transparency = 0.92;
+}
+
+# DielectricMaterial(Color diffuseColor, double ior, double reflectivity, double transparency)
+DielectricMaterial dielectric {
+	diffuseColor = 0.3f, 0.8f, 0.9f, 0.6f;
+	ior = 1.52;
+	transparency = 0.95;
+	reflectivity = 0.15;
+	filterColorInside = 1.0f, 1.0f, 1.0f;
+	filterColorOutside = 0.0f, 0.0f, 1.0f;
+}
+
+#TextDielectricMaterial(String word, Color textColor, Color gradientColor, 
+//                                 String gradientType, Color bgColor,
+//                                 String fontFamily, int fontStyle, int fontSize,
+//                                 int uOffset, int vOffset,
+//                                 BufferedImage imageObject, int imageWidth, int imageHeight,
+//                                 int imageUOffset, int imageVOffset,
+//                                 Color diffuseColor, double ior, double transparency, double reflectivity,
+//                                 Color filterColorInside, Color filterColorOutside)
+// Info: 1.0->transparent; 0.0->opaque
+// AE: Æ; O/: Ø; A0: Å; ae: æ; o/: ø; a0: å
+// gradientType: "horizontal", "vertical", "diagonal"
+// Not that all parameters are optional.
+TextDielectricMaterial dielectricWordTR {
+    word = "GÜNEŞ"; 
+    bgColor = #00000000;
+    textColor = #FF0000;
+    gradientColor = #FFFF00;
+	diffuseColor = 0.3f, 0.8f, 0.9f, 0.6f;
+	filterColorInside = 1.0f, 0.0f, 0.0f;
+	filterColorOutside = 1.0f, 0.0f, 0.0f;
+    gradientType = "horizontal"; 
+    fontFamily = Arial; //Arial_black
+    fontStyle = 1;
+    fontSize = 50;
+    uOffset = 30;
+    vOffset = 20; // -90
+	ior = 1.52;
+	transparency = 0.95;
+	reflectivity = 0.15;
+    imageObject = "textures/turkeyFlag.png"; //or "null"
+    imageWidth = 192; 
+    imageHeight = 250;
+    imageUOffset = 30;
+    imageVOffset = 0; //-180
+}
+
+TextDielectricMaterial dielectricWordNO {
+    word = "SOL"; 
+    bgColor = #00000000;
+    textColor = #FF0000;
+    gradientColor = #FFFF00;
+	diffuseColor = 0.99f, 0.0f, 0.0f, 1.0f;
+	filterColorInside = 0.0f, 1.0f, 0.0f;
+	filterColorOutside = 0.0f, 1.0f, 0.0f;
+    gradientType = "horizontal"; 
+    fontFamily = Arial; //Arial_black
+    fontStyle = 1;
+    fontSize = 50;
+    uOffset = -30;
+    vOffset = 20; // -90
+	ior = 1.52;
+	transparency = 0.95;
+	reflectivity = 0.15;
+    imageObject = "textures/norwayFlag.png"; //or "null"
+    imageWidth = 192; 
+    imageHeight = 250;
+    imageUOffset = -30;
+    imageVOffset = 0; //-180
+}
+
+// GhostTextMaterial(String word, Color textColor, Color gradientColor,
+//                  String gradientType, Color bgColor,
+//                  String fontFamily, int fontStyle, int fontSize,
+//                  int uOffset, int vOffset,
+//                  BufferedImage imageObject, int imageWidth, int imageHeight,
+//                  int imageUOffset, int imageVOffset,
+//                  double transparency, double reflectivity, double ior)
+// Info: 1.0->transparent; 0.0->opaque
+// AE: Æ; O/: Ø; A0: Å; ae: æ; o/: ø; a0: å
+// gradientType: "horizontal", "vertical", "diagonal"
+// Not that all parameters are optional.
+GhostTextMaterial ghostWordTR {
+    word = "GÜNEŞ"; 
+    textColor = #ff0000ff;
+    gradientColor = #ffff00ff;
+    gradientType = "horizontal"; 
+    fontFamily = Arial_black; //Arial_black
+    fontStyle = 1;
+    fontSize = 46;
+    uOffset = 15;
+    vOffset = 0; // -90
+    transparency = 0.95;
+    reflectivity = 0.60;
+    ior = 1.50;
+    imageObject = "textures/turkeyFlag.png"; //or "null"
+    imageWidth = 192; 
+    imageHeight = 250;
+    imageUOffset = 60;
+    imageVOffset = 0; //-180
+}
+
+# GEOMETRIES
+
+# Arka duvar
+Plane backWallShape {
+    pointOnPlane = P(0.0, 0.0, -5.0);
+    normal = V(0.0, 0.0, 1.0);
+	material = lambertMat;
+}
+
+# Zemin
+Plane floorShape {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat; 
+}
+
+Sphere sphereTR {
+    radius = 1.6;
+    transform = translate(-1.75, 0.8, 0.0) * rotate(0.0, 0.0, 0.0);
+	//material = rubyMat;
+	//material = obsidianMat;
+	//material = emeraldMat;
+	//material = edgeMat
+	//material = invert;
+	//material = glass;
+	material = ghostWordTR;
+	//material = dielectricWordTR;  //original
+	//material = dielectric;
+}
+
+Sphere sphereNO {
+    radius = 1.6;
+    transform = translate(1.75, 0.8, 0.0) * rotate(0.0, 0.0, 0.0);
+	material = dielectricWordNO;  //original
+}

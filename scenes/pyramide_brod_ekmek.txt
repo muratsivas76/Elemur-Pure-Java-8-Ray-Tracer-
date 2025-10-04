@@ -1,0 +1,150 @@
+# ===================================================
+# TransparentEmojiMaterial Test - SCENE (Norveç-Türkçe Öğrenme)
+# Reference Scene Uyumlu
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #2A4E6C;
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 1.0;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 6.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.2;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+// EKLENMESİ GEREKEN - YUMUŞAK IŞIK
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0); // Arkadan gelen yumuşak ışık
+    color = #88CCFF;
+    intensity = 0.5;
+}
+
+# Materials
+
+// Zemin
+# CheckerboardMaterial(Color color1, Color color2, double size, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+CheckerboardMaterial floorMat {
+    color1 = #CCCCCC;
+    color2 = #444444;
+    size = 0.4;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.6;
+    specularCoeff = 0.3;
+    shininess = 35.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, boolean useGradient, Color gradientColor, BufferedImage wordImage)
+WordMaterial wordMaterial {
+	text = "BRØD";
+	//text = "BROD";
+	backgroundColor = #FF3333;
+	foregroundColor = #00DD00;
+	fontName = "Verdana";
+	fontSize = 14;
+	fontStyle = 1;
+	wordImage = "null"; //"null" or "imagePath"
+	gradientColor = 0.0f, 0.0f, 1.0f, 1.0F;
+	uOffset = -0.25;
+	vOffset = 0.25;
+	uScale = 1.0;
+	vScale = 1.0;
+	isRepeatTexture = false;
+	isTriangleEtc = false;
+}
+
+GoldPBRMaterial chrome {
+}
+
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anod {
+    baseColor = #552222EE;
+}
+
+# LambertMaterial(Color color)
+LambertMaterial lambert {
+    color = #AA3333;
+}
+
+# GEOMETRIES
+
+# Arka duvar (Norveç bayrağı)
+Plane backWall {
+    pointOnPlane = P(0.0, 0.0, -8.0);
+    normal = V(0.0, 0.0, 1.0);
+	material = anod;
+	//material = lambert;
+}
+
+# Zemin (mermer texture)
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+Triangle t1 {
+  v0 = P(-0.5, 0.0, -0.5);
+  v1 = P(0.5, 0.0, -0.5);
+  v2 = P(0.0, 2.0, 0.0);
+  transform = translate(-2.0, 0.0, 0.0) * scale(2.0, 2.0, 2.0);
+  material = lambert;
+}
+
+Triangle t2 {
+  v0 = P(0.5, 0.0, -0.5);
+  v1 = P(0.5, 0.0, 0.5);
+  v2 = P(0.0, 2.0, 0.0);
+  transform = translate(-2.0, 0.0, 0.0) * scale(2.0, 2.0, 2.0);
+  material = lambert;
+}
+
+Triangle t3 {
+  v0 = P(0.5, 0.0, 0.5);
+  v1 = P(-0.5, 0.0, 0.5);
+  v2 = P(0.0, 2.0, 0.0);
+  transform = translate(-2.0, 0.0, 0.0) * scale(2.0, 2.0, 2.0);
+  material = wordMaterial;
+  //material = chrome;
+}
+
+Triangle t4 {
+  v0 = P(-0.5, 0.0, 0.5);
+  v1 = P(-0.5, 0.0, -0.5);
+  v2 = P(0.0, 2.0, 0.0);
+  transform = translate(-2.0, 0.0, 0.0) * scale(2.0, 2.0, 2.0);
+  material = lambert;
+}

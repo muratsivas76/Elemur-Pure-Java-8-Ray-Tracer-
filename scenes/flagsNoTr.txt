@@ -1,0 +1,152 @@
+# =============================================
+# TURKISH-NORWEGIAN GREETING SCENE
+# =============================================
+
+# 1. CAMERA
+Camera mainCamera {
+    position = P(0.0, 0.0, 5.0);
+    lookAt = P(0.0, 0.0, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+	orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# 2. RENDER SETTINGS
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #E0E0E0;
+    shadowColor = #000000;
+}
+
+# 3. LIGHTS
+
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 0.3;
+}
+
+MuratPointLight pointLight1 {
+    position = P(-1.0, 1.0, 2.0);
+    color = #FFFFFF;
+    intensity = 0.5;
+}
+
+ElenaDirectionalLight dirLight {
+    direction = V(0.0, -1.0, 0.0);
+    color = #FFFFFF;
+    intensity = 0.5;
+}
+
+# 4. MATERIALS
+
+# Norwegian flag texture for back wall
+ImageTextureMaterial flagMaterial {
+    transparency = 0.0;
+    imagePath = "textures\norwayFlag.png";
+    uScale = 2.5;
+    vScale = 2.5;
+    uOffset = 0.0;
+    vOffset = 0.0;
+    ambientCoefficient = 2.8;
+    diffuseCoefficient = 0.8;
+    specularCoefficient = 0.6;
+    shininess = 50.0;
+	reflectivity = 2.4;
+	ior = 1.0;
+}
+
+# Checkerboard floor
+CheckerboardMaterial floorMat {
+    color1 = #202020;
+    color2 = #404040;
+    size = 2.5;
+    ambientCoeff = 1.25;
+    diffuseCoeff = 0.5;
+	specularCoeff = 0.3;
+    shininess = 8.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.25;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# Turkish greeting material
+GradientTextMaterial turkishMat {
+    bgStart = #E30A17;
+    bgEnd = #FFFFFF;
+    textStart = #0000FF; // start color
+    textEnd = #0000EE;   // end color
+    text = "Merhaba";
+    font = "Arial";
+    fontSize = 27;
+    fontStyle = 1;
+    direction = DIAGONAL;
+    reflectivity = 0.1;
+	ior = 1.0;
+    transparency = 0.1;
+    xOffset = -115;
+    yOffset = -30;
+}
+
+# Norwegian greeting material
+GradientImageTextMaterial norwegianMat {
+    bgStart = #BA0C2F;
+    bgEnd = #00205B;
+    textStart = #FFFF00;
+    textEnd = #00FF00;
+    transparency = 0.1;
+	imagePath = "textures\norwayFlag.png";
+	bgAlpha = 0.80F;
+	textAlpha = 1F;
+    text = "Hei";
+    font = "Arial";
+    fontSize = 160;
+    fontStyle = 1;
+    direction = DIAGONAL;
+    reflectivity = 0.1;
+	ior = 1.0;
+    xOffset = -320;
+    yOffset = 20;
+	imgOffsetX = -150;
+	imgOffsetY = 60;
+	isWrap = true;
+}
+
+# 5. SHAPES
+
+# Back wall with Norwegian flag at z = -5
+Plane backWall {
+    pointOnPlane = P(0.0, 0.0, -5.0);
+    normal = V(0.0, 0.0, 1.0);
+    material = flagMaterial;
+}
+
+# Floor plane
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+# Turkish greeting sphere
+Sphere turkishSphere {
+    radius = 1.60;
+    transform = translate(-1.7, 1.0, 0.0) * rotate (0, 0, -60);
+    material = turkishMat;
+}
+
+# Norwegian greeting sphere
+Sphere norwegianSphere {
+    radius = 1.20;
+    transform = translate(1.5, 0.30, 1.0);
+    material = norwegianMat;
+}
+
+# =============================================
+# END
+# =============================================

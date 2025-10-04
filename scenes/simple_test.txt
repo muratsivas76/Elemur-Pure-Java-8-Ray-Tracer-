@@ -1,0 +1,335 @@
+# simple_test.txt
+Camera mainCamera {
+    position = P(0.0, 0.0, 5.0);
+    lookAt = P(0.0, 0.0, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+	ortographic = false;
+    maxRecursionDepth = 3;
+	reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+Renderer Settings {
+    width = 400;
+    height = 300;
+    backgroundColor = #336699;
+    shadowColor = #000000;
+}
+
+ElenaMuratAmbientLight ambientLight {
+    color = #FFF5E1;  // Sıcak beyaz (günbatımı efekti)
+    intensity = 4.5;
+}
+
+# ElenaDirectionalLight(Vector3 direction, Color color, double intensity)
+ElenaDirectionalLight dirLight {
+    direction = V(0.0, -1.0, -0.5);
+    color = #FFFFFF;
+    intensity = 1.2;
+}
+
+// 3 noktasal ışık ile stüdyo aydınlatması
+MuratPointLight keyLight {
+    position = P(3.0, 5.0, 3.0);
+    color = #FFFFFF;
+    intensity = 1.0;  // Ana ışık
+}
+
+# Checkerboard floor
+CheckerboardMaterial floorMat {
+    color1 = #202020;
+    color2 = #606020;
+    size = 3.0;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.3;
+	specularCoeff = 0.2;
+    shininess = 6.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.;0
+    ior = 0.18;
+    transparency = 0.0;
+}
+
+DiffuseMaterial simpleMat {
+    color = #FF0000;
+}
+
+GradientImageTextMaterial materialImageGradientText3 {
+    bgStart = 0, 0, 0, 125;
+    bgEnd = 0F, 0F, 0.80F;
+    textStart = 0.97F, 0.07F, 0.04F, 0.90F;
+    textEnd = 0.08F, 0.95F, 0.02F, 0.95F;
+	transparency = 0.0;
+	imagePath = "textures\norwayFlag.png";
+	bgAlpha = 1F;
+	textAlpha = 1F;
+    text = "HEI";
+    font = "Arial";
+    fontSize = 150;
+    fontStyle = 1;
+    direction = HORIZONTAL;
+    reflectivity = 0.25;
+    ior = 1.0;
+    xOffset = -200;
+    yOffset = -70;
+	imgOffsetX = 120;
+	imgOffsetY = 50;
+	isWrap = false;
+}
+
+#baseColor = 0.0F, 0.80F, 0.0F;
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anod {
+//	baseColor = #00DD00;
+}
+
+# CarpetTextureMaterial ()
+CarpetTextureMaterial carpetTexture {
+	baseColor = #00CC00;
+	patternColor = #2424EE;
+}
+
+# AuroraCeramicMaterial ()
+AuroraCeramicMaterial aceramic {
+	baseColor = #EE0000;
+	auroraColor = #00DD00;
+	auroraIntensity = 0.25;
+}
+
+SultanKingMaterial sultan2 {
+	goldColor = #FF7000;
+	rubyColor = #22DD33;
+	sapphireColor = #0064CD;
+	royaltyIntensity = 0.95;
+}
+
+# BrunostCheeseMaterial ()
+BrunostCheeseMaterial buce {
+//	cheeseColor = #EE0000;
+//	caramelColor = #00DD00;
+//	caramelAmount = 0.25;
+}
+
+# NorwegianRoseMaterial ()
+NorwegianRoseMaterial norwegianRose {
+}
+
+NorwegianRoseMaterial norwegianRose2 {
+	woodColor = #33DD33;
+	roseColor = #FF2222;
+}
+
+# TurkishTileMaterial ()
+TurkishTileMaterial turkishTile {
+}
+
+TurkishTileMaterial turkishTile2 {
+//	baseColor = #000000;
+//	patternColor = #0000FF;
+//	tileSize = 0.50;
+}
+
+HotCopperMaterial hotcopper2 {
+	copperColor = #B87333;
+	patinaColor = #339977;
+	patinaAmount = 0.25;
+}
+
+CalligraphyRuneMaterial calig2 {
+//	parchmentColor = #F5DEB3
+//	inkColor = #2F4F4F;
+//	goldLeafColor = #FFD700;
+//	writingIntensity = 0.65;
+}
+
+# VikingRuneMaterial(Color stoneColor, Color runeColor, double runeDepth)
+VikingRuneMaterial vikingRune2 {
+	stoneColor = #606060;
+	runeColor = #E8D8C8;
+	runeDepth = 0.35;
+}
+
+# VikingMetalMaterial(Color baseColor, Color rustColor, double rustDensity)
+VikingMetalMaterial vikingMetal2 {
+	baseColor = #606060;
+	rustColor = #E8D8C8;
+	rustDensity = 0.35;
+}
+
+# TulipFjordMaterial(Color tulipColor, Color fjordColor, Color stemColor, double bloomIntensity)
+TulipFjordMaterial tulip2 {
+	tulipColor = #FF0000;  #Red
+	fjordColor = #007FFF;
+	stemColor = #228B22;
+	bloomIntensity = 0.6;
+}
+
+# TelemarkPatternMaterial(Color baseColor, Color patternColor, Color accentColor, double patternScale)
+TelemarkPatternMaterial telemark2 {
+	baseColor = #8B0000;
+	patternColor = #FFD700;
+	accentColor = #006400;
+	patternScale = 5.0;
+}
+
+# RuneStoneMaterial(Color stoneColor, Color runeColor, double runeDensity)
+RuneStoneMaterial runeStone2 {
+	stoneColor = #606060;
+	runeColor = #E8D8C8;
+	runeDensity = 0.3;
+}
+
+# RosemalingMaterial(Color backgroundColor, Color flowerColor, Color accentColor, double patternDensity)
+RosemalingMaterial rosemal2 {
+	backgroundColor = #2F4F4F;
+	flowerColor = #FF69B4;
+	accentColor = #FFD700;
+	patternDensity = 0.65;
+}
+
+# NorthernLightMaterial(Color primaryAurora, Color secondaryAurora, double intensity)
+NorthernLightMaterial northern2 {
+    primaryAurora = #00FF7F;
+    secondaryAurora = #00BFFF;
+    intensity = 0.85;
+}
+
+# CoffeeFjordMaterial(Color coffeeColor, Color fjordColor, double blendIntensity)
+CoffeeFjordMaterial coffoj2 {
+    coffeeColor = #4A2C1D;
+    fjordColor = #1E90FF;
+    blendIntensity = 0.25;
+}
+
+# NordicWoodMaterial(Color woodColor, Color grainColor, double grainIntensity)
+NordicWoodMaterial nwood2 {
+    woodColor = #8B5A2B;
+    grainColor = #5D4035;
+    grainIntensity = 0.5;
+}
+
+# NordicWeaveMaterial(Color primaryColor, Color secondaryColor, Color accentColor, double patternScale)
+NordicWeaveMaterial nwev2 {
+    primaryColor = #8B4513;
+    secondaryColor = #006464;
+	accentColor = #DCDCDC;
+    patternScale = 4.0;
+}
+
+# KilimRosemalingMaterial(Color kilimColor, Color rosemalingColor, Color accentColor, double patternIntensity) {
+KilimRosemalingMaterial kilim2 {
+	kilimColor = #CC0000;
+	rosemalingColor = #000064;
+	accentColor = #00D700;
+	patternIntensity = 0.7;
+}
+
+# HamamSaunaMaterial(Color marbleColor, Color woodColor, Color steamColor, double steamIntensity)
+HamamSaunaMaterial hamam2 {
+	marbleColor = #E6E6FE;
+    woodColor = #8B4513;
+    steamColor = #F5F5F5;
+    steamIntensity = 0.55;
+}
+
+# FjordCrystalMaterial(Color waterColor, Color crystalColor, double clarity)
+FjordCrystalMaterial fcrystal2 {
+	waterColor = #007FFF;
+    crystalColor = #AFEEEE;
+    clarity = 0.75;
+}
+
+# CustomMaterial () //Enter your custom material with full className (withORwithout .class) and its parameters
+CustomMaterial testMaterial {
+    className = extraMaterialsShapes\TestMaterial;
+	baseColor = #00DD00;
+	dotDensity = 0.5;
+	circleColor = #DD0000;
+	circleRadius = 0.15;
+}
+
+CustomMaterial twoColors {
+	className = extraMaterialsShapes\TwoColorsIntensityMaterial;
+	color1 = 1F, 0F, 0F, 0.75F; 
+	color2 = #00DD00;
+	intensity = 0.1;
+}
+
+# Floor plane
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.2, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+	//material = materialImageGradientText3;
+	//material = aceramic;
+	//material = buce;
+	//material = calig2;
+	//material = carpetTexture;
+	//material = turkishTile;
+	//material = norwegianRose;
+	//material = sultan2;
+	//material = hotcopper2;
+	//material = norwegianRose2;
+	//material = turkishTile2;
+	//material = vikingRune2;
+	//material = vikingMetal2;
+	//material = tulip2;
+	//material = telemark2;
+	//material = runeStone2;
+	//material = rosemal2;
+	//material = northern2;
+	//material = coffoj2;
+	//material = nwood2;
+	//material = nwev2;
+	//material = kilim2;
+	//material = hamam2;
+	//material = fcrystal2;
+	//material = testMaterial;
+	//material = twoColors;
+}
+
+Sphere testSphere {
+    radius = 2.0;
+    transform = translate(-1.0, 1, 0.0) * rotate(0.0, 0.0, 20.0);    
+    //material = simpleMat;
+	//material = buce;
+	material = anod;
+	//material = sultan2;
+	//material = aceramic;
+	//material = turkishTile2;
+	//material = carpetTexture;
+	//material = norwegianRose;
+	//material = fcrystal2;
+	//material = hotcopper2;
+	//material = materialImageGradientText3;
+}
+
+# Box(double width, double height, double depth)
+Box box1 {
+    width = 2.0;
+    height = 1.5;
+    depth = 1.0;
+    transform = translate(-1.0, 1.0, 0.0) * rotate (10.0, -40.0, -25.0);
+//    material = anod;
+	material = materialImageGradientText3;
+}
+
+
+# Cone(double radius, double height)
+//Cone cone1 {
+//    radius = 2.2;
+//    height = 2.0;
+//    transform = translate(-1.0, 0.5, 0.0) * rotate (10, -20, -20) * scale (0.99, 0.99, 0.99);
+//    material = materialImageGradientText3;
+//}
+
+# transform = .... //First transform, then material
+# CustomShape (...) //Enter your custom shape with full className (withORwithout .class) and its parameters
+//CustomShape testShape {
+//    className = extraMaterialsShapes\TestShape;
+//	radius = 1.5;
+//    transform = translate(0.0, 1.0, 0.0);
+//	material = anod;
+//}

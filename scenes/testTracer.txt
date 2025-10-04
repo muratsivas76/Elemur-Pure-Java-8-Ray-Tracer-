@@ -1,0 +1,83 @@
+# =============================================
+# TEST SCENE - FINAL PARSER-COMPATIBLE VERSION
+# =============================================
+
+# 1. CAMERA
+Camera mainCamera {
+    position = P(0.0, 2.0, 10.0);
+    lookAt = P(0.0, 0.0, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    maxRecursionDepth = 3;
+}
+
+# 2. RENDER SETTINGS
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #333333;
+    shadowColor = #000000;
+}
+
+# 3. LIGHTS
+
+# Orange point light
+MuratPointLight pointLight1 {
+    position = P(2.0, 5.0, 3.0);
+    color = #FF8800;
+    intensity = 1.5;
+}
+
+# White directional light
+ElenaDirectionalLight dirLight {
+    direction = V(-1.0, -1.0, -0.5);
+    color = #FFFFFF;
+    intensity = 0.8;
+}
+
+# 4. MATERIALS
+
+# Red Lambert material
+LambertMaterial redMat {
+    color = #FF3333;
+    ambientCoeff = 0.1;
+    diffuseCoeff = 0.9;
+}
+
+# Checkerboard floor
+# White and dark gray colors
+# Pattern size: 0.5 units
+CheckerboardMaterial floorMat {
+    color1 = #FFFFFF;
+    color2 = #444444;
+    size = 0.5;
+    ambientCoeff = 1.0;
+    diffuseCoeff = 0.6;
+    specularCoeff = 0.3;
+    shininess = 35.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# 5. SHAPES
+
+# Central red sphere
+Sphere sphere1 {
+    radius = 1.5;
+    material = redMat;
+    transform = translate(0.0, 0.0, 0.0);
+}
+
+# Checkerboard floor plane
+# Height: y = -1.5
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.5, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+# =============================================
+# END
+# =============================================

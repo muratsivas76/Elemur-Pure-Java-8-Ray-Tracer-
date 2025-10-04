@@ -1,0 +1,247 @@
+# ===================================================
+# SOME NEW TESTS - SCENE
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #1A3A5A;  // koyu gökyüzü mavisi
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 0.8;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 5.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.3;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4.0, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0);
+    color = #88CCFF;
+    intensity = 0.7;
+}
+
+# Materials
+
+# CheckerboardMaterial(Color color1, Color color2, double size, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+CheckerboardMaterial floorMat {
+    color1 = #CCCCCC;
+    color2 = #444444;
+    size = 1.5;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.6;
+    specularCoeff = 0.3;
+    shininess = 20.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# DynamicAlphaColorMaterial(Color baseColor, int minAlpha, int maxAlpha)
+DynamicAlphaColorMaterial dacmMat {
+	baseColor = #00DD00;
+	minAlpha = 16;
+	maxAlpha = 32;
+}
+
+# ProceduralCloudMaterial(Color baseColor, Color highlightColor)
+ProceduralCloudMaterial pcloud {
+	baseColor = #FF0000;
+	highlightColor = #00DD00;
+}
+
+# LinearGradientMaterial(Color topColor, Color bottomColor)
+LinearGradientMaterial linearGradient {
+	topColor = #FF0000;
+	bottomColor = #00DD00;
+}
+
+# RadialGradientMaterial(Color centerColor, Color edgeColor)
+RadialGradientMaterial radialGradient {
+	centerColor = #FF0000;
+	edgeColor = #00DD00;
+}
+
+# GlassMaterial(Color baseColor, double ior, double reflectivity, double transparency)
+// 1. Yoğun Renkli Cam:
+GlassMaterial glass1 {
+	baseColor = 0, 100, 200;
+	ior = 1.45;
+	reflectivity = 0.15;
+	transparency = 0.8;
+}
+
+// 2. Aynaya Yakın Yansıtıcı Cam:
+GlassMaterial glass2 {
+	baseColor = 255, 255, 255;
+	ior = 1.6;
+	reflectivity = 0.85;
+	transparency = 0.95;
+}
+
+// 3. Buzlu / Mat Cam:
+GlassMaterial glass3 {
+	baseColor = 250, 250, 255;
+	ior = 1.4;
+	reflectivity = 0.3;
+	transparency = 0.7;
+}
+
+// 4. Kehribar / Amber Cam:
+GlassMaterial glass4 {
+	baseColor = 255, 170, 50;
+	ior = 1.55;
+	reflectivity = 0.1;
+	transparency = 0.85;
+}
+
+// 5. Koyu Yeşil Şişe Camı:
+GlassMaterial glass5 {
+	baseColor = 30, 70, 50;
+	ior = 1.5;
+	reflectivity = 0.15;
+	transparency = 0.6;
+}
+
+// 6. Elmas Efekti:
+GlassMaterial glass6 {
+	baseColor = 255, 255, 255;
+	ior = 2.42;
+	reflectivity = 0.2;
+	transparency = 0.99;
+}
+
+// 7. Kırmızı Işık Camı (Gece Görüşü):
+GlassMaterial glass7 {
+	baseColor = 255, 20, 20;
+	ior = 1.52;
+	reflectivity = 0.05;
+	transparency = 0.9;
+}
+
+// 8. Su:
+GlassMaterial glass8 {
+	baseColor = 200, 230, 255;
+	ior = 1.33;
+	reflectivity = 0.02;
+	transparency = 0.97;
+}
+
+# DiamondMaterial(Color baseColor, double ior, double reflectivity, double transparency, double dispersionStrength, double fireEffect)
+DiamondMaterial diamond1 {
+	baseColor = 255, 250, 245;
+	ior = 2.42;
+	reflectivity = 0.15;
+	transparency = 0.98;
+	dispersionStrength = 0.3;
+	fireEffect = 0.7;
+}
+
+// Saf Beyaz Elmas (High Quality):
+DiamondMaterial diamond2 {
+	baseColor = 255, 255, 255;
+	ior = 2.42;
+	reflectivity = 0.18;
+	transparency = 0.99;
+	dispersionStrength = 0.4;
+	fireEffect = 0.8;
+}
+
+//  Sıcak Tonlu Elmas (Fancy Yellow):
+DiamondMaterial diamond3 {
+	baseColor = 255, 240, 200;
+	ior = 2.42;
+	reflectivity = 0.12;
+	transparency = 0.96;
+	dispersionStrength = 0.25;
+	fireEffect = 0.6;
+}
+
+// Mavi-beyaz
+DiamondMaterial diamond4 {
+	baseColor = 230, 240, 255;
+	ior = 2.42;
+	reflectivity = 0.16;
+	transparency = 0.98;
+	dispersionStrength = 0.35;
+	fireEffect = 0.75;
+}
+
+// Koyu, fancy deep
+DiamondMaterial diamond5 {
+	baseColor = 220, 200, 180;
+	ior = 2.38;
+	reflectivity = 0.08;
+	transparency = 0.92;
+	dispersionStrength = 0.2;
+	fireEffect = 0.5;
+}
+
+// Laboratuvar Elması (Süper Parlak):
+DiamondMaterial diamond6 {
+	baseColor = 175, 200, 255;
+	ior = 2.42;
+	reflectivity = 0.22;
+	transparency = 0.995;
+	dispersionStrength = 0.25;
+	fireEffect = 0.55;
+}
+
+# LambertMaterial(Color color)
+LambertMaterial lambertMat {
+    color = #AA3333;
+}
+
+# GEOMETRIES
+
+# Arka duvar
+Plane backWallShape {
+    pointOnPlane = P(0.0, 0.0, -5.0);
+    normal = V(0.0, 0.0, 1.0);
+	material = lambertMat;
+}
+
+# Zemin
+Plane floorShape {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+Sphere sphere {
+    radius = 1.4;
+    transform = translate(0.0, 0.1, 0.0);
+    //material = dacmMat;
+	//material = pcloud;
+	//material = linearGradient;
+	//material = radialGradient;
+	material = glass1;
+	//material = diamond6;
+}

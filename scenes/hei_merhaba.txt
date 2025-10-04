@@ -1,0 +1,162 @@
+# ===================================================
+# HEI MERHABA - OPTİMİZE SAHNE
+# ===================================================
+
+# Kamera: Karşı duvara odaklanıyor
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt     = P(0.0, 1.5, -10.0);   # Duvarın ortasına bak
+    upVector   = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Ayarları
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #2A4E6C;  # Mavi tonu (gece havası)
+    shadowColor = #000000;
+}
+
+# Işıklandırma
+ElenaMuratAmbientLight ambientLight {
+    color = #FFF5E1;      # Sıcak arka plan ışığı
+    intensity = 0.5;
+}
+
+ElenaDirectionalLight dirLight {
+    direction = V(0.0, -1.0, -0.5);
+    color = #FFFFFF;
+    intensity = 1.2;
+}
+
+MuratPointLight keyLight {
+    position = P(4.0, 6.0, 4.0);
+    color = #FFFFFF;
+    intensity = 1.0;
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4.0, 2.0);
+    color = #FFF5E1;
+    intensity = 0.4;
+}
+
+# Materyaller
+
+# Zemin: Satranç tahtası
+CheckerboardMaterial floorMat {
+    color1 = 1F, 1F, 1F;
+    color2 = 0F, 0F, 0F;
+    size = 3.0;
+    ambientCoeff = 0.25;
+    diffuseCoeff = 0.2;
+    specularCoeff = 0.2;
+    shininess = 8.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.0;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# HEI Yazısı
+GradientImageTextMaterial imageNoMat {
+    bgStart = 200, 200, 0, 255;
+    bgEnd = 0.99F, 0.99F, 0.99F, 1F;
+    textStart = 0.97F, 0.0F, 0.0F, 1F;
+    textEnd = 0.0, 0.95F, 0.0F, 1F;
+    transparency = 0.25;
+	imagePath = "textures\\blue16.png";
+    bgAlpha = 1F;
+    textAlpha = 1F;
+    text = "HEI";
+    font = "Arial";
+    fontSize = 153;
+    fontStyle = 1;
+    direction = HORIZONTAL;
+    reflectivity = 0.0;
+    ior = 1.0;
+    xOffset = -200;
+    yOffset = -70;
+    imgOffsetX = 0;
+    imgOffsetY = 0;
+    isWrap = false;
+}
+
+# MERHABA Yazısı
+GradientImageTextMaterial imageTrMat {
+    bgStart = 200, 200, 0, 255;
+    bgEnd = 0.99F, 0.99F, 0.99F, 1F;
+    textStart = 0.97F, 0.0F, 0.0F, 1F;
+    textEnd = 0.0F, 0.95F, 0.0F, 1F;
+	transparency = 0.25;
+	imagePath = "textures\\red16.png";
+    bgAlpha = 1F;
+    textAlpha = 1F;
+    text = "MERHABA";
+    font = "Arial";
+    fontSize = 70;
+    fontStyle = 1;
+    direction = HORIZONTAL;
+    reflectivity = 0.2;
+    ior = 1.0;
+    xOffset = -280;
+    yOffset = -60;
+    imgOffsetX = 0;
+    imgOffsetY = 0;
+    isWrap = false;
+}
+
+ImageTextureMaterial itextMat {
+    transparency = 0.5;
+	imagePath = "textures\\norwayFlag.png";
+    uScale = 1.0;
+    vScale = 1.0;
+    uOffset = 0.0;
+    vOffset = 0.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.8;
+    specularCoefficient = 0.2;
+    shininess = 20.0;
+	reflectivity = 0.3;
+	ior = 1.0;
+}
+
+# GEOMETRİLER
+
+//# Şeffaf duvar: Box ile simüle edilmiş
+Box transparentWall {
+    width = 26.0;
+    height = 9.0;
+    depth = 0.01;
+    transform = translate(-1.0, 5.70, -10.0);
+	material = itextMat;
+}
+
+# Zemin (duvarın önünde)
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.2, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+# Koni 1: HEI yazısı
+Cone cone1 {
+    radius = 1.5;
+    height = 2.0;
+    transform = translate(-1.6, -0.5, -0.4) * rotate(10, -20, -20) * scale(0.99, 0.99, 0.99);
+    material = imageNoMat;
+}
+
+# Koni 2: MERHABA yazısı
+Cone cone2 {
+    radius = 1.5;
+    height = 2.0;
+    transform = translate(1.6, 0.0, 0.0) * rotate(30, -20, -20) * scale(0.99, 0.99, 0.99);
+    material = imageTrMat;
+}

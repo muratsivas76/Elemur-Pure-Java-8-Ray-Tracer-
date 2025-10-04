@@ -1,0 +1,190 @@
+# ===================================================
+# VINDU - PENCERE - SCENE (Norveç-Türkçe Öğrenme)
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #1A3A5A;  // koyu gökyüzü mavisi
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 0.8;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 5.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.3;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4.0, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0);
+    color = #88CCFF;
+    intensity = 0.7;
+}
+
+# Materials
+
+// Zemin: PBR checkered
+CeramicTilePBRMaterial floorMat {
+    tileColor = #FFFFFFEE;
+    groutColor = #EFEFEF10;
+    tileSize = 0.3;
+    groutWidth = 0.0012;
+    tileRoughness = 0.08;
+    groutRoughness = 0.8;
+    tileSpecular = 0.75;
+    groutSpecular = 0.05;
+    fresnelIntensity = 0.9;
+    normalMicroFacet = 0.02;
+    reflectionSharpness = 0.7;
+    energyConservation = 1.0;
+}
+
+CheckerboardMaterial floorMat2 {
+    color1 = #EEEEEE;
+    color2 = #333333;
+    size = 2.0;
+    ambientCoeff = 0.25;
+    diffuseCoeff = 0.65;
+    specularCoeff = 0.25;
+    shininess = 30.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.0;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+// VINDU - Norveççe
+TransparentPNGMaterial vinduPng {
+    imagePath = "textures/vindu.png";
+    uOffset = 0.0;
+    vOffset = 0.0;
+    uScale = 0.7;
+    vScale = 0.7;
+    isRepeatTexture = false;
+}
+
+// PENCERE - Türkçe
+TransparentPNGMaterial pencerePng {
+    imagePath = "textures/pencere.png";
+    uOffset = 0.0;
+    vOffset = 0.0;
+    uScale = 1.0;
+    vScale = 1.0;
+    isRepeatTexture = false;
+}
+
+// Arka duvar: Norveç manzarası
+TransparentPNGMaterial landscapeMat {
+	imagePath = "textures\mountNorway.jpg";
+	uOffset = 0.3;
+    vOffset = -0.25;
+	uScale = 5.0;
+	vScale = 2.0;
+	isRepeatTexture = false;
+}
+
+# Emissive sphere (güneş gibi)
+//EmissiveMaterial emissiveYellowMat {
+//    emissiveColor = #FFD700;
+//    emissiveStrength = 2.0;
+//}
+
+# LambertMaterial(Color color)
+LambertMaterial lambert {
+    color = #AA3333;
+}
+
+LambertMaterial lambert2 {
+    color = #33DD33;
+}
+
+# GEOMETRIES
+
+# Arka duvar: Norveç manzarası
+Plane backWall {
+    pointOnPlane = P(0.0, 0.0, -5.0);
+    normal = V(0.0, 0.0, 1.0);
+    //material = landscapeMat;
+	material = lambert;
+	//material = floorMat2;
+}
+
+# Zemin
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat2;
+}
+
+# EmojiBillboard: VINDU
+EmojiBillboard vinduShape {
+    width = 2.0;
+    height = 1.0;
+    transform = translate(-0.7, 0.2, 1.4) * rotate(0.0, 30.0, 0.0);
+    material = vinduPng;
+}
+
+# EmojiBillboard: PENCERE
+EmojiBillboard pencereShape {
+   width = 2.0;
+    height = 1.0;
+    transform = translate(0.7, 0.2, 1.4) * rotate(0.0, -30.0, 0.0);
+    material = pencerePng;
+}
+
+# EmojiBillboard: VINDU
+EmojiBillboard backBoard {
+    width = 11.0;
+    height = 6.0;
+    transform = translate(0.0, 3.0, 0.0);
+    material = landscapeMat;
+	//material = lambert2;
+}
+
+# Yıldızlar
+//Sphere star1 {
+//    radius = 0.03;
+//    transform = translate(-0.5, 1.7, -2.0);
+//    material = emissiveWhiteMat;
+//}
+
+//Sphere star2 {
+//    radius = 0.025;
+//    transform = translate(0.3, 1.9, -1.8);
+//    material = emissiveSoftWhiteMat;
+//}
+
+# Ay (crescent)
+//Crescent moon {
+//    radius = 0.8;
+//    cutRadius = 0.6;
+//    cutDistance = 0.3;
+//    transform = translate(3.2, 2.5, -3.0);
+//    material = emissiveYellowMat;
+//}

@@ -1,0 +1,128 @@
+# =============================================
+# TEST SCENE - FINAL PARSER-COMPATIBLE VERSION
+# =============================================
+
+# 1. CAMERA
+Camera mainCamera {
+    position = P(0.0, 0.0, 5.0);
+    lookAt = P(0.0, 0.0, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    maxRecursionDepth = 2;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# 2. RENDER SETTINGS
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #FFFFFF;
+    shadowColor = #000000;
+}
+
+# 3. LIGHTS
+
+# ElenaMuratAmbientLight(Color color, double intensity)
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 0.5;
+}
+
+# Orange point light
+MuratPointLight pointLight1 {
+    position = P(-1.0, 1.0, 2.0);
+    color = #FFFFFF;
+    intensity = 1.0;
+}
+
+# White directional light
+ElenaDirectionalLight dirLight {
+    direction = V(0.0, -1.0, 0.0);
+    color = #FFFFFF;
+    intensity = 1.5;
+}
+
+# 4. MATERIALS
+
+# Checkerboard floor
+# White and dark gray colors
+# Pattern size: 0.5 units
+CheckerboardMaterial floorMat {
+    color1 = #202020;
+    color2 = #404040;
+    size = 0.4;
+    ambientCoeff = 1.25;
+    diffuseCoeff = 0.5;
+    specularCoeff = 0.3;
+    shininess = 8.0;
+    specularColor = #FFFEEE;
+    reflectivity = 0.25;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# GradientTextMaterial(Color bgStart, Color bgEnd, Color textStart, Color textEnd, String text, Font font, GradientDirection direction, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform, int xOffset, int yOffset)
+GradientTextMaterial material1 {
+    bgStart = #0000FF;
+    bgEnd = #00FFFF;
+    textStart = #FFFF00;
+    textEnd = #FF0000;
+    text = "Ja";
+    font = "Serif";
+    fontSize = 400;
+    fontStyle = 1;
+    direction = DIAGONAL;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+    xOffset = 90;
+    yOffset = -30;
+}
+
+# GradientTextMaterial(Color bgStart, Color bgEnd, Color textStart, Color textEnd, String text, Font font, GradientDirection direction, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform, int xOffset, int yOffset)
+GradientTextMaterial material2 {
+    bgStart = #0000FF;
+    bgEnd = #00FFFF;
+    textStart = #FFFF00;
+    textEnd = #FF0000;
+    text = "Evet";
+    font = "Serif";
+    fontSize = 400;
+    fontStyle = 1;
+    direction = DIAGONAL;
+    reflectivity = 0.2;
+    ior = 1.0;
+    transparency = 0.0;
+    xOffset = -90;
+    yOffset = -30;
+}
+
+# 5. SHAPES
+
+# Checkerboard floor plane
+# Height: y = -1.5
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.7, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+# First sphere
+Sphere sphere1 {
+    radius = 1.2;
+    transform = translate(-1.5, 0.9, 0.0);
+	material = material1;
+}
+
+# Second sphere
+Sphere sphere2 {
+    radius = 1.2;
+	transform = translate(1.5, 0.9, 0.0);
+    material = material2;
+}
+
+# =============================================
+# END
+# =============================================

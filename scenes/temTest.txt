@@ -1,0 +1,119 @@
+# ===================================================
+# TransparentEmojiMaterial Test - SCENE (Norveç-Türkçe Öğrenme)
+# Reference Scene Uyumlu
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #2A4E6C;
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 1.0;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 6.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.2;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+// EKLENMESİ GEREKEN - YUMUŞAK IŞIK
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0); // Arkadan gelen yumuşak ışık
+    color = #88CCFF;
+    intensity = 0.5;
+}
+
+# Materials
+
+// Zemin
+# pbr.CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness)
+CeramicTilePBRMaterial floorMat {
+    tileColor = #FFFFFF;
+    groutColor = #EEEEEE;
+    tileSize = 0.4;
+    groutWidth = 0.12;
+    tileRoughness = 0.05;
+    groutRoughness = 0.5;
+    tileSpecular = 0.75;
+    groutSpecular = 0.05;
+    fresnelIntensity = 0.9;
+    normalMicroFacet = 0.02;
+    reflectionSharpness = 0.95;
+    energyConservation = 1.0;
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency, Color checkerColor1, Color checkerColor2, double checkerSize, double uOffset, double vOffset, double uScale, double vScale)
+TransparentEmojiMaterial su {
+    imagePath = "textures\turkeyFlag.png";
+    transparency = 0.15;
+    checkerColor1 = #000000DD;         # Açık gri (şeffaf olmayan beyaz tonu)
+    checkerColor2 = #00000000;         # Kırmızı (Türk bayrağı temalı)
+    checkerSize = 0.025;               # Görünebilir, ama çok küçük değil (0.001 çok dar!)
+    uOffset = -0.11;                    # Resim: yatayda hareket yok
+    vOffset = -0.60;                    # Resim: dikeyde hareket yok
+    uScale = 0.5;                     # Resim: orijinal genişlik
+    vScale = 0.5;                     # Resim: orijinal yükseklik
+    isRepeatTexture = false;           # Resim dışına taşarsa tekrar etsin
+	isMessy = false;
+}
+
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anod {
+    baseColor = #552222EE;
+}
+
+# LambertMaterial(Color color)
+LambertMaterial lambert {
+    color = #AA3333;
+}
+
+# GEOMETRIES
+
+# Arka duvar (Norveç bayrağı)
+Plane backWall {
+    pointOnPlane = P(0.0, 0.0, -8.0);
+    normal = V(0.0, 0.0, 1.0);
+	material = anod;
+	material = lambert;
+}
+
+# Zemin (mermer texture)
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+EmojiBillboard suShape {
+	width = 1.1;
+	height = 0.7;
+	transform = translate(-0.55, 1.35, 3.0) * rotate(0.0, 30.0, 0.0);
+	//material = su;
+	material = su;
+}

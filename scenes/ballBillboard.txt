@@ -1,0 +1,285 @@
+# ===================================================
+# RUBY vs. TESTS - SCENE
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 640;
+    height = 480;
+    backgroundColor = 224, 224, 224;
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 0.8;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 5.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.3;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4.0, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0);
+    color = #88CCFF;
+    intensity = 0.7;
+}
+
+# Materials
+
+# CheckerboardMaterial(Color color1, Color color2, double size, double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor, double reflectivity, double ior, double transparency, Matrix4 objectInverseTransform)
+CheckerboardMaterial floorMat {
+    color1 = #CCCCCC;
+    color2 = #444444;
+    size = 2.5;
+    ambientCoeff = 0.15;
+    diffuseCoeff = 0.6;
+    specularCoeff = 0.3;
+    shininess = 20.0;
+    specularColor = #FFFFFF;
+    reflectivity = 0.15;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+LambertMaterial lambertMat {
+    color = 0f, 0.6f, 0f; 
+}
+
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anod {
+    baseColor = 1.0f, 0.25f, 0.25f, 0.6f;
+}
+
+# AnodizedTextMaterial(String word, Color textColor, Color gradientColor,
+//      String gradientType, Color bgColor,
+//      String fontFamily, int fontStyle, int fontSize,
+//      int uOffset, int vOffset,
+//      BufferedImage imageObject, int imageWidth, int imageHeight,
+//      int imageUOffset, int imageVOffset,
+//      Color baseColor)
+AnodizedTextMaterial anodizedWord {
+    word = "HEI";
+    bgColor = #00CC0055;
+    textColor = #FF0000;
+    gradientColor = #FFFF00;
+    baseColor = 50, 50, 200;  
+    gradientType = "horizontal";
+    fontFamily = Arial;
+    fontStyle = 1;
+    fontSize = 100;
+    uOffset = 0;
+    vOffset = -200;
+    imageObject = "textures\\norwayFlag.png";  // or "null"
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;
+    imageVOffset = 100;
+}
+
+PhongMaterial phong {
+    diffuseColor = 0.8f, 0.2f, 0.2f;
+    specularColor = 1.0f, 1.0f, 1.0f;
+    shininess = 64.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.8;
+    reflectivity = 0.25;  
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+//PhongTextMaterial(String word, Color textColor, Color gradientColor,
+//      String gradientType, Color bgColor,
+//      String fontFamily, int fontStyle, int fontSize,
+//      int uOffset, int vOffset,
+//      BufferedImage imageObject, int imageWidth, int imageHeight,
+//      int imageUOffset, int imageVOffset,
+//      Color diffuseColor, Color specularColor, double shininess,
+//      double ambientCoefficient, double diffuseCoefficient, double specularCoefficient,
+//      double reflectivity, double ior, double transparency)
+PhongTextMaterial phongText {
+    word = "HEI";
+    textColor = #FF0000;
+    diffuseColor = 0.3f, 0.8f, 0.2f;  
+    specularColor = 1.0f, 0.0f, 0.0f; 
+    shininess = 100.0;
+    ambientCoefficient = 0.1;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.8;
+    reflectivity = 0.1;
+    ior = 1.0;
+    transparency = 0.0;
+    gradientType = "horizontal";
+	gradientColor = #ee0000;
+    fontFamily = Arial;
+    fontStyle = 1;
+    fontSize = 80;
+    uOffset = 10;
+    vOffset = -90;
+    imageObject = "textures\\norwayFlag.png";  // or "null"
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;
+    imageVOffset = -75;
+}
+
+# HybridTextMaterial(String word, Color textColor, Color gradientColor,
+//                              String gradientType, Color bgColor,
+//                              String fontFamily, int fontStyle, int fontSize,
+//                              int uOffset, int vOffset,
+//                              BufferedImage imageObject, int imageWidth, int imageHeight,
+//                              int imageUOffset, int imageVOffset,
+//                              Color diffuseColor, double ior, double transparency, double reflectivity,
+//                              Color filterColorInside, Color filterColorOutside,
+//                              Color specularColor, double shininess,
+//                              double ambientCoefficient, double diffuseCoefficient, double specularCoefficient)
+HybridTextMaterial hybridText {
+    word = "TAKK";
+    textColor = #FF0000;           // Orange text color
+    gradientColor = #00DD00;       // Green gradient end
+    gradientType = "horizontal";   // Horizontal gradient
+    bgColor = #00dd00ff;           // Fully transparent background
+
+    fontFamily = Arial;
+    fontStyle = 1;                 // BOLD
+    fontSize = 80;
+    uOffset = 10;
+    vOffset = -50;
+
+    imageObject = "textures\\norwayFlag.png"; //or "null"
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;
+    imageVOffset = -100;
+
+    // --- Phong Lighting ---
+    diffuseColor = 0.3f, 0.5f, 0.9f;     // Bright base for glass
+    specularColor = 1.0f, 0.0f, 0.0f;    // Red specular
+    shininess = 64.0;                    // Normal shininess
+    ambientCoefficient = 0.2;            // Higher ambient for brightness
+    diffuseCoefficient = 0.9;            // Strong diffuse
+    specularCoefficient = 0.8;           // Normal specular
+
+    // --- Dielectric Properties ---
+    indexOfRefraction = 1.52;            // Standard glass
+    transparency = 0.25;                  // Moderate transparency
+    reflectivity = 0.25;                 // Lower reflection
+    filterColorInside = 0.44f, 0.0f, 0.07f;     // Neutral inside
+    filterColorOutside = 0.44f, 0.0f, 0.07f;    // Neutral outside
+}
+
+// TexturedCheckerboardMaterial — Checkerboard pattern with optional text and image overlay.
+// Lighting: Phong model (ambient + diffuse + specular).
+// No dielectric properties — pure texture material.
+// Note: imageObject expects a file path as String (e.g., "textures/norwayFlag.png") or "null".
+# TexturedCheckerboardMaterial(
+//    Color color1, Color color2, double size,
+//    String text, Color textColor, Color gradientColor, String gradientType, Color bgColor,
+//    String fontFamily, int fontStyle, int fontSize,
+//    int textUOffset, int textVOffset,
+//    BufferedImage imageObject, int imageWidth, int imageHeight,
+//    int imageUOffset, int imageVOffset,
+//    double ambientCoeff, double diffuseCoeff, double specularCoeff, double shininess, Color specularColor,
+//    double reflectivity, double ior, double transparency,
+//    Matrix4 objectInverseTransform)
+TexturedCheckerboardMaterial checkerText {
+    // Checkerboard base pattern colors and scale
+    color1 = #bbbb5e;              // Dark gray squares
+    color2 = #efefef;              // Light gray squares
+    size = 0.4;                    // Checkerboard scale (larger = bigger squares)
+
+    // Overlay text properties
+    text = "TAKK";        // Text to render on top
+    textColor = #FF0000;           // Text color (supports alpha if needed)
+    gradientColor = #00AA00;       // Optional gradient end color (e.g., cyan)
+    gradientType = "vertical";   // Gradient direction: "horizontal", "vertical", "diagonal"
+    bgColor = #00000000;           // Background color (RGBA, transparent by default)
+
+    // Font styling
+    fontFamily = "Arial_Black";
+    fontStyle = 1;                 // 0=PLAIN, 1=BOLD, 2=ITALIC, 3=BOLDITALIC
+    fontSize = 80;
+
+    // Text position offset (relative to center)
+    textUOffset = 70;               // Horizontal offset in pixels
+    textVOffset = 0;              // Vertical offset in pixels
+
+    // Optional image overlay (set to "null" if not used)
+    imageObject = "textures\\norwayFlag.png";  // File path as String, or "null"
+    imageWidth = 192;
+    imageHeight = 250;
+    imageUOffset = 0;              // Image horizontal offset
+    imageVOffset = 20;            // Image vertical offset
+
+    // --- Phong Lighting Parameters ---
+    ambientCoefficient = 0.15;     // Base ambient light contribution
+    diffuseCoefficient = 0.7;      // Diffuse lighting strength
+    specularCoefficient = 0.8;     // Specular highlight intensity
+    shininess = 40.0;              // Specular exponent (higher = sharper highlight)
+    specularColor = #FFFFFF;       // Color of specular highlights (usually white)
+
+    // --- Material Properties (required by Material interface) ---
+    reflectivity = 0.05;            // Reflection strength (0.0 = none)
+    ior = 1.0;                     // Index of refraction (1.0 = air, no refraction)
+    transparency = 0.05;            // Transparency level (0.0 = opaque, 1.0 = fully transparent)
+}
+
+# TransparentColorMaterial(Color baseColor, double transparency, 
+//                         double reflectivity, double ior)
+TransparentColorMaterial tcolor {
+    transparency = 0.99                // %X şeffaf
+    reflectivity = 0.40;                // %X yansıma (parıltı için)
+    ior = 1.52;                        // Current ior
+}
+
+# GEOMETRIES
+
+# Arka duvar
+Plane backWallShape {
+    pointOnPlane = P(0.0, 0.0, -5.0);
+    normal = V(0.0, 0.0, 1.0);
+	material = lambertMat;
+}
+
+# Zemin
+Plane floorShape {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat; 
+}
+
+# Sphere(double radius)
+Sphere sphere {
+    radius = 2.0;
+    transform = translate(0.0, 1.0, 0.0);
+    //material = anod;
+	//material = anodizedWord;
+	//material = phong;
+	//material = hybridText;
+	//material = phongText;
+	//material = checkerText;
+	material = tcolor;
+}

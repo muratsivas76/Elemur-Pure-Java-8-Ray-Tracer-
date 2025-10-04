@@ -1,0 +1,486 @@
+# ===================================================
+# HUS - EV - SCENE (Norveç-Türkçe Öğrenme)
+# Reference Scene Uyumlu
+# ===================================================
+
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.5, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 2;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #2A4E6C;
+    shadowColor = #000000;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 1.0;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 6.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.2;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+// EKLENMESİ GEREKEN - YUMUŞAK IŞIK
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0); // Arkadan gelen yumuşak ışık
+    color = #88CCFF;
+    intensity = 0.6;
+}
+
+# MATERIALS
+
+// Zemin
+# pbr.CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness)
+CeramicTilePBRMaterial floorMat {
+    tileColor = #FFFFFFEE;
+    groutColor = #EFEFEF10;
+    tileSize = 0.3;
+    groutWidth = 0.0012;
+    tileRoughness = 0.08;
+    groutRoughness = 0.8;
+    tileSpecular = 0.75;
+    groutSpecular = 0.05;
+    fresnelIntensity = 0.9;
+    normalMicroFacet = 0.02;
+    reflectionSharpness = 0.95;
+    energyConservation = 1.0;
+}
+
+# HUS yazılı kutu material
+PhongMaterial husMaterial {
+    diffuseColor = #CC0000;
+    specularColor = #FFFFFF;
+    shininess = 20.0;
+    ambientCoefficient = 0.4;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.2;
+    reflectivity = 0.35;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# EV yazılı kutu material
+PhongMaterial evMaterial {
+    diffuseColor = #FFCC00;
+    specularColor = #FFFFFF;
+    shininess = 20.0;
+    ambientCoefficient = 0.4;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.2;
+    reflectivity = 0.35;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture)
+TransparentPNGMaterial norwayFlagMat {
+	imagePath = "textures\norwayFlag.png";
+	uOffset = -0.3;
+    vOffset = -0.35;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = false;
+}
+
+# EV text
+GradientImageTextMaterial evTextMat {
+    bgStart = 200, 200, 0, 255;
+    bgEnd = 0.99F, 0.99F, 0.99F, 1F;
+    textStart = 0.97F, 0.0F, 0.0F, 1F;
+    textEnd = 0.0F, 0.95F, 0.0F, 1F;
+	transparency = 0.0;
+	imagePath = "textures\\blue16.png";
+    bgAlpha = 1F;
+    textAlpha = 1F;
+    text = "EV";
+    font = "Arial";
+    fontSize = 130;
+    fontStyle = 1;
+    direction = HORIZONTAL;
+    reflectivity = 0.0;
+    ior = 1.0;
+    xOffset = -250;
+    yOffset = 20;
+    imgOffsetX = 0;
+    imgOffsetY = 0;
+    isWrap = false;
+}
+
+# HUS text
+GradientImageTextMaterial husTextMat {
+    bgStart = 200, 200, 0, 255;
+    bgEnd = 0.99F, 0.99F, 0.99F, 1F;
+    textStart = 0.97F, 0.0F, 0.0F, 1F;
+    textEnd = 0.0F, 0.95F, 0.0F, 1F;
+	transparency = 0.0;
+	imagePath = "textures\\red16.png";
+    bgAlpha = 1F;
+    textAlpha = 1F;
+    text = "HUS";
+    font = "Arial";
+    fontSize = 130;
+    fontStyle = 1;
+    direction = HORIZONTAL;
+    reflectivity = 0.0;
+    ior = 1.0;
+    xOffset = -250;
+    yOffset = 20;
+    imgOffsetX = 0;
+    imgOffsetY = 0;
+    isWrap = false;
+}
+
+# LambertMaterial(Color color)
+LambertMaterial lambert {
+    color = #222222;
+}
+
+# LambertMaterial(Color color)
+LambertMaterial starMatx {
+    color = #FFFFFF;
+}
+
+StarfieldMaterial starMat {
+    nebulaColor = #330066;
+    starSize = 1.8;
+    starDensity = 0.012;
+    twinkleSpeed = 0.6;
+}
+
+# Emissive sphere (güneş gibi)
+EmissiveMaterial sunMaterial {
+    emissiveColor = #FFD700;
+    emissiveStrength = 2.0;
+}
+
+# GEOMETRIES
+
+# Arka duvar (Norveç bayrağı)
+Plane backWall {
+    pointOnPlane = P(0.0, 0.0, -5.0);
+    normal = V(0.0, 0.0, 1.0);
+    material = lambert;
+}
+
+EmojiBillboard flagShape {
+	width = 2.5;
+	height = 2.0;
+	transform = translate(0.0, 1.50, 0.0) * rotate(0.0, 30.0, 0.0);
+	//material = su;
+	material = norwayFlagMat;
+}
+
+////////////
+# Sphere(double radius)
+Sphere star1 {
+    radius = 0.02;
+    transform = translate(-4.2, 3.8, -1.0);
+    material = starMat;
+}
+
+Sphere star2 {
+    radius = 0.015;
+    transform = translate(-3.9, 3.1, -1.0);
+    material = starMat;
+}
+
+Sphere star3 {
+    radius = 0.02;
+    transform = translate(-3.5, 4.0, -1.0);
+    material = starMat;
+}
+
+Sphere star4 {
+    radius = 0.018;
+    transform = translate(-3.1, 2.7, -1.0);
+    material = starMat;
+}
+
+Sphere star5 {
+    radius = 0.016;
+    transform = translate(-2.8, 3.5, -1.0);
+    material = starMat;
+}
+
+Sphere star6 {
+    radius = 0.022;
+    transform = translate(-2.5, 2.1, -1.0);
+    material = starMat;
+}
+
+Sphere star7 {
+    radius = 0.017;
+    transform = translate(-2.0, 3.9, -1.0);
+    material = starMat;
+}
+
+Sphere star8 {
+    radius = 0.02;
+    transform = translate(-1.7, 2.4, -1.0);
+    material = starMat;
+}
+
+Sphere star9 {
+    radius = 0.015;
+    transform = translate(-1.3, 3.2, -1.0);
+    material = starMat;
+}
+
+Sphere star10 {
+    radius = 0.021;
+    transform = translate(-0.9, 1.8, -1.0);
+    material = starMat;
+}
+
+Sphere star11 {
+    radius = 0.019;
+    transform = translate(-0.6, 2.9, -1.0);
+    material = starMat;
+}
+
+Sphere star12 {
+    radius = 0.016;
+    transform = translate(-0.2, 1.5, -1.0);
+    material = starMat;
+}
+
+Sphere star13 {
+    radius = 0.023;
+    transform = translate(0.1, 2.6, -1.0);
+    material = starMat;
+}
+
+Sphere star14 {
+    radius = 0.018;
+    transform = translate(0.4, 1.2, -1.0);
+    material = starMat;
+}
+
+Sphere star15 {
+    radius = 0.02;
+    transform = translate(0.7, 2.1, -1.0);
+    material = starMat;
+}
+
+Sphere star16 {
+    radius = 0.017;
+    transform = translate(1.0, 0.8, -1.0);
+    material = starMat;
+}
+
+Sphere star17 {
+    radius = 0.022;
+    transform = translate(1.3, 1.9, -1.0);
+    material = starMat;
+}
+
+Sphere star18 {
+    radius = 0.015;
+    transform = translate(1.6, 0.5, -1.0);
+    material = starMat;
+}
+
+Sphere star19 {
+    radius = 0.019;
+    transform = translate(1.9, 1.6, -1.0);
+    material = starMat;
+}
+
+Sphere star20 {
+    radius = 0.021;
+    transform = translate(2.2, 0.2, -1.0);
+    material = starMat;
+}
+
+Sphere star21 {
+    radius = 0.016;
+    transform = translate(2.5, 1.1, -1.0);
+    material = starMat;
+}
+
+Sphere star22 {
+    radius = 0.02;
+    transform = translate(2.8, 0.7, -1.0);
+    material = starMat;
+}
+
+Sphere star23 {
+    radius = 0.018;
+    transform = translate(3.1, 1.8, -1.0);
+    material = starMat;
+}
+
+Sphere star24 {
+    radius = 0.017;
+    transform = translate(3.4, 0.4, -1.0);
+    material = starMat;
+}
+
+Sphere star25 {
+    radius = 0.023;
+    transform = translate(3.7, 1.5, -1.0);
+    material = starMat;
+}
+
+Sphere star26 {
+    radius = 0.015;
+    transform = translate(4.0, 0.1, -1.0);
+    material = starMat;
+}
+
+Sphere star27 {
+    radius = 0.02;
+    transform = translate(4.3, 1.3, -1.0);
+    material = starMat;
+}
+
+Sphere star28 {
+    radius = 0.019;
+    transform = translate(4.6, 0.9, -1.0);
+    material = starMat;
+}
+
+Sphere star29 {
+    radius = 0.016;
+    transform = translate(-4.6, 1.7, -1.0);
+    material = starMat;
+}
+
+Sphere star30 {
+    radius = 0.022;
+    transform = translate(-4.2, 0.6, -1.0);
+    material = starMat;
+}
+
+Sphere star31 {
+    radius = 0.018;
+    transform = translate(-3.8, 1.0, -1.0);
+    material = starMat;
+}
+
+Sphere star32 {
+    radius = 0.017;
+    transform = translate(-3.4, 0.3, -1.0);
+    material = starMat;
+}
+
+Sphere star33 {
+    radius = 0.021;
+    transform = translate(-3.0, 1.4, -1.0);
+    material = starMat;
+}
+
+Sphere star34 {
+    radius = 0.016;
+    transform = translate(-2.6, 0.8, -1.0);
+    material = starMat;
+}
+
+Sphere star35 {
+    radius = 0.02;
+    transform = translate(-2.2, 1.9, -1.0);
+    material = starMat;
+}
+
+Sphere star36 {
+    radius = 0.019;
+    transform = translate(-1.8, 0.6, -1.0);
+    material = starMat;
+}
+
+Sphere star37 {
+    radius = 0.015;
+    transform = translate(-1.4, 1.2, -1.0);
+    material = starMat;
+}
+
+Sphere star38 {
+    radius = 0.022;
+    transform = translate(-1.0, 0.1, -1.0);
+    material = starMat;
+}
+
+Sphere star39 {
+    radius = 0.018;
+    transform = translate(-0.6, 1.7, -1.0);
+    material = starMat;
+}
+
+Sphere star40 {
+    radius = 0.021;
+    transform = translate(-0.2, 0.9, -1.0);
+    material = starMat;
+}
+////////////
+
+# Zemin (mermer texture)
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+}
+
+# Parlayan küre (güneş)
+Sphere sunSphere {
+    radius = 0.75;
+    transform = translate(4.0, 3.0, -3.0);
+    material = sunMaterial;
+}
+
+# HUS yazılı kutu
+Box husBox {
+    width = 1.5;
+    height = 1.5;
+    depth = 1.5;
+    transform = translate(-1.5, 0.0, 1.0);
+    material = husMaterial;
+}
+
+# EV yazılı kutu
+Box evBox {
+    width = 1.5;
+    height = 1.5;
+    depth = 1.5;
+    transform = translate(1.5, 0.0, 1.0);
+    material = evMaterial;
+}
+
+# HUS yazısı (kutu üzerinde)
+Box husText {
+    width = 1.0;
+    height = 0.5;
+    depth = 1.0;
+    transform = translate(-1.5, 0.0, 1.26);
+    material = husTextMat;
+}
+
+# EV yazısı (kutu üzerinde)
+Box evText {
+    width = 1.0;
+    height = 0.5;
+    depth = 1.0;
+    transform = translate(1.5, 0.0, 1.26);
+    material = evTextMat;
+}

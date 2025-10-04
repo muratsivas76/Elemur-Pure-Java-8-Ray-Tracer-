@@ -1,1 +1,336 @@
+# ===================================================
+# VANN - SU - SCENE (Norveç-Türkçe Öğrenme)
+# Reference Scene Uyumlu
+# ===================================================
 
+# Camera settings
+Camera mainCamera {
+    position = P(0.0, 1.0, 5.0);
+    lookAt = P(0.0, 0.5, 0.0);
+    upVector = V(0.0, 1.0, 0.0);
+    fov = 60.0;
+    orthographic = false;
+    maxRecursionDepth = 3;
+    reflective = true;
+    refractive = true;
+    shadowsEnabled = true;
+}
+
+# Renderer Settings
+Renderer Settings {
+    width = 800;
+    height = 600;
+    backgroundColor = #2A4E6C;
+    shadowColor = 0.0f, 0.8f, 0.0f, 0.05f;
+}
+
+# Lighting
+ElenaMuratAmbientLight ambientLight {
+    color = #FFFFFF;
+    intensity = 1.0;       
+}
+
+MuratPointLight keyLight {
+    position = P(3.0, 6.0, 4.0);  
+    color = #FFFFFF;
+    intensity = 1.2;       
+}
+
+MuratPointLight fillLight {
+    position = P(-3.0, 4, 3.0); 
+    color = #FFF5E1;
+    intensity = 0.5;      
+}
+
+// EKLENMESİ GEREKEN - YUMUŞAK IŞIK
+MuratPointLight rimLight {
+    position = P(0.0, 2.0, -2.0); // Arkadan gelen yumuşak ışık
+    color = #88CCFF;
+    intensity = 0.5;
+}
+
+# Materials
+
+// Zemin
+# pbr.CeramicTilePBRMaterial(Color tileColor, Color groutColor, double tileSize, double groutWidth, double tileRoughness, double groutRoughness)
+CeramicTilePBRMaterial floorMat {
+    tileColor = #FFFFFFEE;
+    groutColor = #EFEFEF10;
+    tileSize = 0.3;
+    groutWidth = 0.0012;
+    tileRoughness = 0.08;
+    groutRoughness = 0.8;
+    tileSpecular = 0.75;
+    groutSpecular = 0.05;
+    fresnelIntensity = 0.9;
+    normalMicroFacet = 0.02;
+    reflectionSharpness = 0.95;
+    energyConservation = 1.0;
+}
+
+# VANN yazılı kutu material
+PhongMaterial vannMaterial {
+    diffuseColor = #CC0000;
+    specularColor = #FFFFFF;
+    shininess = 20.0;
+    ambientCoefficient = 0.4;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.2;
+    reflectivity = 0.35;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# SU yazılı kutu material
+PhongMaterial suMaterial {
+    diffuseColor = #FFCC00;
+    specularColor = #FFFFFF;
+    shininess = 20.0;
+    ambientCoefficient = 0.4;
+    diffuseCoefficient = 0.7;
+    specularCoefficient = 0.2;
+    reflectivity = 0.35;
+    ior = 1.0;
+    transparency = 0.0;
+}
+
+# TransparentEmojiMaterial(BufferedImage image, double transparency, Color checkerColor1, Color checkerColor2, double checkerSize, double uOffset, double vOffset, double uScale, double vScale)
+TransparentEmojiMaterial su {
+    imagePath = "textures/turkeyFlag.png";
+    transparency = 0.15;
+    checkerColor1 = #ffeeef;         # Açık gri (şeffaf olmayan beyaz tonu)
+    checkerColor2 = #ff0000;         # Kırmızı (Türk bayrağı temalı)
+    checkerSize = 0.025;               # Görünebilir, ama çok küçük değil (0.001 çok dar!)
+    uOffset = -0.1;                    # Resim: yatayda hareket yok
+    vOffset = -0.25;                    # Resim: dikeyde hareket yok
+    uScale = 0.75;                     # Resim: orijinal genişlik
+    vScale = 0.75;                     # Resim: orijinal yükseklik
+    isRepeatTexture = false;           # Resim dışına taşarsa tekrar etsin
+	isMessy = false;
+}
+
+TransparentEmojiMaterial vann {
+    imagePath = "textures/norwayFlag.png";
+    checkerColor1 = #DDDDDD;        # Açık gri
+    checkerColor2 = #000000FF;        # Mavi (Norveç bayrağı temalı)
+    checkerSize = 0.025;              # Tutarlı checkerboyutu
+    uOffset = -0.1;                    # Resim: sağa kaymış (yarım UV)
+    vOffset = -0.25;                   # Resim: hafif yukarı kaymış
+    uScale = 0.75;                     # Resim: 2x büyütülmüş (daha büyük görünür)
+    vScale = 0.75;                     # Resim: dikeyde de 2x büyütülmüş
+    isRepeatTexture = false;          # Resim sınırlarını aşarsa gösterme
+	isMessy = false;
+}
+
+//TransparentPNGMaterial supng2 {
+//	imagePath = "textures/norwayFlag.png";
+//	uOffset = -0.1;
+//    vOffset = -0.25;
+//	uScale = 0.75;
+//	vScale = 0.75;
+//	isRepeatTexture = false;
+//}
+
+# TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture)
+TransparentPNGMaterial supng {
+	imagePath = "textures/turkeyFlag.png";
+	uOffset = -0.1;
+    vOffset = -0.25;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = true;
+}
+
+# NonScaledTransparentPNGMaterial(BufferedImage texture, double billboardWidth, double billboardHeight) 
+# Extra set values: uOffset, vOffset, shadowAlphaThreshold
+NonScaledTransparentPNGMaterial nonScaleTPM {
+	imagePath = "textures/su.png";
+	billboardWidth = 0.5;
+	billboardHeight = 0.4;
+	shadowAlphaThreshold = 0.1;
+	gammaCorrection = 2.4f; //if no, select 1f
+	uOffset = 0.0;
+	vOffset = 0.0;
+}
+
+# TransparentEmissivePNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture, Color emissiveColor, double emissiveStrength)
+TransparentEmissivePNGMaterial suEmissivePng {
+	imagePath = "textures/turkeyFlag.png";
+	emissiveColor = 1F, 1F, 0F, 1F;
+	emissiveStrength = 2.5;
+	uOffset = -0.1;
+    vOffset = -0.25;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = false;
+}
+
+# TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture)
+TransparentPNGMaterial vannpng {
+	imagePath = "textures/norwayFlag.png";
+	uOffset = -0.1;
+    vOffset = -0.25;
+	uScale = 0.75;
+	vScale = 0.75;
+	isRepeatTexture = false;
+}
+
+# TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture)
+TransparentPNGMaterial suTextPng {
+	imagePath = "textures/su.png";
+	//imagePath = "textures\elena.png";
+	uOffset = -0.50;
+    vOffset = 0.0;
+	uScale = 0.5;
+	vScale = 1;
+	isRepeatTexture = false;
+}
+
+# TransparentPNGMaterial(BufferedImage texture, double uOffset, double vOffset, double uScale, double vScale, boolean isRepeatTexture)
+TransparentPNGMaterial vannTextPng {
+	imagePath = "textures/vann.png";
+	//imagePath = "textures/damlalar.png";	
+	uOffset = -0.50;
+    vOffset = 0.0;
+	uScale = 0.5;
+	vScale = 1.0;
+	isRepeatTexture = false;
+}
+
+ImageTextureMaterial norwayFlagMat {
+    imagePath = "textures/norwayFlag.png";
+    //imagePath = "textures/turkeyFlag.png";
+	//imagePath = "textures/elena.png";
+    uScale = 1.0;              
+    vScale = 1.0; 
+    uOffset = 0.0;
+    vOffset = 0.0;
+    ambientCoefficient = 1.5; 
+    diffuseCoefficient = 0.65;  
+    specularCoefficient = 0.25; 
+    shininess = 10.0;   
+    reflectivity = 0.35;     
+    ior = 1.0;
+}
+
+# WordMaterial(String text, Color foregroundColor, Color backgroundColor, Font font, boolean useGradient, Color gradientColor, BufferedImage wordImage)
+//WordMaterial wmat {
+//	text = "SELAM";
+//	backgroundColor = #00000000;
+//	foregroundColor = #FF0000;
+//	fontName = "Arial";
+//	fontSize = 50;
+//	fontStyle = 1;
+//	wordImage = "textures/damlalar.png"; //"null" or "imagePath"
+//	gradientColor = 0F, 0.75F, 0F;
+//	uOffset = 0.0;
+//	vOffset = 0.0;
+//	uScale = 1.0;
+//	vScale = 1.0;
+//	isRepeatTexture = false;
+//}
+
+# AnodizedMetalMaterial ()
+AnodizedMetalMaterial anod {
+    baseColor = #552222EE;
+}
+
+LambertMaterial lambert {
+    color = #55AA3333;
+}
+
+# GEOMETRIES
+
+# Arka duvar (Norveç bayrağı)
+Plane backWall {
+    pointOnPlane = P(0.0, 0.0, -8.0);
+    normal = V(0.0, 0.0, 1.0);
+	//material = norwayFlagMat;
+	//material = supng;
+	//material = lambert;
+	material = anod;
+}
+
+# Zemin (mermer texture)
+Plane floorPlane {
+    pointOnPlane = P(0.0, -1.0, 0.0);
+    normal = V(0.0, 1.0, 0.0);
+    material = floorMat;
+	//material = norwayFlagMat;
+}
+
+Ellipsoid ellipsoid1 {
+    center = P(0.0, 0.0, 0.0); 
+    a = 1.0;
+    b = 1.5;
+    c = 3.0;
+    transform = translate(2.0, 1.0, 0.0);
+    material = suMaterial;
+}
+
+Ellipsoid ellipsoid2 {
+    center = P(0.0, 0.0, 0.0);  
+    a = 1.0;
+    b = 1.5;
+    c = 3.0;
+	transform = translate(-2.0, 1.0, 0.0);
+    material = suMaterial;
+}
+
+//EmojiBillboard backWallBoard {
+	//width = 2.0;
+	//height = 1.0;
+	//transform = translate(0.4, 2.20, 1.0) * rotate(0.0, -10.0, 0.0);
+	//material = suMaterial;
+	//material = norwayFlagMat;
+  //  //material = floorMat;
+//	//material = supng2;
+//}
+
+EmojiBillboard suTextShape {
+	width = 0.7;
+	height = 0.5;
+	isRectangle = false;
+	isVisible = false;
+	imagePath = "textures/su.png"; //must be same its material image if is invisible
+	transform = translate(-1.0, 1.35, 3.0) * rotate(0.0, 30.0, 0.0);
+	//material = su;
+	material = suTextPng; //original
+	//material = nonScaleTPM;
+}
+
+# EmojiBillboard(double width, double height, boolean isRectangle, boolean isVisible, BufferedImage texture)
+EmojiBillboard vannTextShape {
+	width = 0.85;
+	height = 0.5;
+	isRectangle = true;
+	isVisible = false; //false is total transparent shape
+	imagePath = "textures/vann.png"; //must be same its material image if is invisible
+	transform = translate(1.1, 1.35, 2.8) * rotate(0.0, -30.0, 0.0);
+	material = vannTextPng;
+}
+
+EmojiBillboard suShape {
+	width = 1.4;
+	height = 1.2;
+	isVisible = false; //false is total transparent shape
+	imagePath = "textures/turkeyFlag.png";
+	transform = translate(-0.7, 0.35, 3.0) * rotate(0.0, 30.0, 0.0);
+	//material = su;
+	material = supng; //original
+	//material = suEmissivePng;
+}
+
+EmojiBillboard vannShape {
+	width = 1.4;
+	height = 1.2;
+	isVisible = false; //false is total transparent shape
+	imagePath = "textures/norwayFlag.png"; //must be same its material image if is invisible
+	transform = translate(0.7, 0.35, 3.0) * rotate(0.0, -30.0, 0.0);
+	//material = vann;
+	//material = lambert;
+    material = vannpng; //original
+	//material = vannTextPng;
+	//material = norwayFlagMat;
+	//material = wmat;
+}
