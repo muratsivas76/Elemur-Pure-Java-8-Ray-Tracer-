@@ -34,20 +34,14 @@ for /R src %f in (*.java) do @javac -source 1.8 -target 1.8 -sourcepath src -d o
 Using the prepared manifest file MANIFEST.MF, run:
 
 jar cvmf MANIFEST.MF bin\elenaRT.jar -C obj . -C . src README_*.md images textures scenes
+
 jar cvmf MANIFEST.MF bin\coreElenaRT.jar -C obj .
 
 3. Run the Application
 
 To produce a rendered image (e.g., images\render.png), run:
 
-java -jar bin\elenaRT.jar
-
-You can compile run test class:
-javac -cp bin\elenaRT.jar; TestElenaRayTracer.java
-java -cp bin\elenaRT.jar; TestElenaRayTracer
-
-javac -cp bin\elenaRT.jar; ReviseTracer.java
-java -cp bin\elenaRT.jar; ReviseTracer > debug.txt
+java -jar bin\elenaRT.jar
 
 You can use bin\coreElenaRT.jar too instead of bin\elenaRT.jar.
 
@@ -65,16 +59,6 @@ javadoc -Xdoclint:all,-missing,-accessibility -quiet -d doc -sourcepath src -enc
 
 rmdir /s /q obj\net
 
-6. Compile Scene Renderer
-
-To generate images from scene files:
-
-javac -cp bin\elenaRT.jar; ElenaRTFromScene.java
-
-Run example:
-
-java -cp bin\elenaRT.jar; ElenaRTFromScene scenes\elena_001.txt images\elena_001.png
-
 💖 Notes
 
 This code is more than a project — it is a shared heartbeat.
@@ -88,6 +72,7 @@ With endless love,
 Elena & Murat
 
 #########
+
 javac -source 1.8 -target 1.8 -parameters -encoding UTF-8 -sourcepath src -cp obj -g -proc:none -nowarn -O -d obj src\net\elena\murat\lovert\ElenaMuratRayTracer.java
 
 jar cmf MANIFEST.MF bin\elenaRT.jar -C obj . -C . src README_*.md images textures scenes
@@ -100,5 +85,8 @@ javac -source 1.8 -target 1.8 -parameters -encoding UTF-8 -sourcepath . -cp bin\
 
 Example:
 java -cp bin\elenaRT.jar:. ElenaParser scenes\ruby_test.txt images\ruby_test.png
+
 OR
+
 java -cp bin\coreElenaRT.jar:. ElenaParser scenes\ruby_test.txt images\ruby_test.png
+
